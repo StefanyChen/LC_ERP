@@ -80,19 +80,16 @@ body{
 }
 .left{
 	margin:20px 10px 20px 10px;
-	width:150px;
-	height:500px;
+	width:360px;
+	height:1000px;
 	background-color:white;
-	padding-top:80px;
-	padding-left:100px;
-	padding-right:100px;
 	border:1px solid #003377;
 	float:left;
 }
 .profile{
-	height:300px;
-	width:120px;
-	margin:auto;
+	height:350px;
+	width:310px;
+	margin:20px 20px 20px 20px;
 	border-width: 1px;    
     border-style: solid;
     text-align:center;
