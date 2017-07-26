@@ -31,5 +31,9 @@ a{
 	font-family:Microsoft JhengHei;
 	font-size:20px
 }
-
+.input_text{
+	border-color:#CCC;
+	border-radius:5px;
+	font-size:17px;
+}
 	
