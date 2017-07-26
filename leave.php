@@ -51,17 +51,17 @@
 			</li>
 			<li><a href="#">表單申請</a>
 				<ul>
-					<li><a href="#">請假申請</a>
+					<li><a href="leave.php">請假申請</a>
 					</li>
-					<li><a href="#">出差申請</a>
+					<li><a href="travel.php">出差申請</a>
 					</li>
-					<li><a href="#">差旅費</a>
+					<li><a href="allowance.php">差旅費申請</a>
 					</li>
 				</ul>
 			</li>
-			<li><a href="#">內部公告</a>
+			<li><a href="index.php">內部公告</a></li>
+			<li><a href="#">sign out</a></li>
 		</ul>
-		<button class="btn" class="leftside" style="margin-bottom:20px" >Sign out</button>
 	</div>
 	<div class="bottom">
 	<div class="left"> 
@@ -74,23 +74,23 @@
 			<p>birth</p>
 		</div>
 		<h1 class="text">表單申請</h1>
-		<a href="#" >
+		<a href="travel.php" >
 		<p class="pp">出差申請</p>
 		</a>
 		<p class="pp">請假申請</p>
-		<a href="#" >
+		<a href="allowance.php" >
 		<p class="pp">差旅費申請</p>
 		</a>
 	</div>
 	<div class="right-up">
 		<h1 class="text">請假申請<h1>
 		<form>
-		<p class="p">請假日期/時間: <input type="text" id="from" name="from" size="8"> <input type="time" name="tfrom" size="7"> 至 <input type="text" id="to" name="to" size="8"> <input type="time" name="tto" size="7"></p>
-		<p class="p">請假時數：<input type="text" name="" ></p>
-		<p class="p">假勤項目：<input type="radio" name="l_type" value="">病假   <input type="radio" name="l_type" value="" >事假   <input type="radio" name="l_type" value="" >喪假   <input type="radio" name="l_type" value="">其他 <input type="text" size="5" name="l_type_other" value=""> </p>
-		<p class="p">職務代理人：<input type="text" name="" ></p>
-		<p class="p">簽核代理人：<input type="text" name="" ></p>
-		<p class="p">說明：<input type="text" name="" placeholder="請輸入詳細說明" size="70"></p>
+		<p class="p">請假日期/時間：<input class="input_text" type="text" id="from" name="from" size="8"> <input class="input_text" type="time" name="tfrom" size="7"> 至 <input class="input_text" type="text" id="to" name="to" size="8"> <input class="input_text" type="time" name="tto" size="7"></p>
+		<p class="p">請假時數：<input class="input_text" type="text" name="" ></p>
+		<p class="p">假勤項目：<input type="radio" name="l_type" value="">病假   <input type="radio" name="l_type" value="" >事假   <input type="radio" name="l_type" value="" >喪假   <input type="radio" name="l_type" value="">其他 <input class="input_text" type="text" size="5" name="l_type_other" value=""> </p>
+		<p class="p">職務代理人：<input class="input_text" type="text" name="" ></p>
+		<p class="p">簽核代理人：<input class="input_text" type="text" name="" ></p>
+		<p class="p">說明：<input class="input_text" type="text" name="" placeholder="請輸入詳細說明" size="50"></p>
 		</form>
 		<button class="btn">送出表單</button>
 	</div>

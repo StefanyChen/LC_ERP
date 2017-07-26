@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>出差申請</title>
+	<title>差旅費申請</title>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="travel-style.css">
-	<link rel="stylesheet" href="index-style.css">
+	<link type="text/css" rel="stylesheet" href="travel-style.css">
+	<link type="text/css" rel="stylesheet" href="index-style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
@@ -47,8 +47,7 @@
 		</a>
 		<p class="leftside" style="color:white;font-size:60px;margin-left:80px;font-family:Arial;margin-top:30px;margin-bottom:0px">Lei Chi Technology</p>
 		<ul class="drop-down-menu">
-			<li><a href="#">線上打卡</a>
-			</li>
+			<li><a href="#">線上打卡</a></li>
 			<li><a href="#">表單申請</a>
 				<ul>
 					<li><a href="leave.php">請假申請</a>
@@ -56,7 +55,6 @@
 					<li><a href="travel.php">出差申請</a>
 					</li>
 					<li><a href="allowance.php">差旅費申請</a>
-					</li>
 				</ul>
 			</li>
 			<li><a href="index.php">內部公告</a></li>
@@ -74,21 +72,23 @@
 			<p>birth</p>
 		</div>
 		<h1 class="text">表單申請</h1>
+		<a href="travel.php" >
 		<p class="pp">出差申請</p>
+		</a>
 		<a href="leave.php" >
 		<p class="pp">請假申請</p>
 		</a>
-		<a href="allowance.php" >
 		<p class="pp">差旅費申請</p>
-		</a>
 	</div>
 	<div class="right-up">
-		<h1 class="text">出差申請<h1>
+		<h1 class="text">差旅費申請<h1>
 		<form>
-		<p class="p">預計出發日期：<input class="input_text" type="text" id="from" name="from"></p>
-		<p class="p">預計結束日期：<input class="input_text" type="text" id="to" name="to"></p>
-		<p class="p">出差類型：<input type="radio" name="b_type" value="">國內   <input type="radio" name="b_type" value="">國外</p>
-		<p class="p">交通需求：<input type="radio" name="transport" value="">火車   <input type="radio" name="transport" value="" >飛機   <input type="radio" name="transport" value="" >高鐵   <input type="radio" name="transport" value="">其他 <input class="input_text" type="text" size="5" name="trans_other" value=""> </p>
+		<p class="p">出發日期：<input class="input_text" type="text" id="from" name="from"></p>
+		<p class="p">結束日期：<input class="input_text" type="text" id="to" name="to"></p>
+		<p class="p">出差類型：<input type="radio" name="Type" value="Domestic">國內   <input type="radio" name="Type" value="foreign">國外</p>
+		<p class="p">交通費：火車: <input class="input_text" type="text" name="Transport" value=""> 飛機: <input class="input_text" type="text" name="Transport" value=""><br>
+		　　　　高鐵: <input class="input_text" type="text" name="Transport" value=""> 其他: <input class="input_text" type="text" name="Transport" value="">  
+		</p>
 		<p class="p">出差地點：<input class="input_text" type="text" name="" size="15" placeholder="ex:台北市信義區"></p>
 		<p class="p">出差事由：<input class="input_text" type="text" name="" size="50" placeholder="請輸入詳細說明"></p>
 		</form>

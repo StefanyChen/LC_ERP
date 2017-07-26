@@ -4,6 +4,7 @@
 	<title>ERP</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="index-style.css">
+	<link rel="stylesheet" href="travel-style.css">
 </head>
 <body>
 	<div class="top-black">
@@ -16,17 +17,17 @@
 			</li>
 			<li><a href="#">表單申請</a>
 				<ul>
-					<li><a href="#">請假申請</a>
+					<li><a href="leave.php">請假申請</a>
 					</li>
-					<li><a href="#">出差申請</a>
+					<li><a href="travel.php">出差申請</a>
 					</li>
-					<li><a href="#">差旅費</a>
+					<li><a href="allowance.php">差旅費申請</a>
 					</li>
 				</ul>
 			</li>
-			<li><a href="#">內部公告</a>
+			<li><a href="index.php">內部公告</a></li>
+			<li><a href="#">sign out</a></li>
 		</ul>
-		<button class="btn" class="leftside" style="margin-bottom:20px" >Sign out</button>
 	</div>
 	<div class="bottom">
 	<div class="left">
@@ -41,8 +42,8 @@
 	</div>
 	<div class="right-up">
 	<h1 style="font-family:Microsoft JhengHei">新增公告</h1>
-	<textarea style="width:600px;height:200px" placeholder="請輸入內容..."></textarea>
-	<button class="btn">送出</button>
+	<textarea class="input_text" style="width:600px;height:200px" placeholder="請輸入內容..."></textarea>
+	<button class="btn" style="margin-top:10px">送出</button>
 	</div>
 
 	<div class="right-down">
