@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "hn13441673";
-$dbname = "peopleResource";
+$password = "Chen1010";
+$dbname = "comment";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -10,13 +10,10 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // sql to create table
-    $sql = "CREATE TABLE employee (
+    $sql = "CREATE TABLE news (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-    name VARCHAR(30) NOT NULL,
-    mobile VARCHAR(20),
-    email VARCHAR(50),
-    address VARCHAR(300),
-    personID VARCHAR(10),
+    title VARCHAR(30),
+	containers VARCHAR(300),
     reg_date TIMESTAMP
     )";
 

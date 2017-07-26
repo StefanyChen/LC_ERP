@@ -42,25 +42,20 @@
 </head>
 <body>
 	<div class="top-black">
-		<a href="index.html">
+		<a href="index.php">
 			<img class="leftside" src="http://www.lctech.com.tw/wp-content/uploads/bfi_thumb/%E6%9C%AA%E5%91%BD%E5%90%8D-1-%E6%8B%B7%E8%B2%9D-31w65e1o8bhj94p9q5patm@2x.png" width="80" height="80">
 		</a>
 		<p class="leftside" style="color:white;font-size:60px;margin-left:80px;font-family:Arial;margin-top:30px;margin-bottom:0px">Lei Chi Technology</p>
 		<ul class="drop-down-menu">
-			<li><a href="#">線上打卡</a>
-			</li>
-			<li><a href="#">表單申請</a>
-				<ul>
-					<li><a href="leave.php">請假申請</a>
-					</li>
-					<li><a href="travel.php">出差申請</a>
-					</li>
-					<li><a href="allowance.php">差旅費申請</a>
-					</li>
-				</ul>
-			</li>
+			<li><a href="#">線上打卡</a></li>
+			<li><a href="#">表單申請</a></li>
+			<ul>
+				<li><a href="leave.php">請假申請</a></li>
+				<li><a href="travel.php">出差申請</a></li>
+				<li><a href="allowance.php">差旅費申請</a></li>
+			</ul>
 			<li><a href="index.php">內部公告</a></li>
-			<li><a href="#">sign out</a></li>
+			<li><a href="logout.php">sign out</a></li>
 		</ul>
 	</div>
 	<div class="bottom">
@@ -91,8 +86,8 @@
 		<p class="p">職務代理人：<input class="input_text" type="text" name="" ></p>
 		<p class="p">簽核代理人：<input class="input_text" type="text" name="" ></p>
 		<p class="p">說明：<input class="input_text" type="text" name="" placeholder="請輸入詳細說明" size="50"></p>
+		<input type="summit" name="" class="btn" value="送出表單" size="6.5">
 		</form>
-		<button class="btn">送出表單</button>
 	</div>
 	
 	</div>
