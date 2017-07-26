@@ -37,7 +37,8 @@
 	</div>
 	<div class="right-up">
 	<h1 style="font-family:Microsoft JhengHei">新增公告</h1>
-	<textarea class="input_text" style="width:600px;height:200px" placeholder="請輸入內容..."></textarea>
+	<input type="text" name="title" class="input_text" style="width:600px;margin-bottom:5px" placeholder="請輸入標題..." >
+	<textarea class="input_text" name="new_ann" style="width:600px;height:200px" placeholder="請輸入內容..."></textarea>
 	<button class="btn" style="margin-top:10px">送出</button>
 	</div>
 
