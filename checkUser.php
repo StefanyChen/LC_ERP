@@ -13,7 +13,7 @@
 		{
 			//如果密碼一樣，以及帳號一樣，那就代表正確，所以顯示登入成功
 			//使用php header 來轉址 前往後台
-			header('Location: index.html');
+			header('Location: index.php');
 		}
 		else
 		{
