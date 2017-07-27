@@ -14,12 +14,13 @@
 		<p class="leftside" style="color:white;font-size:60px;margin-left:80px;font-family:Arial;margin-top:30px;margin-bottom:0px">Lei Chi Technology</p>
 		<ul class="drop-down-menu">
 			<li><a href="#">線上打卡</a></li>
-			<li><a href="#">表單申請</a></li>
-			<ul>
+			<li><a href="#">表單申請</a>
+				<ul>
 				<li><a href="leave.php">請假申請</a></li>
 				<li><a href="travel.php">出差申請</a></li>
 				<li><a href="allowance.php">差旅費申請</a></li>
-			</ul>
+				</ul>
+			</li>
 			<li><a href="index.php">內部公告</a></li>
 			<li><a href="logout.php">sign out</a></li>
 		</ul>
