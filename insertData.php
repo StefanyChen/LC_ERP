@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "Chen1010";
+$password = "hn13441673";
 $dbname = "peopleresource";
 
 $name=$_POST['name'];
@@ -17,7 +17,7 @@ try {
     $sql = "INSERT INTO `employee` ( `name`, `mobile`, `email`, `address`, `personID`) VALUES ('$name', '$mobile', '$email', '$address', '$personID');";
     // use exec() because no results are returned
     $conn->exec($sql);
-    header('Location:selectEmployee.php') ;
+    header("Location:index.php");
     }
 catch(PDOException $e)
     {
