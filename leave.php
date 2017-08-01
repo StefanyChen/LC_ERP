@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,6 +89,25 @@
 		<div class="right">
 			<div class="right-top">
 				<p style="line-height:50px;font-family:Microsoft JhengHei;font-size:25px;margin:auto 15px">請假申請</p>
+			</div>
+			<div class="right-down">
+				<form style="margin-left:15px;font-family:Microsoft JhengHei;font-size:18px" action="insertLeaveData.php" method="POST">
+					<p>申請人：<?php echo $_SESSION['name']?></p>
+					<p>請假日期/時間：<input type="date" name="l_startDate" size="8"> <input type="time" name="l_startTime" size="7"> 至 <input type="date" name="l_endDate" size="8"> <input type="time" name="l_endTime" size="7"></p>
+					<p class="p">請假時數：<input type="text" name="l_hrs" size="5"></p>
+					<p class="p">請假類別：	
+								<input type="radio" name="l_type" value="病假">病假   
+								<input type="radio" name="l_type" value="事假">事假   
+								<input type="radio" name="l_type" value="喪假">喪假   
+								<input type="radio" name="l_type" value="補休">補休
+								<input type="radio" name="l_type" value="婚產假">婚產假
+								<input type="radio" name="l_type" value="公假">公假
+								<input type="radio" name="l_type" value="特休">特休 
+								</p>
+					<p>請假事由：<input type="text" name="l_state" placeholder=" 請輸入詳細說明" size="50"></p>
+					<p>備註：<input type="text" name="l_comment" size="50"></p>
+					<input type="submit" name="" class="btn" value="送出表單" size="6.5">
+				</form>
 			</div>
 			
 		</div>
