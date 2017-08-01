@@ -9,10 +9,10 @@
 </head>
 <body>
 	<div class="top">
-		<a href="index.php">
+		<a href="user_index.php">
 			<img src="http://www.lctech.com.tw/wp-content/uploads/bfi_thumb/%E6%9C%AA%E5%91%BD%E5%90%8D-1-%E6%8B%B7%E8%B2%9D-31w65e1o8bhj94p9q5patm@2x.png" width="50" height="50" style="float:left;margin-left:15px">
 		</a>
-		<a href="profile.php">
+		<a href="user_profile.php">
 			<i class="material-icons" style="margin-top:15px;margin-right:15px;margin-left:5px;float:right;font-size:30px;color:#CCC">person</i>
 		</a>
 		<a href="#">
@@ -43,7 +43,7 @@
 						<a href="admin_bTrip.php" style="margin:auto 30px;color:#666666">差勤審核</a>
 					</div>
 					<div class="left-list">
-						<a href="admin_mission.php" style="margin:auto 30px;color:#666666">差勤明細</a>
+						<a href="#" style="margin:auto 30px;color:#666666">差勤明細</a>
 					</div>
 				</div>
 				<div>
@@ -64,7 +64,7 @@
 				</div>
 				<div>
 					<div class="left-title">
-						<a href="#" style="margin:auto 20px">登出人資管理</a>
+						<a href="user_index" style="margin:auto 20px">登出人資管理</a>
 					</div>
 				</div>
 			</div>
