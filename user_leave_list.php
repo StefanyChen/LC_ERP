@@ -34,7 +34,7 @@ td{
 <body>
 
 <table>
-	<th></th>
+
 	<th>申請人</th>
 	<th colspan="3">公差時間</th>
 	<th>開始時間</th>
@@ -44,16 +44,13 @@ td{
 	<th>請假事由</th>
 	<th>備註</th>
 	<th>人資確認</th>
-	<th></th>
 	<th>老闆確認</th>
-	<th></th>
 
 <?php
 while($row = mysqli_fetch_array($result)) {
 ?>
 
 <tr>
-	<td><a href="admin_delete_leave.php?id=<?php echo $row["id"]; ?>"  class="link"><img alt='Delete' title='Delete' src='images/delete.png' width='15px' height='15px'hspace='10' /></a></td>
 	<td><?php echo $row["l_name"]; ?></td>
 	<td><?php echo $row["l_startDate"]; ?></td>
 	<td>~</td>
@@ -65,11 +62,7 @@ while($row = mysqli_fetch_array($result)) {
 	<td><?php echo $row["l_state"];?></td>
 	<td><?php echo $row["l_comment"];?></td>
 	<td><?php echo $row["l_hrCheck"]; ?></td>
-	<td><a href="admin_leave_hrCheck.php?id=<?php echo $row["id"]; ?>" class="link">
-	<img alt='Edit' title='Edit' src='images/edit.png' width='15px' height='15px' hspace='10' /></a></td>  
 	<td><?php echo $row["l_bossCheck"]; ?></td>
-	<td><a href="admin_leave_bossCheck.php?id=<?php echo $row["id"]; ?>" class="link">
-	<img alt='Edit' title='Edit' src='images/edit.png' width='15px' height='15px' hspace='10' /></a></td>  
 </tr>
 <?php
 }

@@ -3,7 +3,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "Chen1010";
+$password = "root";
 $dbname = "peopleresource";
 try {
     $conn = mysqli_connect($servername,$username ,$password,$dbname);
@@ -28,10 +28,10 @@ catch(PDOException $e)
 </head>
 <body>
 	<div class="top">
-		<a href="index.php">
+		<a href="user_index.php">
 			<img src="http://www.lctech.com.tw/wp-content/uploads/bfi_thumb/%E6%9C%AA%E5%91%BD%E5%90%8D-1-%E6%8B%B7%E8%B2%9D-31w65e1o8bhj94p9q5patm@2x.png" width="50" height="50" style="float:left;margin-left:15px">
 		</a>
-		<a href="profile.php">
+		<a href="user_profile.php">
 			<i class="material-icons" style="margin-top:15px;margin-right:15px;margin-left:5px;float:right;font-size:30px;color:#CCC">person</i>
 		</a>
 		<a href="#">
@@ -61,7 +61,7 @@ catch(PDOException $e)
 						<p style="margin:auto 30px;color:#666666">差勤審核</p>
 					</div>
 					<div class="left-list">
-						<a href="admin_mission.php" style="margin:auto 30px;color:#666666">差勤明細</a>
+						<a href="#" style="margin:auto 30px;color:#666666">差勤明細</a>
 					</div>
 				</div>
 				<div>
@@ -82,7 +82,7 @@ catch(PDOException $e)
 				</div>
 				<div>
 					<div class="left-title">
-						<a href="#" style="margin:auto 20px">登出人資管理</a>
+						<a href="user_index.php" style="margin:auto 20px">登出人資管理</a>
 					</div>
 				</div>
 			</div>
@@ -116,7 +116,7 @@ catch(PDOException $e)
 						while($row = mysqli_fetch_array($result)) {
 					?>
 						<tr>
-						<td><a href="delete_bTripData.php?id=<?php echo $row["id"]; ?>"  class="link"><img alt='Delete' title='Delete' src='images/delete.png' width='15px' height='15px'hspace='10' /></a></td>
+						<td><a href="admin_delete_bTrip.php?id=<?php echo $row["id"]; ?>"  class="link"><img alt='Delete' title='Delete' src='images/delete.png' width='15px' height='15px'hspace='10' /></a></td>
 						<td><?php echo $row["b_name"]; ?></td>
 						<td><?php echo $row["b_startDate"]; ?></td>
 						<td><?php echo $row["b_endDate"];?></td>
@@ -127,10 +127,10 @@ catch(PDOException $e)
 						<td><?php echo $row["b_state"];?></td>
 						<td><?php echo $row["b_comment"];?></td>
 						<td><?php echo $row["b_hrCheck"]; ?></td>
-						<td><a href="update_hrCheck.php?id=<?php echo $row["id"]; ?>" class="link">
+						<td><a href="admin_bTrip_hrCheck.php?id=<?php echo $row["id"]; ?>" class="link">
 						<i class="material-icons" style="font-size:15px">check</i></a></td>  
 						<td><?php echo $row["b_bossCheck"]; ?></td>
-						<td><a href="update_bossCheck.php?id=<?php echo $row["id"]; ?>" class="link">
+						<td><a href="admin_bTrip_bossCheck.php?id=<?php echo $row["id"]; ?>" class="link">
 						<i class="material-icons" style="font-size:15px">check</i></a></td>  
 						</tr>
 					<?php } ?>

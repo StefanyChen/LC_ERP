@@ -2,7 +2,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "Chen1010";
+$password = "root";
 $dbname = "peopleresource";
 
 $b_name=$_SESSION['name'];
@@ -24,7 +24,7 @@ try {
     VALUES ('$b_name','$b_startDate','$b_startTime','$b_endDate','$b_endTime','$b_totalTime','$b_location','$b_state','$b_comment');";
     // use exec() because no results are returned
     $conn->exec($sql);
-    header("Location:index.php");
+    header("Location:user_bTrip_list.php");
 
     }
 catch(PDOException $e)
