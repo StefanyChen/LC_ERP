@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>個人資料</title>
+	<title>一般員工-請假申請</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="indexStyle.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -59,7 +58,7 @@
 						<a href="leave.php" style="margin:auto 30px;color:#666666">請假申請</a>
 					</div>
 					<div class="left-list">
-						<a href="bTrip.php" style="margin:auto 30px;color:#666666">出差申請</a>
+						<p style="margin:auto 30px;color:#666666">出差申請</p>
 					</div>
 					<div class="left-list">
 						<a href="overtime.php" style="margin:auto 30px;color:#666666">加班申請</a>
@@ -88,9 +87,20 @@
 		</div>
 		<div class="right">
 			<div class="right-top">
-				<p style="line-height:50px;font-family:Microsoft JhengHei;font-size:25px;margin:auto 15px">個人資料</p>
+				<p style="line-height:50px;font-family:Microsoft JhengHei;font-size:25px;margin:auto 15px">出差申請</p>
 			</div>
-			
+			<div class="right-down">
+				<form style="margin-left:15px;font-family:Microsoft JhengHei;font-size:18px" action="insert_bTrip.php">
+					<p>申請人：</p>
+					<p>預計出發日期/時間：<input type="date" name="b_startDate" size="8"> / <input type="time" name="b_startTime" size="7"></p>
+					<p>預計結束日期/時間：<input type="date" name="b_endDate" size="8"> / <input  type="time" name="b_endTime" size="7"></p>
+					<p>出差時數：<input type="text" name="b_totalTime" size="5"></p>
+					<p>出差地點：<input type="text" name="b_location" size="15" placeholder=" ex:台北市"></p>
+					<p>出差事由：<input type="text" name="b_state" size="50" placeholder=" 請輸入詳細說明"></p>
+					<p>備註：<input type="text" name="b_comment" size="50"></p>
+					<input type="submit" name="" value="送出表單" size="6.5" class="btn">
+				</form>
+			</div>
 		</div>
 	</div>
 </body>

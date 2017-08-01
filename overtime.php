@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>個人資料</title>
+	<title>一般員工-加班申請</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="indexStyle.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,10 +62,10 @@
 						<a href="bTrip.php" style="margin:auto 30px;color:#666666">出差申請</a>
 					</div>
 					<div class="left-list">
-						<a href="overtime.php" style="margin:auto 30px;color:#666666">加班申請</a>
+						<p style="margin:auto 30px;color:#666666">加班申請</p>
 					</div>
 					<div class="left-list">
-						<a href="mission.php" style="margin:auto 30px;color:#666666">差勤明細</a>
+						<a href="#" style="margin:auto 30px;color:#666666">差勤明細</a>
 					</div>
 				</div>
 				<div>
@@ -88,7 +88,7 @@
 		</div>
 		<div class="right">
 			<div class="right-top">
-				<p style="line-height:50px;font-family:Microsoft JhengHei;font-size:25px;margin:auto 15px">個人資料</p>
+				<p style="line-height:50px;font-family:Microsoft JhengHei;font-size:25px;margin:auto 15px">加班申請</p>
 			</div>
 			
 		</div>

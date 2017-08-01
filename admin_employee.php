@@ -40,7 +40,7 @@
 						<p style="margin:auto 20px">差勤管理</p>
 					</div>
 					<div class="left-list">
-						<a href="admin_review.php" style="margin:auto 30px;color:#666666">差勤審核</a>
+						<a href="admin_bTrip.php" style="margin:auto 30px;color:#666666">差勤審核</a>
 					</div>
 					<div class="left-list">
 						<a href="admin_mission.php" style="margin:auto 30px;color:#666666">差勤明細</a>
