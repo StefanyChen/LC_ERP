@@ -106,9 +106,12 @@ table{
 	font-size:16px;
 	line-height:30px;
 }
-td,th{
+td,th,tr{
 	border:solid 1px #CCC;
 	font-family:Microsoft JhengHei;
 	font-size:16px;
 	text-align:center;
+}
+tr:hover{
+	background-color:#FFDDAA;
 }
