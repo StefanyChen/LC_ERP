@@ -56,16 +56,16 @@
 						<p style="margin:auto 20px">表單申請</p>
 					</div>
 					<div  class="left-list">
-						<a href="#" style="margin:auto 30px;color:#666666">請假申請</a>
+						<a href="leave.php" style="margin:auto 30px;color:#666666">請假申請</a>
 					</div>
 					<div class="left-list">
-						<a href="#" style="margin:auto 30px;color:#666666">出差申請</a>
+						<a href="bTrip.php" style="margin:auto 30px;color:#666666">出差申請</a>
 					</div>
 					<div class="left-list">
-						<a href="#" style="margin:auto 30px;color:#666666">加班申請</a>
+						<a href="overtime.php" style="margin:auto 30px;color:#666666">加班申請</a>
 					</div>
 					<div class="left-list">
-						<a href="#" style="margin:auto 30px;color:#666666">差勤明細</a>
+						<a href="mission.php" style="margin:auto 30px;color:#666666">差勤明細</a>
 					</div>
 				</div>
 				<div>
