@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,8 +91,8 @@
 				<p style="line-height:50px;font-family:Microsoft JhengHei;font-size:25px;margin:auto 15px">出差申請</p>
 			</div>
 			<div class="right-down">
-				<form style="margin-left:15px;font-family:Microsoft JhengHei;font-size:18px" action="insert_bTrip.php">
-					<p>申請人：</p>
+				<form style="margin-left:15px;font-family:Microsoft JhengHei;font-size:18px" method="post" action="insert_bTrip.php">
+					<p>申請人：<?php echo $_SESSION['name'];?></p>
 					<p>預計出發日期/時間：<input type="date" name="b_startDate" size="8"> / <input type="time" name="b_startTime" size="7"></p>
 					<p>預計結束日期/時間：<input type="date" name="b_endDate" size="8"> / <input  type="time" name="b_endTime" size="7"></p>
 					<p>出差時數：<input type="text" name="b_totalTime" size="5"></p>

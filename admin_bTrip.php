@@ -101,7 +101,7 @@ catch(PDOException $e)
 					<table cellspacing="0">
 						<th></th>
 						<th>申請人</th>
-						<th colspan="3">公差時間</th>
+						<th colspan="2">公差時間</th>
 						<th>開始時間</th>
 						<th>結束時間</th>
 						<th>時數</th>
@@ -119,7 +119,6 @@ catch(PDOException $e)
 						<td><a href="delete_bTripData.php?id=<?php echo $row["id"]; ?>"  class="link"><img alt='Delete' title='Delete' src='images/delete.png' width='15px' height='15px'hspace='10' /></a></td>
 						<td><?php echo $row["b_name"]; ?></td>
 						<td><?php echo $row["b_startDate"]; ?></td>
-						<td>~</td>
 						<td><?php echo $row["b_endDate"];?></td>
 						<td><?php echo $row["b_startTime"];?></td>
 						<td><?php echo $row["b_endTime"];?></td>
