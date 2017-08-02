@@ -14,13 +14,6 @@ $l_state=$_POST['l_state'];
 $l_comment=$_POST['l_comment'];
 $l_type=$_POST['l_type'];
 $l_hrs=$_POST['l_hrs'];
-$l_compensatoryLevae=0;
-$l_annualLeave=0;
-$l_marriageLeave=0;
-$l_officialLeave=0;
-$l_personalLeave=0;
-$l_funeralLeave=0;
-$l_sickLeave=0;
 
 try {
     $conn = mysqli_connect($servername,$username ,$password,$dbname);
@@ -29,9 +22,10 @@ try {
 
     // use exec() because no results are returned
     $result = mysqli_query($conn,$sql);
-     
-    while($row = mysqli_fetch_array($result)){
 
+     
+    $row = mysqli_fetch_array($result);
+        
     switch($l_type){
         case "補休":
         $l_compensatoryLevae=$_POST['l_hrs'];
@@ -55,7 +49,7 @@ try {
         $l_sickLeave=$_POST['l_hrs'];
         break;
         }
-    }
+    
     if(COUNT($_POST)>0){
         $sql="INSERT INTO `leave`(`l_name`, `l_startDate`, `l_startTime`, `l_endDate`, `l_endTime`, `l_type`, `l_hrs`, `l_state`, `l_comment`,`l_compensatoryLevae`, `l_annualLeave`, `l_marriageLeave`, `l_officialLeave`, `l_personalLeave`, `l_funeralLeave`, `l_sickLeave`) VALUES('$l_name','$l_startDate','$l_startTime','$l_endDate','$l_endTime','$l_type','$l_hrs','$l_state','$l_comment','$l_compensatoryLevae','$l_annualLeave','$l_marriageLeave','$l_officialLeave','$l_personalLeave','$l_funeralLeave','$l_sickLeave')";
         $result = mysqli_query($conn,$sql);

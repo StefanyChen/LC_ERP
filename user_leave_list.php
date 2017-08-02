@@ -170,7 +170,7 @@ td{
 		try {
 		    $conn = mysqli_connect($servername,$username ,$password,$dbname);
 
-		    $sql = "SELECT SUM(`l_compensatoryLevae`),SUM(`l_annualLeave`),SUM(`l_marriageLeave`),SUM(`l_personalLeave`),SUM(`l_funeralLeave`),SUM(`l_officialLeave`),SUM('l_sickLeave') FROM `leave` WHERE l_name='".$_SESSION['name']."'";
+		    $sql = "SELECT SUM(`l_compensatoryLevae`),SUM(`l_annualLeave`),SUM(`l_marriageLeave`),SUM(`l_personalLeave`),SUM(`l_funeralLeave`),SUM(`l_officialLeave`),SUM(`l_sickLeave`) FROM `leave` WHERE l_name='".$_SESSION['name']."'";
 		    // use exec() because no results are returned
 		    $result = mysqli_query($conn,$sql);
 		    }
@@ -185,8 +185,7 @@ td{
 		<?php
 		 $row = mysqli_fetch_array($result);
 		 ?>
-		<th rowspan="7" style="width:30%">總請假時數:<?php echo $row["SUM(`l_compensatoryLevae`)"]+$row["SUM(`l_annualLeave`)"]+$row["SUM(`l_marriageLeave`)"]+$row["SUM(`l_personalLeave`)"]+$row["SUM(`l_funeralLeave`)"]+$row["SUM(`l_officialLeave`)"]+$row["SUM(`l_sickLeave`)"];?>  hrs
-		</th>
+		<th rowspan="7" style="width:30%">總請假時數:<?php echo $row["SUM(`l_compensatoryLevae`)"]+$row["SUM(`l_annualLeave`)"]+$row["SUM(`l_marriageLeave`)"]+$row["SUM(`l_personalLeave`)"]+$row["SUM(`l_funeralLeave`)"]+$row["SUM(`l_officialLeave`)"]+$row["SUM(`l_sickLeave`)"];?>  hrs</th>
 		<td>補休:<?php echo $row["SUM(`l_compensatoryLevae`)"]; ?>  hrs</td></tr>
 		<tr><td>特休:<?php echo $row["SUM(`l_annualLeave`)"];?>  hrs</td></tr>
 		<tr><td>婚/產假:<?php echo $row["SUM(`l_marriageLeave`)"];?>  hrs</td></tr>		
