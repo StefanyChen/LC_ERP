@@ -1,33 +1,28 @@
--- phpMyAdmin SQL Dump
--- version 4.6.6
--- https://www.phpmyadmin.net/
---
--- 主機: localhost
--- 產生時間： 2017-08-01 07:11:31
--- 伺服器版本: 5.7.17-log
--- PHP 版本： 5.6.30
+/*
+ Navicat Premium Data Transfer
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+ Source Server         : david
+ Source Server Type    : MySQL
+ Source Server Version : 50635
+ Source Host           : localhost
+ Source Database       : peopleresource
 
+ Target Server Type    : MySQL
+ Target Server Version : 50635
+ File Encoding         : utf-8
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+ Date: 08/02/2017 14:35:43 PM
+*/
 
---
--- 資料庫： `peopleresource`
---
+SET NAMES utf8;
+SET FOREIGN_KEY_CHECKS = 0;
 
--- --------------------------------------------------------
-
---
--- 資料表結構 `employees`
---
-
+-- ----------------------------
+--  Table structure for `employees`
+-- ----------------------------
+DROP TABLE IF EXISTS `employees`;
 CREATE TABLE `employees` (
-  `id` int(255) UNSIGNED NOT NULL,
+  `id` int(255) NOT NULL AUTO_INCREMENT,
   `e_sn` varchar(30) DEFAULT NULL,
   `e_password` varchar(30) NOT NULL,
   `e_date` date DEFAULT NULL,
@@ -39,41 +34,54 @@ CREATE TABLE `employees` (
   `e_marriage` varchar(6) DEFAULT NULL,
   `e_blood` varchar(2) DEFAULT NULL,
   `e_address` varchar(150) DEFAULT NULL,
-  `e_mobile` int(20) DEFAULT NULL,
+  `e_mobile` varchar(20) DEFAULT NULL,
   `e_email` varchar(100) DEFAULT NULL,
   `e_emergency` varchar(15) DEFAULT NULL,
-  `e_em_mobile` int(20) DEFAULT NULL,
+  `e_em_mobile` varchar(20) DEFAULT NULL,
   `e_edu` varchar(30) DEFAULT NULL,
   `e_edu_high` varchar(30) DEFAULT NULL,
   `e_edu_dep` varchar(30) DEFAULT NULL,
   `e_edu_start` date DEFAULT NULL,
   `e_edu_end` date DEFAULT NULL,
   `e_edu_gra` varchar(10) DEFAULT NULL,
-  `e_exp_com` varchar(30) DEFAULT NULL,
-  `e_exp_posi` varchar(30) DEFAULT NULL,
-  `e_exp_start` date DEFAULT NULL,
-  `e_exp_end` date DEFAULT NULL,
-  `e_exp_reson` varchar(30) DEFAULT NULL,
-  `e_license` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `e_exp_com1` varchar(30) DEFAULT NULL,
+  `e_exp_posi1` varchar(30) DEFAULT NULL,
+  `e_exp_start1` date DEFAULT NULL,
+  `e_exp_reason1` varchar(100) DEFAULT NULL,
+  `e_license` varchar(60) DEFAULT NULL,
+  `e_exp_end1` date DEFAULT NULL,
+  `e_exp_com2` varchar(30) DEFAULT NULL,
+  `e_exp_posi2` varchar(30) DEFAULT NULL,
+  `e_exp_start2` date DEFAULT NULL,
+  `e_exp_end2` date DEFAULT NULL,
+  `e_exp_reason2` varchar(100) DEFAULT NULL,
+  `e_exp_com3` varchar(30) DEFAULT NULL,
+  `e_exp_posi3` varchar(30) DEFAULT NULL,
+  `e_exp_start3` date DEFAULT NULL,
+  `e_exp_end3` date DEFAULT NULL,
+  `e_exp_reason3` varchar(100) DEFAULT NULL,
+  `e_exp_com4` varchar(30) DEFAULT NULL,
+  `e_exp_posi4` varchar(30) DEFAULT NULL,
+  `e_exp_start4` date DEFAULT NULL,
+  `e_exp_end4` date DEFAULT NULL,
+  `e_exp_reason4` varchar(100) DEFAULT NULL,
+  `e_exp_com5` varchar(30) DEFAULT NULL,
+  `e_exp_posi5` varchar(30) DEFAULT NULL,
+  `e_exp_start5` date DEFAULT NULL,
+  `e_exp_end5` date DEFAULT NULL,
+  `e_exp_reason5` varchar(100) DEFAULT NULL,
+  `e_type` varchar(10) DEFAULT NULL,
+  `e_status` varchar(10) DEFAULT NULL,
+  `e_location` varchar(10) DEFAULT NULL,
+  `e_extension` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
---
--- 資料表的匯出資料 `employees`
---
+-- ----------------------------
+--  Records of `employees`
+-- ----------------------------
+BEGIN;
+INSERT INTO `employees` VALUES ('1', 'A01', '1234', '2017-08-02', '王小名', 'wang', '男', '2017-08-31', 'A113456789', '未婚', 'A', '桃園市中壢區XX路XX段XX號', '0937465748', 'wang@gmail.com', '王大明', '0912345678', '大學', '台灣大學', '資工系', '2017-08-01', '2017-08-31', '畢業', '無', null, null, '因為心累了', '無', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+COMMIT;
 
-INSERT INTO `employees` (`id`, `e_sn`, `e_password`, `e_date`, `e_name_cn`, `e_name_en`, `e_sex`, `e_birth`, `e_personalID`, `e_marriage`, `e_blood`, `e_address`, `e_mobile`, `e_email`, `e_emergency`, `e_em_mobile`, `e_edu`, `e_edu_high`, `e_edu_dep`, `e_edu_start`, `e_edu_end`, `e_edu_gra`, `e_exp_com`, `e_exp_posi`, `e_exp_start`, `e_exp_end`, `e_exp_reson`, `e_license`) VALUES
-(0, 'A01', '1234', '2017-08-02', '王小名', 'wang', '男', '2017-08-31', 'A113456789', '未婚', 'A', '桃園市中壢區XX路XX段XX號', 937465748, 'wang@gmail.com', '王大明', 912345678, '大學', '台灣大學', '資工系', '2017-08-01', '2017-08-31', '畢業', '無', NULL, NULL, NULL, '因為心累了', '無');
-
---
--- 已匯出資料表的索引
---
-
---
--- 資料表索引 `employees`
---
-ALTER TABLE `employees`
-  ADD PRIMARY KEY (`id`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+SET FOREIGN_KEY_CHECKS = 1;
