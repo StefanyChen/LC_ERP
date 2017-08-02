@@ -14,6 +14,9 @@ a:active {
 	color: blue;
 	font-weight:bolder;
 }
+body{
+	margin:0;
+}
 .top{
 	width:100%;
 	height:60px;
@@ -27,14 +30,14 @@ a:active {
 	margin:auto;
 }
 .left{
-	width:21%;
+	width:18%;
 	height:auto;
 	background-color:white;
 	margin:auto;
 	float:left;
 }
 .right{
-	width:79%;
+	width:82%;
 	height:1000px;
 	background-color:#F5F5F5;
 	margin:auto;
@@ -114,4 +117,19 @@ td,th,tr{
 }
 tr:hover{
 	background-color:#FFDDAA;
+}
+.leftside{
+	float:left;
+}
+select{
+	border-radius:5px;
+	border:solid 1px #CCC;
+	font-size:20px;
+	font-family:Microsoft JhengHei;
+}
+option{
+	border-radius:5px;
+	border:solid 1px #CCC;
+	font-size:20px;
+	font-family:Microsoft JhengHei;
 }

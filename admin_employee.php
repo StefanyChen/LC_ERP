@@ -1,4 +1,53 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "peopleresource";
+
+$location=$_POST["Location"];
+$type=$_POST["Type"];
+$status=$_POST["Status"];
+
+try {
+    $conn = mysqli_connect($servername,$username ,$password,$dbname);
+	if($location==NULL){
+		if($type==NULL){
+			if($status==NULL){
+				$sql = "SELECT * FROM employees";
+				$result = mysqli_query($conn,$sql);}
+			else{
+				$sql = "SELECT * FROM `employees` WHERE e_status='$status'";
+				$result = mysqli_query($conn,$sql);}}
+		else{
+			if($status==NULL){
+				$sql = "SELECT * FROM `employees` WHERE e_type='$type'";
+				$result = mysqli_query($conn,$sql);}
+			else{
+				$sql = "SELECT * FROM `employees` WHERE e_status='$status' && e_type='$type'";
+				$result = mysqli_query($conn,$sql);}}}
+	else{
+		if($type==NULL){
+			if($status==NULL){
+				$sql = "SELECT * FROM `employees` WHERE e_location='$location'";
+				$result = mysqli_query($conn,$sql);}
+			else{
+				$sql = "SELECT * FROM `employees` WHERE e_status='$status' && e_location='$location'";
+				$result = mysqli_query($conn,$sql);}}
+		else{
+			if($status==NULL){
+				$sql = "SELECT * FROM `employees` WHERE e_location='$location' && e_type='$type'";
+				$result = mysqli_query($conn,$sql);}
+			else{
+				$sql = "SELECT * FROM `employees` WHERE e_location='$location' && e_type='$type' && e_status='$status'";
+				$result = mysqli_query($conn,$sql);}}}
+	}
+catch(PDOException $e)
+    {
+    echo $sql . "<br>" . $e->getMessage();
+    }
+?>
 <html>
 <head>
 	<title>員工資料</title>
@@ -32,7 +81,13 @@
 						<p style="margin:auto 20px">人事管理</p>
 					</div>
 					<div class="left-list">
-						<p style="margin:auto 30px;color:#666666">員工資料</p>
+						<p style="margin:auto 30px;color:#666666">員工資料列表</p>
+					</div>
+					<div class="left-list">
+						<a href="#" style="margin:auto 30px;color:#666666">員工資料修改</a>
+					</div>
+					<div class="left-list">
+						<a href="#" style="margin:auto 30px;color:#666666">新增員工資料</a>
 					</div>
 				</div>
 				<div>
@@ -64,16 +119,51 @@
 				</div>
 				<div>
 					<div class="left-title">
-						<a href="user_index" style="margin:auto 20px">登出人資管理</a>
+						<a href="user_index.php" style="margin:auto 20px">登出人資管理</a>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="right">
 			<div class="right-top">
-				<p style="line-height:50px;font-family:Microsoft JhengHei;font-size:25px;margin:auto 15px">員工資料</p>
+				<p style="line-height:50px;font-family:Microsoft JhengHei;font-size:25px;margin:auto 15px">員工資料列表</p>
 			</div>
 			<div><!--rightBottom-->
+				<div style="width:100%;height:70px;margin:auto;;border-bottom:solid 1px #CCC;">
+					<form method="post" action="admin_employee.php" style="float:left;margin:15px"><select name="Location"><option value="" selected>工作地點</option><option value="台北">台北</option><option value="中壢">中壢</option></select>
+					<select name="Type"><option value="" selected>員工型態</option><option value="正職">正職</option><option value="工讀">工讀</option></select>
+					<select name="Status"><option value="" selected>員工狀態</option><option value="在職中">在職中</option><option value="已離職">已離職</option></select>
+					<input class="btn" type="submit" value="Submit" />
+					</form>
+				</div>
+				<div>
+					<div>
+					<table cellspacing="0">
+						<th>編號</th>
+						<th>員工型態</th>
+						<th>員工狀態</th>
+						<th>工作地點</th>
+						<th>中文姓名</th>
+						<th>英文姓名</th>
+						<th>分機號碼</th>
+						<th>電話</th>
+						<?php
+						while($row = mysqli_fetch_array($result)) {
+						?>
+						<tr>
+						<td><?php echo $row["e_sn"]; ?></td>
+						<td><?php echo $row["e_type"]; ?></td>
+						<td><?php echo $row["e_status"];?></td>
+						<td><?php echo $row["e_location"];?></td>
+						<td><?php echo $row["e_name_cn"];?></td>
+						<td><?php echo $row["e_name_en"];?></td>
+						<td><?php echo $row["e_extension"]?></td> 
+						<td><?php echo $row["e_mobile"];?></td>
+						</tr>
+					<?php } ?>
+					</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
