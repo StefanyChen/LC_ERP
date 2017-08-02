@@ -50,7 +50,13 @@ catch(PDOException $e)
 						<p style="margin:auto 20px">人事管理</p>
 					</div>
 					<div class="left-list">
-						<a href="admin_employee.php" style="margin:auto 30px;color:#666666">員工資料</a>
+						<a href="admin_employee.php" style="margin:auto 30px;color:#666666">員工資料列表</a>
+					</div>
+					<div class="left-list">
+						<a href="#" style="margin:auto 30px;color:#666666">員工資料修改</a>
+					</div>
+					<div class="left-list">
+						<a href="#" style="margin:auto 30px;color:#666666">新增員工資料</a>
 					</div>
 				</div>
 				<div>
@@ -93,11 +99,11 @@ catch(PDOException $e)
 			</div>
 			<div><!--rightBottom-->
 				<div style="width:100%;height:50px;margin:auto;;border-bottom:solid 1px #CCC;">
-					<a href="admin_bTrip.php" class="right-title">出差審核</a>
+					<a href="admin_bTrip.php" class="right-title" style="background-color:#FFDDAA">出差審核</a>
 					<a href="admin_leave.php" class="right-title">請假審核</a>
 					<a href="admin_overtime.php" class="right-title">加班審核</a>
 				</div>
-				<div>
+				<div style="overflow:auto">
 					<table cellspacing="0">
 						<th></th>
 						<th>申請人</th>

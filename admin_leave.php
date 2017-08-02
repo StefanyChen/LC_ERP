@@ -50,7 +50,13 @@ catch(PDOException $e)
 						<p style="margin:auto 20px">人事管理</p>
 					</div>
 					<div class="left-list">
-						<a href="admin_employee.php" style="margin:auto 30px;color:#666666">員工資料</a>
+						<a href="admin_employee.php" style="margin:auto 30px;color:#666666">員工資料列表</a>
+					</div>
+					<div class="left-list">
+						<a href="#" style="margin:auto 30px;color:#666666">員工資料修改</a>
+					</div>
+					<div class="left-list">
+						<a href="#" style="margin:auto 30px;color:#666666">新增員工資料</a>
 					</div>
 				</div>
 				<div>
@@ -94,15 +100,15 @@ catch(PDOException $e)
 			<div><!--rightBottom-->
 				<div style="width:100%;height:50px;margin:auto;;border-bottom:solid 1px #CCC;">
 					<a href="admin_bTrip.php" class="right-title">出差審核</a>
-					<a href="admin_leave.php" class="right-title">請假審核</a>
+					<a href="admin_leave.php" class="right-title" style="background-color:#FFDDAA">請假審核</a>
 					<a href="admin_overtime.php" class="right-title">加班審核</a>
 				</div>
-				<div>
+				<div style="overflow:auto">
 
-<table>
+<table cellspacing="0">
 	<th></th>
 	<th>申請人</th>
-	<th colspan="3">公差時間</th>
+	<th colspan="2">公差時間</th>
 	<th>開始時間</th>
 	<th>結束時間</th>
 	<th>請假類別</th>
@@ -122,7 +128,6 @@ while($row = mysqli_fetch_array($result)) {
 	<td><a href="admin_delete_leave.php?id=<?php echo $row["id"]; ?>"  class="link"><img alt='Delete' title='Delete' src='images/delete.png' width='15px' height='15px'hspace='10' /></a></td>
 	<td><?php echo $row["l_name"]; ?></td>
 	<td><?php echo $row["l_startDate"]; ?></td>
-	<td>~</td>
 	<td><?php echo $row["l_endDate"];?></td>
 	<td><?php echo $row["l_startTime"];?></td>
 	<td><?php echo $row["l_endTime"];?></td>
@@ -131,11 +136,11 @@ while($row = mysqli_fetch_array($result)) {
 	<td><?php echo $row["l_state"];?></td>
 	<td><?php echo $row["l_comment"];?></td>
 	<td><?php echo $row["l_hrCheck"]; ?></td>
-	<td><a href="admin_leave_hrCheck.php?id=<?php echo $row["id"]; ?>" class="link">
-	<img alt='Edit' title='Edit' src='images/edit.png' width='15px' height='15px' hspace='10' /></a></td>  
-	<td><?php echo $row["l_bossCheck"]; ?></td>
-	<td><a href="admin_leave_bossCheck.php?id=<?php echo $row["id"]; ?>" class="link">
-	<img alt='Edit' title='Edit' src='images/edit.png' width='15px' height='15px' hspace='10' /></a></td>  
+						<td><a href="admin_leave_hrCheck.php?id=<?php echo $row["id"]; ?>" class="link">
+						<i class="material-icons" style="font-size:15px">check</i></a></td>  
+						<td><?php echo $row["b_bossCheck"]; ?></td>
+						<td><a href="admin_leave_bossCheck.php?id=<?php echo $row["id"]; ?>" class="link">
+						<i class="material-icons" style="font-size:15px">check</i></a></td>  
 </tr>
 <?php
 }
