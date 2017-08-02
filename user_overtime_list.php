@@ -8,7 +8,7 @@ $dbname = "peopleresource";
 try {
     $conn = mysqli_connect($servername,$username ,$password,$dbname);
 
-    $sql = "SELECT * FROM business WHERE b_name='".$_SESSION['name']."'";
+    $sql = "SELECT * FROM `overtime_apply` WHERE o_name='".$_SESSION['name']."'";
     // use exec() because no results are returned
     $result = mysqli_query($conn,$sql);
 
@@ -30,7 +30,9 @@ td{
 }
 
 </style>
-	<title>差勤明細</title>
+</head>
+<body>
+<title>差勤明細</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="indexStyle.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -115,7 +117,7 @@ td{
 		</div>
 		<div class="right">
 			<div class="right-top">
-				<p style="line-height:50px;font-family:Microsoft JhengHei;font-size:25px;margin:auto 15px">差勤明細</p>
+				<p style="line-height:50px;font-family:Microsoft JhengHei;font-size:25px;margin:auto 15px">加班明細</p>
 			</div>
 			<div>
 			<div style="width:100%;height:50px;margin:auto;;border-bottom:solid 1px #CCC;">
@@ -124,44 +126,63 @@ td{
 					<a href="user_overtime_list.php" class="right-title">加班明細</a>
 			</div>
 			<div>
-			<table>
-				<th>申請人</th>
-				<th colspan="2">公差時間</th>
-				<th>開始時間</th>
-				<th>結束時間</th>
-				<th>時數</th>
-				<th>公差地點</th>
-				<th>公差事由</th>
-				<th>備註</th>
-				<th>人資確認</th>
-				<th>老闆確認</th>
+		<table>
 
-			<?php
-			while($row = mysqli_fetch_array($result)) {
-			?>
+			<th>申請人</th>
+			<th>加班日期</th>
+			<th>開始時間</th>
+			<th>結束時間</th>
+			<th>申請加班費時數</th>
+			<th>申請補修時數</th>
+			<th>加班事由</th>
+			<th>備註</th>
+			<th>人資確認</th>
+			<th>老闆確認</th>
 
-			<tr>
-				<td><?php echo $row["b_name"]; ?></td>
-				<td><?php echo $row["b_startDate"]; ?></td>
-				<td><?php echo $row["b_endDate"];?></td>
-				<td><?php echo $row["b_startTime"];?></td>
-				<td><?php echo $row["b_endTime"];?></td>
-				<td><?php echo $row["b_totalTime"]?></td>
-				<td><?php echo $row["b_location"];?></td>
-				<td><?php echo $row["b_state"];?></td>
-				<td><?php echo $row["b_comment"];?></td>
-				<td><?php echo $row["b_hrCheck"]; ?></td>
-				<td><?php echo $row["b_bossCheck"]; ?></td>
-			</tr>
-			<?php
-			}
-			?>
-			</table>
-		</div>
-		</div>
-	</div>
-	</div>
+		<?php
+		while($row = mysqli_fetch_array($result)) {
+		?>
 
-</body>
+		<tr>
+			<td><?php echo $row["o_name"]; ?></td>
+			<td><?php echo $row["o_date"]; ?></td>
+			<td><?php echo $row["o_start"];?></td>
+			<td><?php echo $row["o_end"];?></td>
+			<td><?php echo $row["o_hrs"];?></td>
+			<td><?php echo $row["o_phrs"]?></td>
+			<td><?php echo $row["o_state"]?></td>
+			<td><?php echo $row["o_comment"];?></td>
+			<td><?php echo $row["o_hrCheck"]; ?></td>
+			<td><?php echo $row["o_bossCheck"]; ?></td>
+		</tr>
+		<?php
+		}
+		?>
+
+		</table>
+
+		<?php
+		$servername = "localhost";
+		$username = "root";
+		$password = "root";
+		$dbname = "peopleresource";
+		try {
+		    $conn = mysqli_connect($servername,$username ,$password,$dbname);
+
+		    $sql = "SELECT SUM(`o_hrs`),SUM(`o_phrs`) FROM `overtime_apply` WHERE o_name='".$_SESSION['name']."'";
+		    // use exec() because no results are returned
+		    $result = mysqli_query($conn,$sql);
+		    }	
+		catch(PDOException $e)
+		    {
+		    echo $sql . "<br>" . $e->getMessage();
+		    }
+		 $row = mysqli_fetch_array($result);
+		 ?>
+		<table>
+		<td>加班費總時數:<?php echo $row["SUM(`o_hrs`)"]; ?></td>
+		<td>補修總時數:<?php echo $row["SUM(`o_phrs`)"]; ?></td>
+
+		</table>
+	</body>
 </html>
-

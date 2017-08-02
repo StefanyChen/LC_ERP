@@ -20,7 +20,7 @@ catch(PDOException $e)
 ?>
 <html>
 <head>
-	<title>差勤審核-加班</title>
+	<title>差勤審核-出差</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="indexStyle.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -89,7 +89,7 @@ catch(PDOException $e)
 		</div>
 		<div class="right">
 			<div class="right-top">
-				<p style="line-height:50px;font-family:Microsoft JhengHei;font-size:25px;margin:auto 15px">加班審核</p>
+				<p style="line-height:50px;font-family:Microsoft JhengHei;font-size:25px;margin:auto 15px">差勤審核</p>
 			</div>
 			<div><!--rightBottom-->
 				<div style="width:100%;height:50px;margin:auto;;border-bottom:solid 1px #CCC;">
@@ -98,49 +98,62 @@ catch(PDOException $e)
 					<a href="admin_overtime.php" class="right-title">加班審核</a>
 				</div>
 				<div>
-					<table cellspacing="0">
-						<th></th>
-						<th>申請人</th>
-						<th>加班日期</th>
-						<th>開始時間</th>
-						<th>結束時間</th>
-						<th>申請加班時數</th>
-						<th>申請補修時數</th>
-						<th>加班事由</th>
-						<th>備註</th>
-						<th>加班時數</th>
-						<th>補修總計時數</th>
-						<th>人資確認</th>
-						<th></th>
-						<th>老闆確認</th>
-						<th></th>
-					<?php
-						while($row = mysqli_fetch_array($result)) {
-					?>
-						<tr>
-						<td><a href="admin_delete_bTrip.php?id=<?php echo $row["id"]; ?>"  class="link"><img alt='Delete' title='Delete' src='images/delete.png' width='15px' height='15px' hspace='10' /></a></td>
-						<td><?php echo $row["o_name"]; ?></td>
-						<td><?php echo $row["o_date"]; ?></td>
-						<td><?php echo $row["o_start"]; ?></td>
-						<td><?php echo $row["o_end"];?></td>
-						<td><?php echo $row["o_hrs"];?></td>
-						<td><?php echo $row["o_phrs"];?></td>
-						<td><?php echo $row["o_state"]?></td>
-						<td><?php echo $row["o_comment"];?></td>
-						<td><?php echo $row["o_total"];?></td>
-						<td><?php echo $row["o_ptotal"];?></td>
-						<td><?php echo $row["o_hrCheck"];?></td>
-						<td><a href="admin_bTrip_hrCheck.php?id=<?php echo $row["id"]; ?>" class="link">
-						<i class="material-icons" style="font-size:15px">check</i></a></td>  
-						<td><?php echo $row["o_bossCheck"]; ?></td>
-						<td><a href="admin_bTrip_bossCheck.php?id=<?php echo $row["id"]; ?>" class="link">
-						<i class="material-icons" style="font-size:15px">check</i></a></td>  
-						</tr>
-					<?php } ?>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
+
+
+<table>
+	<th></th>
+	<th>申請人</th>
+	<th>加班日期</th>
+	<th>開始時間</th>
+	<th>結束時間</th>
+	<th>申請加班時數</th>
+	<th>申請補修時數</th>
+	<th>加班事由</th>
+	<th>備註</th>
+	<th>加班時數</th>
+	<th>補修總計時數</th>
+	<th>人資確認</th>
+	<th></th>
+	<th>老闆確認</th>
+	<th></th>
+<?php
+while($row = mysqli_fetch_array($result)) {
+?>
+
+<tr>
+	
+	<td>
+		<a href="delete_bTripData.php?id=<?php echo $row["id"]; ?>"  class="link">
+		<img alt='Delete' title='Delete' src='images/delete.png' width='15px' height='15px' hspace='10' />
+		</a>
+	</td>
+	<td><?php echo $row["o_name"]; ?></td>
+	<td><?php echo $row["o_date"]; ?></td>
+	<td><?php echo $row["o_start"]; ?></td>
+	<td><?php echo $row["o_end"];?></td>
+	<td><?php echo $row["o_hrs"];?></td>
+	<td><?php echo $row["o_phrs"];?></td>
+	<td><?php echo $row["o_state"]?></td>
+	<td><?php echo $row["o_comment"];?></td>
+	<td><?php echo $row["o_total"];?></td>
+	<td><?php echo $row["o_ptotal"];?></td>
+	<td><?php echo $row["o_hrCheck"];?></td>
+	<td>
+		<a href="update_hrCheck.php?id=<?php echo $row["id"]; ?>" class="link">
+		<img alt='Edit' title='Edit' src='images/edit.png' width='15px' height='15px' hspace='10' />
+		</a>
+	</td>  
+	<td><?php echo $row["o_bossCheck"]; ?></td>
+	<td>
+		<a href="update_bossCheck.php?id=<?php echo $row["id"]; ?>" class="link">
+		<img alt='Edit' title='Edit' src='images/edit.png' width='15px' height='15px' hspace='10' />
+		</a>
+	</td>  
+</tr>
+<?php
+}
+?>
+</table>
+
 </body>
 </html>

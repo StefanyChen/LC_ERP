@@ -25,7 +25,7 @@ $l_sickLeave=0;
 try {
     $conn = mysqli_connect($servername,$username ,$password,$dbname);
 
-    $sql = "SELECT `l_compensatoryLevae` FROM `leave` WHERE l_name='".$_SESSION['name']."'";
+    $sql = "SELECT * FROM `leave` WHERE l_name='".$_SESSION['name']."'";
 
     // use exec() because no results are returned
     $result = mysqli_query($conn,$sql);
@@ -34,25 +34,25 @@ try {
 
     switch($l_type){
         case "補休":
-        $l_compensatoryLevae+=$_POST['l_hrs'];
+        $l_compensatoryLevae=$_POST['l_hrs'];
         break;
         case "特休":
-        $l_annualLeave+=$_POST['l_hrs'];
+        $l_annualLeave=$_POST['l_hrs'];
         break;
         case "婚產假":
-        $l_marriageLeave+=$_POST['l_hrs'];
+        $l_marriageLeave=$_POST['l_hrs'];
         break;
         case "公假":
-        $l_officialLeave+=$_POST['l_hrs'];
+        $l_officialLeave=$_POST['l_hrs'];
         break;
         case "事假":
-        $l_personalLeave+=$_POST['l_hrs'];
+        $l_personalLeave=$_POST['l_hrs'];
         break;
         case "喪假":
-        $l_funeralLeave+=$_POST['l_hrs'];
+        $l_funeralLeave=$_POST['l_hrs'];
         break;
         case "病假":
-        $l_sickLeave+=$_POST['l_hrs'];
+        $l_sickLeave=$_POST['l_hrs'];
         break;
         }
     }
