@@ -7,11 +7,9 @@ $password = "root";
 $dbname = "peopleresource";
 try {
     $conn = mysqli_connect($servername,$username ,$password,$dbname);
-
-    $sql = "SELECT * FROM employees";
+    $sql = "SELECT * FROM `employees` WHERE e_name_cn = '".$_SESSION['name']."'";
     // use exec() because no results are returned
     $result = mysqli_query($conn,$sql);
-
     }
 catch(PDOException $e)
     {
@@ -32,7 +30,6 @@ catch(PDOException $e)
    		width:90% ;
    		margin:auto;
    		margin-top:30px; 
-
 		}
 		th{
 		padding:0;
@@ -45,7 +42,9 @@ catch(PDOException $e)
 		td{
 		text-align: left;
 		}
-
+		tr{
+			height:38px;
+		}
 </style>
 </head>
 <body>
