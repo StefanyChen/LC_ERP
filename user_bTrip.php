@@ -62,7 +62,7 @@
 						<p style="margin:auto 30px;color:#666666">出差申請</p>
 					</div>
 					<div class="left-list">
-						<a href="user_overtime.php" style="margin:auto 30px;color:#666666">加班申請</a>
+						<a href="user_overtime_list.php" style="margin:auto 30px;color:#666666">加班申請</a>
 					</div>
 					<div class="left-list">
 						<a href="user_bTrip_list.php" style="margin:auto 30px;color:#666666">差勤明細</a>

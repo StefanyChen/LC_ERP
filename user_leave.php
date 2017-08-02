@@ -62,7 +62,7 @@
 						<a href="user_bTrip.php" style="margin:auto 30px;color:#666666">出差申請</a>
 					</div>
 					<div class="left-list">
-						<a href="user_overtime.php" style="margin:auto 30px;color:#666666">加班申請</a>
+						<a href="user_overtime_list.php" style="margin:auto 30px;color:#666666">加班申請</a>
 					</div>
 					<div class="left-list">
 						<a href="user_bTrip_list.php" style="margin:auto 30px;color:#666666">差勤明細</a>
@@ -93,7 +93,7 @@
 			<div class="right-down">
         
 
-				<form style="margin-left:15px;font-family:Microsoft JhengHei;font-size:18px" action="insertLeaveData.php" method="POST">
+				<form style="margin-left:15px;font-family:Microsoft JhengHei;font-size:18px" action="insert_leave.php" method="POST">
 					<p>申請人：<?php echo $_SESSION['name']?></p>
 					<p>請假日期/時間：<input type="date" name="l_startDate" size="8"> <input type="time" name="l_startTime" size="7"> 至 <input type="date" name="l_endDate" size="8"> <input type="time" name="l_endTime" size="7"></p>
 					<p class="p">請假時數：<input type="text" name="l_hrs" size="5"></p>
