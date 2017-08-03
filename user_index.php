@@ -43,7 +43,7 @@
 				</div>
 				<div>
 					<div class="left-title">
-						<a href="#" style="margin:auto 20px">公佈欄</a>
+						<a href="user_nwes.php" style="margin:auto 20px">公佈欄</a>
 					</div>
 				</div>
 				<div>

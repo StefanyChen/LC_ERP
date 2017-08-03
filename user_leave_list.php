@@ -7,11 +7,9 @@ $password = "root";
 $dbname = "peopleresource";
 try {
     $conn = mysqli_connect($servername,$username ,$password,$dbname);
-
     $sql = "SELECT * FROM `leave` WHERE l_name='".$_SESSION['name']."'";
     // use exec() because no results are returned
     $result = mysqli_query($conn,$sql);
-
     }
 catch(PDOException $e)
     {
@@ -28,7 +26,6 @@ td{
 	padding:5px;
 	text-align:center;
 }
-
 </style>
 </head>
 <body>
@@ -72,7 +69,7 @@ td{
 				</div>
 				<div>
 					<div class="left-title">
-						<a href="#" style="margin:auto 20px">公佈欄</a>
+						<a href="user_news.php" style="margin:auto 20px">公佈欄</a>
 					</div>
 				</div>
 				<div>
@@ -169,7 +166,6 @@ td{
 		$dbname = "peopleresource";
 		try {
 		    $conn = mysqli_connect($servername,$username ,$password,$dbname);
-
 		    $sql = "SELECT SUM(`l_compensatoryLevae`),SUM(`l_annualLeave`),SUM(`l_marriageLeave`),SUM(`l_personalLeave`),SUM(`l_funeralLeave`),SUM(`l_officialLeave`),SUM(`l_sickLeave`) FROM `leave` WHERE l_name='".$_SESSION['name']."'";
 		    // use exec() because no results are returned
 		    $result = mysqli_query($conn,$sql);
