@@ -1,11 +1,31 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>一般員工</title>
+	<title>公告</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="indexStyle.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<style>
+		.clearfix{
+			content: "";
+    		clear: both;
+    		display: table;
+    		width: 90%;
+    		border-bottom: solid 1px #CCC;
+    		margin: auto;
+		}
+		.col{
+			float:left;
+			
+		}
+		#title:hover{
+			background-color:#FFDDAA; 
+			font-weight:bolder;
+		}
+
+	</style>
 </head>
 <body>
 	<div class="top">
@@ -42,7 +62,7 @@
 				</div>
 				<div>
 					<div class="left-title">
-						<a href="user_news.php" style="margin:auto 20px">公佈欄</a>
+						<a href="#" style="margin:auto 20px">公佈欄</a>
 					</div>
 				</div>
 				<div>
@@ -91,7 +111,8 @@
 			</div>
 			
 
-			<div class="right-dowm">
+			<div style="margin-top: 15px"><!--right down-->
+
 			<?php
 				$servername = "localhost";
 				$username = "root";
@@ -99,7 +120,9 @@
 				$dbname = "peopleresource";
 				try {
 				    $conn = mysqli_connect($servername,$username ,$password,$dbname);
+
 				    $sql = "SELECT * FROM `news` ORDER BY id DESC";
+
 				    // use exec() because no results are returned
 				    $result = mysqli_query($conn,$sql);
 				    }
@@ -108,13 +131,17 @@
 				    echo $sql . "<br>" . $e->getMessage();
 				    }
 				?>
+				
 				<?php
 				while($row=mysqli_fetch_array($result)){
-				
-				echo '<h3>'.$row['title'].'<h3>';
-				echo '<hr>';
-				echo '<p>'.$row['container'].'</p>';
-				echo '<br>';		
+				?>
+				<a href="selectNews.php?id=<?php echo $row['id']?>">
+				<div id="title" class="clearfix">
+					<div class="col" style="margin-left:10px;font-family:Microsoft JhengHei"><p style="font-size: 20px">
+						<?php echo $row['title'];?></p></div>
+					<div style="float:right; margin-right:15px"><p><?php echo $row['release'];?></p></div>
+				</div></a>	
+				<?php
 				}
 				?>
 			</div>

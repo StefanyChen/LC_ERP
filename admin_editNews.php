@@ -1,10 +1,29 @@
 <html>
 <head>
-	<title>新增公告</title>
+	<title>公告管理</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="indexStyle.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<style>
+		.clearfix{
+			content: "";
+    		clear: both;
+    		display: table;
+    		width: 90%;
+    		border-bottom: solid 1px #CCC;
+    		margin: auto;
+		}
+		.col{
+			float:left;
+			
+		}
+		#title:hover{
+			background-color:#FFDDAA; 
+			font-weight:bolder;
+		}
+
+	</style>
 </head>
 <body>
 	<div class="top">
@@ -30,13 +49,7 @@
 						<p style="margin:auto 20px">人事管理</p>
 					</div>
 					<div class="left-list">
-						<a href="admin_employee.php" style="margin:auto 30px;color:#666666">員工資料列表</a>
-					</div>
-					<div class="left-list">
-						<a href="#" style="margin:auto 30px;color:#666666">員工資料修改</a>
-					</div>
-					<div class="left-list">
-						<a href="#" style="margin:auto 30px;color:#666666">新增員工資料</a>
+						<a href="admin_employee.php" style="margin:auto 30px;color:#666666">員工資料</a>
 					</div>
 				</div>
 				<div>
@@ -55,7 +68,7 @@
 						<p style="margin:auto 20px">公佈欄</p>
 					</div>
 					<div class="left-list">
-						<a href="admin_addNews.php" style="margin:auto 30px;color:#666666">新增公告</a>
+						<a href="#" style="margin:auto 30px;color:#666666">新增公告</a>
 					</div>
 				</div>
 				<div>
@@ -73,17 +86,58 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="right">
 			<div class="right-top">
-				<p style="line-height:50px;font-family:Microsoft JhengHei;font-size:25px;margin:auto 15px">新增公告</p>
+				<p style="line-height:50px;font-family:Microsoft JhengHei;font-size:25px;margin:auto 15px">公告管理</p>
 			</div>
-		
-			<div style="margin-left: 10px;">
-				<form action="insert_news.php" method="post">
-					<p>標題:<br><textarea type="text" style="width:200px;" name="title"></textarea></p><br>
-					<p>內容:<br><textarea id="" cols="70" rows="25" name="container"></textarea></p>
-					<input type="submit" value="送出">
-				</form>
+			
+
+			<div style="margin-top: 15px"><!--right down-->
+
+			<?php
+				$servername = "localhost";
+				$username = "root";
+				$password = "root";
+				$dbname = "peopleresource";
+				try {
+				    $conn = mysqli_connect($servername,$username ,$password,$dbname);
+
+				    $sql = "SELECT * FROM `news` ORDER BY id DESC";
+
+				    // use exec() because no results are returned
+				    $result = mysqli_query($conn,$sql);
+				    }
+				catch(PDOException $e)
+				    {
+				    echo $sql . "<br>" . $e->getMessage();
+				    }
+				?>
+				
+				<?php
+				while($row=mysqli_fetch_array($result)){
+				?>
+
+				
+				<div id="title" class="clearfix">
+					<a href="admin_delete_news.php?id=<?php echo $row["id"]; ?>"  class="link" style="float: left;margin-top:20px">
+					<img  title='Delete' src='images/delete.png' width='30px' height='30px'/>
+					</a>
+					<a href="admin_update_news.php?id=<?php echo $row['id']?>">
+						<div class="col" style="margin-left:10px;font-family:Microsoft JhengHei">
+						<p style="font-size: 20px">
+							<?php echo $row['title'];?>
+						</p>
+						</div>
+						<div style="float:right; margin-right:15px"><p><?php echo $row['release'];?>
+						</p>
+						</div>
+					</a>
+				</div>	
+				<?php
+				}
+				?>
 			</div>
 		</div>
+	</div>
+</body>
+</html>
