@@ -1,3 +1,4 @@
+
 a{
 	text-decoration:none;
 }
@@ -30,18 +31,19 @@ body{
 	margin:auto;
 }
 .left{
-	width:18%;
+	width:13%;
 	height:auto;
 	background-color:white;
 	margin:auto;
 	float:left;
 }
 .right{
-	width:82%;
-	height:1000px;
+	width:75%;
+	height:auto;
 	background-color:#F5F5F5;
 	margin:auto;
 	float:right;
+	border-left:solid 1px #CCC;
 }
 .left-top{
 	width:100%;
@@ -58,7 +60,7 @@ body{
 	margin:auto;
 }
 .left-title{
-	width:100%;
+	width:90%;
 	height:40px;
 	text-align:left;
 	font-family:Microsoft JhengHei;
