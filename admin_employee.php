@@ -106,7 +106,7 @@ catch(PDOException $e)
 						<p style="margin:auto 20px">公佈欄</p>
 					</div>
 					<div class="left-list">
-						<a href="#" style="margin:auto 30px;color:#666666">新增公告</a>
+						<a href="admin_addNews.php" style="margin:auto 30px;color:#666666">新增公告</a>
 					</div>
 				</div>
 				<div>
