@@ -82,7 +82,7 @@ catch(PDOException $e)
 				</div>
 				<div>
 					<div class="left-title">
-						<a href="#" style="margin:auto 20px">公佈欄</a>
+						<a href="user_news.php" style="margin:auto 20px">公佈欄</a>
 					</div>
 				</div>
 				<div>
@@ -140,7 +140,7 @@ catch(PDOException $e)
 					<tr>
 						<td colspan="2"><i class="fa fa-star" style="font-size:17px;color:red"></i>人員編號：<?php echo $row["e_sn"];?></td>
 						<td colspan="2"><i class="fa fa-star" style="font-size:17px;color:red"></i>到職日期：<?php echo $row["e_date"];?></td>
-	<!-- 人員大頭貼  -->	<td colspan="2" rowspan="4"></td>
+	<!-- 人員大頭貼  --><td colspan="2" rowspan="4"></td>	
 					</tr>
 					<tr>
 						<td colspan="2"><i class="fa fa-star" style="font-size:17px;color:red"></i>中文姓名：<?php echo $row["e_name_cn"];?></td>

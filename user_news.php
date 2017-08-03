@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +42,7 @@
 				</div>
 				<div>
 					<div class="left-title">
-						<a href="#" style="margin:auto 20px">公佈欄</a>
+						<a href="user_news.php" style="margin:auto 20px">公佈欄</a>
 					</div>
 				</div>
 				<div>
@@ -100,9 +99,7 @@
 				$dbname = "peopleresource";
 				try {
 				    $conn = mysqli_connect($servername,$username ,$password,$dbname);
-
 				    $sql = "SELECT * FROM `news` ORDER BY id DESC";
-
 				    // use exec() because no results are returned
 				    $result = mysqli_query($conn,$sql);
 				    }
