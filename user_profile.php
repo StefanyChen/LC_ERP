@@ -50,9 +50,8 @@ catch(PDOException $e)
 			
  		}
  		.p_content{
- 			margin-right: 30px;
  			float: right;
- 			width:60% ;
+ 			width:70% ;
 			/*display: inline-block;*/
  			/*border: solid;*/
 			/*height:300px; */
@@ -64,12 +63,12 @@ catch(PDOException $e)
  			width:220px ;
  		}
  		table{
- 			border-collapse:collapse;
  			border:0px;
  		}
- 		tr,td,th{
+ 		tr,th,td{
  			border:0px;
  			padding:0 0 0 0;
+ 			text-align:left;
  		}
  		p{
  			margin-top:10px;
@@ -188,8 +187,8 @@ catch(PDOException $e)
 						<tr>
 						<th style="font-size:15px;background-color:#A9A9A9; "><?php echo $row["e_edu"];?></th>
 						
-						<th style="font-size:15px;background-color:#D3D3D3; "><?php echo $row["e_edu_high"];?></th>
-						<th style="font-size:15px;background-color:#A9A9A9;  "><?php echo $row["e_edu_dep"];?></th>
+						<th style="font-size:15px;background-color:#D3D3D3;width:20% "><?php echo $row["e_edu_high"];?></th>
+						<th style="font-size:15px;background-color:#A9A9A9;width:20%  "><?php echo $row["e_edu_dep"];?></th>
 						<th style="font-size:15px;background-color:#D3D3D3; "><?php echo $row["e_edu_start"];?></th>
 						<th style="font-size:15px;background-color:#A9A9A9;  "><?php echo $row["e_edu_end"]?></th>
 						<th colspan="2" style="font-size:15px;background-color:#D3D3D3; "><?php echo $row["e_edu_gra"];?></th>
@@ -204,10 +203,10 @@ catch(PDOException $e)
 						<th colspan="6" style="text-align:left">經歷</th>
 						</tr>
 						<tr>
-						<th style="font-size:15px;background-color:#A9A9A9; ">公司名稱</th>
-						<th style="font-size:15px;background-color:#D3D3D3; ">職稱</th>
+						<th style="font-size:15px;background-color:#A9A9A9;width:20% ">公司名稱</th>
+						<th style="font-size:15px;background-color:#D3D3D3;width:20% ">職稱</th>
 						<th colspan="2" style="font-size:15px;background-color:#A9A9A9; ">期間</th>
-						<th colspan="2" style="font-size:15px;background-color:#D3D3D3; ">離職原因</th>
+						<th colspan="2" style="font-size:15px;background-color:#D3D3D3;width:30%  ">離職原因</th>
 						</tr>
 <!-- 經歷表格1  -->	
 						<tr>
