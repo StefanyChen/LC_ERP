@@ -168,7 +168,7 @@ catch(PDOException $e)
 						<div class="p_img">
 						<img  src="http://www.freeiconspng.com/uploads/profile-icon-9.png" height="250" width="220">
 						</div><br>
-						<hr noshade align="left" width="80%">
+						<hr noshade  color="#A9A9A9" align="left" width="80%">
 					</div>
 					<div class="p_content"><br><br><br>
 						<p>到職日期：<?php echo $row["e_date"];?></p>
@@ -256,8 +256,8 @@ catch(PDOException $e)
 						<p>婚姻：<?php echo $row["e_marriage"];?></p>
 						<p>血型：<?php echo $row["e_blood"];?></p>
 						<p>手機：<?php echo $row["e_mobile"];?></p>
-						<hr noshade align="left" width="80%">
-						<p style="background-color:#A9A9A9;width:25%;text-align: center  ">技能專長</p>
+						<hr noshade color="#A9A9A9" align="left" width="80%">
+						<p style="background-color:#C0C0C0;width:25%;text-align: center  ">技能專長</p>
 						<p><?php echo $row["e_license"];?></p>
 						
 					</div>
