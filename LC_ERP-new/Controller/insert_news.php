@@ -14,7 +14,7 @@ try {
     VALUES ('$title','$container');";
     // use exec() because no results are returned
     $conn->exec($sql);
-    header("Location:user_news.php");
+    header("Location:../admin-Model/admin_editNews.php");
     }
 catch(PDOException $e)
     {
