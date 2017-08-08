@@ -159,8 +159,8 @@ catch(PDOException $e)
 						<tr>
   						<td style="width:70px"><?php echo $row["b_name"]; ?></td>
   						<td style="width:215px"><?php echo $row["b_startDate"]; ?>~<?php echo $row["b_endDate"];?></td>
-  						<td style="width:70px"><?php echo $row["b_startTime"];?></td>
-  						<td style="width:70px"><?php echo $row["b_endTime"];?></td>
+  						<td style="width:70px"><?php echo substr($row["b_startTime"],0,-3);?></td>
+  						<td style="width:70px"><?php echo substr($row["b_endTime"],0,-3);?></td>
   						<td style="width:45px"><?php echo $row["b_totalTime"]?></td>
   						<td style="width:70px"><?php echo $row["b_location"];?></td>
   						<td style="width:200px"><?php echo $row["b_state"];?></td>
@@ -200,8 +200,8 @@ catch(PDOException $e)
 						<tr>
 						<td style="width:70px"><?php echo $row2["b_name"]; ?></td>
 						<td style="width:215px"><?php echo $row2["b_startDate"]; ?>~<?php echo $row["b_endDate"];?></td>
-						<td style="width:70px"><?php echo $row2["b_startTime"];?></td>
-						<td style="width:70px"><?php echo $row2["b_endTime"];?></td>
+						<td style="width:70px"><?php echo substr($row2["b_startTime"],0,-3);?></td>
+						<td style="width:70px"><?php echo substr($row2["b_endTime"],0,-3);?></td>
 						<td style="width:45px"><?php echo $row2["b_totalTime"]?></td>
 						<td style="width:70px"><?php echo $row2["b_location"];?></td>
 						<td style="width:200px"><?php echo $row2["b_state"];?></td>
