@@ -118,7 +118,7 @@ catch(PDOException $e)
 						<a href="admin_addNews.php" style="margin:auto 35px">新增公告</a>
 					</div>
 					<div class="left-list">
-						<a href="admin_editNews.php" style="margin:auto 35px">新增公告</a>
+						<a href="admin_editNews.php" style="margin:auto 35px">編輯公告</a>
 					</div>
 				</div>
 <!-- 第三組選單結束  -->

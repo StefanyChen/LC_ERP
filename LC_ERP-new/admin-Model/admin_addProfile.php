@@ -115,7 +115,7 @@ catch(PDOException $e)
 						<a href="admin_addNews.php" style="margin:auto 35px">新增公告</a>
 					</div>
 					<div class="left-list">
-						<a href="admin_editNews.php" style="margin:auto 35px">新增公告</a>
+						<a href="admin_editNews.php" style="margin:auto 35px">編輯公告</a>
 					</div>
 				</div>
 <!-- 第三組選單結束  -->
@@ -128,16 +128,17 @@ catch(PDOException $e)
 						<a href="#" style="margin:auto 35px">新增日程</a>
 					</div>
 					<div class="left-list">
-						<a href="#" style="margin:auto 35px">修改日程</a>
+						<a href="#" style="margin:auto 35px">編輯日程</a>
 					</div>
 				</div>
 <!-- 第四組選單結束  -->
 			</div><!-- 左下欄 LEFT-BOTTOM 結束   -->
 		</div><!--左 LEFT 結束 -->
-		<div class="right" style="height:auto">
+		<div class="right">
 			<div class="right-top">
-				<p style="line-height:50px;font-family:Microsoft JhengHei;font-size:25px;margin:auto 15px">新增員工資料</p>
+				<p class="right-top-title">新增員工資料</p>
 			</div>
+<!--    右上欄 RIGHT-TOP 結束    -->
 			<div style="border-left:solid 1px #CCC;margin-top:0px;padding-top:30px">
 				<table>
 					<?php
