@@ -106,7 +106,10 @@
 					</p>
 				</div>
 				<div style="margin:auto;width:70%"><!--  公告內文   -->
-					<p style="font-size:18px;font-weight:300;line-height:30px;font-family:Microsoft JhengHei"> <?php echo $row['container'] ?></p>;
+					<p style="font-size:18px;font-weight:300;line-height:30px;font-family:Microsoft JhengHei"> <?php echo $row['container'] ?></p>
+					
+				<a href="../Controller/respond.php?id=<?php echo $row['id'];?>"><input type="submit" name="" value='回簽' size="6.5" class="btn"></a>
+					
 				</div>
 				<?php } ?>
 			</div><!--  右下欄 RIGHT-BOTTOM 結束    -->
