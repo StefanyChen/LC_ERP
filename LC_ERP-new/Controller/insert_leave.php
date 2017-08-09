@@ -4,7 +4,10 @@ $servername = "localhost";
 $username = "root";
 $password = "root";
 $dbname = "peopleresource";
+$timezone="Asia/Taipei";
+date_default_timezone_set($timezone);
 $l_name=$_SESSION['name'];
+$l_sn=$_SESSION['id'];
 $l_startDate=$_POST['l_startDate'];
 $l_startTime=$_POST['l_startTime'];
 $l_endDate=$_POST['l_endDate'];
@@ -15,12 +18,6 @@ $l_type=$_POST['l_type'];
 $l_hrs=$_POST['l_hrs'];
 try {
     $conn = mysqli_connect($servername,$username ,$password,$dbname);
-    $sql = "SELECT * FROM `leave` WHERE l_name='".$_SESSION['name']."'";
-    // use exec() because no results are returned
-    $result = mysqli_query($conn,$sql);
-
-    $row = mysqli_fetch_array($result);
-
     switch($l_type){
         case "補休":
         $l_compensatoryLevae=$_POST['l_hrs'];
@@ -46,8 +43,13 @@ try {
         }
 
     if(COUNT($_POST)>0){
-        $sql="INSERT INTO `leave`(`l_name`, `l_startDate`, `l_startTime`, `l_endDate`, `l_endTime`, `l_type`, `l_hrs`, `l_state`, `l_comment`,`l_compensatoryLevae`, `l_annualLeave`, `l_marriageLeave`, `l_officialLeave`, `l_personalLeave`, `l_funeralLeave`, `l_sickLeave`) VALUES('$l_name','$l_startDate','$l_startTime','$l_endDate','$l_endTime','$l_type','$l_hrs','$l_state','$l_comment','$l_compensatoryLevae','$l_annualLeave','$l_marriageLeave','$l_officialLeave','$l_personalLeave','$l_funeralLeave','$l_sickLeave')";
+
+        $tt=strtotime($l_startDate);
+        $appM=date("n",$tt);
+
+        $sql="INSERT INTO `leave`(`l_sn`,`l_name`, `l_startDate`, `l_startTime`, `l_endDate`, `l_endTime`, `l_type`, `l_hrs`, `l_state`, `l_comment`,`l_compensatoryLevae`, `l_annualLeave`, `l_marriageLeave`, `l_officialLeave`, `l_personalLeave`, `l_funeralLeave`, `l_sickLeave`,`l_month`) VALUES('$l_sn','$l_name','$l_startDate','$l_startTime','$l_endDate','$l_endTime','$l_type','$l_hrs','$l_state','$l_comment','$l_compensatoryLevae','$l_annualLeave','$l_marriageLeave','$l_officialLeave','$l_personalLeave','$l_funeralLeave','$l_sickLeave','$appM')";
         $result = mysqli_query($conn,$sql);
+
         header("Location:../user-Model/user_leave_list.php");
         }
 }
