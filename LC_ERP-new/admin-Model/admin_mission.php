@@ -13,7 +13,8 @@ $servername = "localhost";
 $username = "root";
 $password = "root";
 $dbname = "peopleresource";
-
+$timezone="Asia/Taipei";
+date_default_timezone_set($timezone);
 try {
     $conn = mysqli_connect($servername,$username,$password,$dbname);
 
@@ -128,9 +129,13 @@ catch(PDOException $e)
 				<p class="right-top-title">差勤明細</p>
 			</div>
 <!--    右上欄 RIGHT-TOP 結束    -->
+<?php
+  $tt=time();
+  $now_m=date("n",$tt);//現在月份
+?>
 			<div class="right-bottom">
         <div style="width:100%;height:50px;margin:auto;;border-bottom:solid 1px #CCC;">
-
+            <p>目前顯示<?php echo $now_m; ?>月份資料</p>
   			</div>
 <!--  右下欄上方選擇列 結束   -->
 				<div style="margin-left:10px">
@@ -141,33 +146,69 @@ catch(PDOException $e)
 						<th>婚/產假</th>
 						<th>公假</th>
 						<th>喪假</th>
-						<th>補休</th>
+						<th>已使用補休</th>
 						<th>特休</th>
+            <th>出差</th>
+            <th>加班費</th>
+            <th>可使用補休</th>
+            <th>加班時數</th>
 					<?php
-						while($row1 = mysqli_fetch_array($result)) {
-							$sn=$row1["e_sn"];
-							$sql = "SELECT SUM(`l_compensatoryLevae`),SUM(`l_annualLeave`),SUM(`l_marriageLeave`),SUM(`l_personalLeave`),SUM(`l_funeralLeave`),SUM(`l_officialLeave`),SUM(`l_sickLeave`) FROM `leave` WHERE l_sn='$sn'";
-							$result1= mysqli_query($conn,$sql);
-							$row = mysqli_fetch_array($result1);
+						while($row = mysqli_fetch_array($result)) {
+							$sn=$row["e_sn"];
+
+              $sql = "SELECT SUM(`l_compensatoryLevae`),SUM(`l_annualLeave`),SUM(`l_marriageLeave`),SUM(`l_personalLeave`),SUM(`l_funeralLeave`),SUM(`l_officialLeave`),SUM(`l_sickLeave`) FROM `leave` WHERE l_sn='$sn'AND l_month='$now_m'";
+              $result4 = mysqli_query($conn,$sql);
+              $row4=mysqli_fetch_array($result4);
+
+              $sql = "SELECT SUM(`l_compensatoryLevae`),SUM(`l_annualLeave`),SUM(`l_marriageLeave`),SUM(`l_personalLeave`),SUM(`l_funeralLeave`),SUM(`l_officialLeave`),SUM(`l_sickLeave`) FROM `leave` WHERE l_sn='$sn'";
+              $result1= mysqli_query($conn,$sql);
+              $row1 = mysqli_fetch_array($result1);
+
+  						$sql = "SELECT SUM(`b_totalTime`) FROM `business` WHERE b_sn='$sn'";
+  						$result2= mysqli_query($conn,$sql);
+  						$row2 = mysqli_fetch_array($result2);
+
+              $sql = "SELECT SUM(`o_hrs`), SUM(`o_phrs`)FROM `overtime_apply` WHERE o_sn='$sn'";
+              $result3= mysqli_query($conn,$sql);
+              $row3 = mysqli_fetch_array($result3);
+
+              $sql = "SELECT SUM(`b_totalTime`) FROM `business` WHERE b_sn='$sn'AND b_month='$now_m'";
+              $result5= mysqli_query($conn,$sql);
+              $row5 = mysqli_fetch_array($result5);
+
+              $sql = "SELECT SUM(`o_hrs`), SUM(`o_phrs`)FROM `overtime_apply` WHERE o_sn='$sn'AND o_month='$now_m'";
+              $result6= mysqli_query($conn,$sql);
+              $row6 = mysqli_fetch_array($result6);
 					?>
 					<tr><tr>
-					<td rowspan="2" style="width:70px"><?php echo $row1["e_name_cn"];?></td>
+					<td rowspan="2" style="width:70px"><?php echo $row["e_name_cn"];?></td>
 					<td style="width:50px">月</td>
-					<td style="width:70px"><?php 	echo $row["SUM(`l_sickLeave`)"]; ?></td>
-					<td style="width:70px"><?php 	echo $row["SUM(`l_personalLeave`)"]; ?></td>
-					<td style="width:70px"><?php 	echo $row["SUM(`l_marriageLeave`)"]; ?></td>
-					<td style="width:70px"><?php 	echo $row["SUM(`l_officialLeave`)"]; ?></td>
-					<td style="width:70px"><?php 	echo $row["SUM(`l_funeralLeave`)"]; ?></td>
-					<td style="width:70px"><?php 	echo $row["SUM(`l_compensatoryLevae`)"]; ?></td>
-					<td style="width:70px"><?php 	echo $row["SUM(`l_annualLeave`)"]; ?></td></tr>
+					<td style="width:70px"><?php 	echo $row4["SUM(`l_sickLeave`)"]; ?></td>
+					<td style="width:70px"><?php 	echo $row4["SUM(`l_personalLeave`)"]; ?></td>
+					<td style="width:70px"><?php 	echo $row4["SUM(`l_marriageLeave`)"]; ?></td>
+					<td style="width:70px"><?php 	echo $row4["SUM(`l_officialLeave`)"]; ?></td>
+					<td style="width:70px"><?php 	echo $row4["SUM(`l_funeralLeave`)"]; ?></td>
+					<td style="width:90px"><?php 	echo $row4["SUM(`l_compensatoryLevae`)"]; ?></td>
+					<td style="width:70px"><?php 	echo $row4["SUM(`l_annualLeave`)"]; ?></td>
+          <td style="width:70px"><?php 	echo $row5["SUM(`b_totalTime`)"]; ?></td>
+          <td style="width:70px"><?php 	echo $row6["SUM(`o_hrs`)"]; ?></td>
+          <td style="width:90px"><?php 	echo $row6["SUM(`o_phrs`)"]; ?></td>
+          <td style="width:90px"><?php 	echo ($row6["SUM(`o_phrs`)"]+$row6["SUM(`o_hrs`)"]); ?></td>
+          </tr>
+
 					<td style="width:50px">總</td>
-					<td style="width:70px"><?php 	echo $row["SUM(`l_sickLeave`)"]; ?></td>
-					<td style="width:70px"><?php 	echo $row["SUM(`l_personalLeave`)"]; ?></td>
-					<td style="width:70px"><?php 	echo $row["SUM(`l_marriageLeave`)"]; ?></td>
-					<td style="width:70px"><?php 	echo $row["SUM(`l_officialLeave`)"]; ?></td>
-					<td style="width:70px"><?php 	echo $row["SUM(`l_funeralLeave`)"]; ?></td>
-					<td style="width:70px"><?php 	echo $row["SUM(`l_compensatoryLevae`)"]; ?></td>
-					<td style="width:70px"><?php 	echo $row["SUM(`l_annualLeave`)"]; ?></td></tr>
+					<td style="width:70px"><?php 	echo $row1["SUM(`l_sickLeave`)"]; ?></td>
+					<td style="width:70px"><?php 	echo $row1["SUM(`l_personalLeave`)"]; ?></td>
+					<td style="width:70px"><?php 	echo $row1["SUM(`l_marriageLeave`)"]; ?></td>
+					<td style="width:70px"><?php 	echo $row1["SUM(`l_officialLeave`)"]; ?></td>
+					<td style="width:70px"><?php 	echo $row1["SUM(`l_funeralLeave`)"]; ?></td>
+					<td style="width:90px"><?php 	echo $row1["SUM(`l_compensatoryLevae`)"]; ?></td>
+					<td style="width:70px"><?php 	echo $row1["SUM(`l_annualLeave`)"]; ?></td>
+          <td style="width:70px"><?php 	echo $row2["SUM(`b_totalTime`)"]; ?></td>
+          <td style="width:70px"><?php 	echo $row3["SUM(`o_hrs`)"]; ?></td>
+          <td style="width:90px"><?php 	echo $row3["SUM(`o_phrs`)"]; ?></td>
+          <td style="width:90px"><?php 	echo  ($row3["SUM(`o_phrs`)"]+$row3["SUM(`o_hrs`)"]); ?></td>
+        </tr>
 					<?php } ?>
 					</table>
 				</div><!-- 表格結束  -->
