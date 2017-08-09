@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機: localhost
--- 產生時間： 2017-08-01 09:25:10
+-- 產生時間： 2017-08-09 04:01:17
 -- 伺服器版本: 5.7.17-log
 -- PHP 版本： 5.6.30
 
@@ -28,6 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `business` (
   `id` int(10) UNSIGNED NOT NULL,
+  `b_sn` varchar(15) NOT NULL,
+  `b_name` varchar(20) NOT NULL,
   `b_startDate` date NOT NULL,
   `b_endDate` date NOT NULL,
   `b_startTime` time NOT NULL,
@@ -37,9 +39,8 @@ CREATE TABLE `business` (
   `b_state` varchar(20) NOT NULL,
   `b_comment` varchar(50) DEFAULT NULL,
   `b_month` varchar(20) NOT NULL,
-  `b_name` varchar(20) NOT NULL,
-  `b_hrCheck` varchar(20) NOT NULL DEFAULT 'unaccept',
-  `b_bossCheck` varchar(10) NOT NULL DEFAULT 'unaccept',
+  `b_hrCheck` varchar(20) NOT NULL DEFAULT '簽核中',
+  `b_bossCheck` varchar(10) NOT NULL DEFAULT '簽核中',
   `b_applyDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -47,12 +48,11 @@ CREATE TABLE `business` (
 -- 資料表的匯出資料 `business`
 --
 
-INSERT INTO `business` (`id`, `b_startDate`, `b_endDate`, `b_startTime`, `b_endTime`, `b_totalTime`, `b_location`, `b_state`, `b_comment`, `b_month`, `b_name`, `b_hrCheck`, `b_bossCheck`, `b_applyDate`) VALUES
-(1, '2017-07-31', '2017-07-31', '00:00:00', '18:00:00', '9', '桃園市', '場刊', '平日公差', '7', 'Henry', 'Apply', 'Apply', '2017-08-01 02:23:04'),
-(2, '2017-07-30', '2017-07-30', '00:00:00', '18:00:00', '12', '桃園市', 'ss', 'asd', '8', 'david', 'Apply', 'Apply', '2017-07-31 09:13:06'),
-(13, '2017-07-06', '2017-08-03', '12:23:00', '00:23:00', '1', '1', '2', '123', '', 'Steph', 'Apply', 'unaccept', '2017-08-01 02:17:43'),
-(17, '2017-08-02', '2017-08-10', '00:12:00', '00:23:00', '12', '2', '12', '123', '', 'Steph', 'Apply', 'Apply', '2017-08-01 08:22:25'),
-(18, '2017-08-02', '2017-08-10', '00:12:00', '00:23:00', '12', '2', '12', '123', '', 'Steph', 'Apply', 'Apply', '2017-08-01 08:22:22');
+INSERT INTO `business` (`id`, `b_sn`, `b_name`, `b_startDate`, `b_endDate`, `b_startTime`, `b_endTime`, `b_totalTime`, `b_location`, `b_state`, `b_comment`, `b_month`, `b_hrCheck`, `b_bossCheck`, `b_applyDate`) VALUES
+(22, '123', '吳阿花', '2017-08-02', '2017-08-16', '00:59:00', '00:59:00', '12', '高雄市', '', '', '8', '簽核中', '簽核中', '2017-08-09 03:37:40'),
+(26, '123', '吳阿花', '2017-08-01', '2017-08-24', '00:59:00', '00:59:00', '12', '南投縣', '活動場刊活動場刊活動場刊活動場刊活動場刊', '沒有沒有沒有沒有沒有沒有沒有沒有沒有沒有沒有沒有沒有沒有沒有沒有沒有沒有沒有沒有沒有沒有沒有沒有沒有', '8', '簽核中', '簽核中', '2017-08-09 03:37:40'),
+(27, 'A02', '張小美', '2017-08-01', '2017-08-09', '00:59:00', '00:59:00', '12', '宜蘭市', '不知道不知道不知道不知道不知道不知道不知', '不知道不知道不知道不知道不知道不知道不知道不知道', '8', '簽核通過', '簽核拒絕', '2017-08-09 03:37:40'),
+(29, '123', '吳阿花', '2017-07-26', '2017-08-01', '01:59:00', '01:59:00', '20', '', '', '', '7', '簽核中', '簽核中', '2017-08-09 03:44:21');
 
 --
 -- 已匯出資料表的索引
@@ -72,7 +72,7 @@ ALTER TABLE `business`
 -- 使用資料表 AUTO_INCREMENT `business`
 --
 ALTER TABLE `business`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
