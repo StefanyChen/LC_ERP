@@ -8,7 +8,7 @@ try {
     $conn = mysqli_connect($servername,$username ,$password,$dbname);
 
     // sql to delete a record
-    $sql = "UPDATE `leave` SET l_bossCheck='通過' WHERE id={$_GET['id']}";
+    $sql = "UPDATE `leave` SET l_bossCheck='不通過' WHERE id={$_GET['id']}";
 
     mysqli_query($conn,$sql);
     header("Location:../admin-Model/admin_leave.php");
