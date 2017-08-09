@@ -156,24 +156,33 @@ catch(PDOException $e)
           	<th colspan="2">老闆確認</th>
           <?php
           while($row = mysqli_fetch_array($result)) {
-          if($row["l_hrCheck"]=='簽核中' || $row["l_bossCheck"]=='簽核中'){?>
+          if(($row["l_hrCheck"]=='簽核中' AND $row["l_bossCheck"]=='簽核中') OR ($row["l_hrCheck"]=='通過'AND $row["l_bossCheck"]=='簽核中')){?>
           <tr>
           	<td style="width:70px"><?php echo $row["l_name"]; ?></td>
           	<td style="width:215px"><?php echo $row["l_startDate"]; ?>~<?php echo $row["l_endDate"];?></td>
           	<td style="width:70px"><?php echo substr( $row["l_startTime"],0,-3);?></td>
           	<td style="width:70px"><?php echo substr( $row["l_endTime"],0,-3);?></td>
-          	<td style="width:50px"><?php echo $row["l_type"]?></td>
-          	<td style="width:45px"><?php echo $row["l_hrs"];?></td>
+          	<td style="width:70px"><?php echo $row["l_type"]?></td>
+          	<td style="width:70px"><?php echo $row["l_hrs"];?></td>
           	<td style="width:200px"><?php echo $row["l_state"];?></td>
           	<td style="width:200px"><?php echo $row["l_comment"];?></td>
-            <td style="width:35px"><a href="admin_leave_hrCheck.php?id=<?php echo $row["id"]; ?>">
-            <i class="material-icons" style="font-size:15px">check</i></a></td>
-            <td style="width:35px"><a href="admin_leave_hrCheck.php?id=<?php echo $row["id"]; ?>">
-                 <i class="material-icons" style="font-size:15px">clear</i></a></td>
-            <td style="width:35px"><a href="admin_leave_bossCheck.php?id=<?php echo $row["id"]; ?>">
-            <i class="material-icons" style="font-size:15px">check</i></a></td>
-            <td style="width:35px"><a href="admin_leave_bossCheck.php?id=<?php echo $row["id"]; ?>">
-            <i class="material-icons" style="font-size:15px">clear</i></a></td>
+            <?php if($row["l_hrCheck"]=='簽核中') {?>
+            <td style="width:35px">
+              <a href="../Controller/leave_hrCheck.php?id=<?php echo $row["id"]; ?>">
+              <i class="material-icons" style="font-size:15px">check</i></a></td>
+            <td style="width:35px">
+              <a href="../Controller/leave_hrCheckRefuse.php?id=<?php echo $row["id"]; ?>">
+              <i class="material-icons" style="font-size:15px">clear</i></a></td>
+            <?php }
+            else{?>
+              <td colspan="2"><?php echo $row["l_hrCheck"]?> </td> <?php  } ?>
+            <?php if($row["l_hrCheck"]=='簽核中') {?>
+              <td colspan="2"></td> <?php  }
+            else{?>
+              <td style="width:35px"><a href="../Controller/leave_bossCheck.php?id=<?php echo $row["id"]; ?>">
+              <i class="material-icons" style="font-size:15px">check</i></a></td>
+              <td style="width:35px"><a href="../Controller/leave_bossCheck.php?id=<?php echo $row["id"]; ?>">
+              <i class="material-icons" style="font-size:15px">clear</i></a></td> <?php }?>
           </tr>
           <?php }} ?>
           </table>
@@ -190,31 +199,26 @@ catch(PDOException $e)
             <th>請假時數</th>
             <th>請假事由</th>
             <th>備註</th>
-            <th colspan="2">人資確認</th>
-            <th colspan="2">老闆確認</th>
+            <th>人資確認</th>
+            <th>老闆確認</th>
           <?php
             $sql = "SELECT * FROM `leave`";
             $result = mysqli_query($conn,$sql);
   					while($row2 = mysqli_fetch_array($result)) {
-            if($row2["l_hrCheck"]!='簽核中' && $row2["l_bossCheck"]!='簽核中'){
+            if((($row2["l_hrCheck"]=='不通過') AND ( $row2["l_bossCheck"]=='簽核中'))
+            || (($row2["l_hrCheck"]!='簽核中') AND ( $row2["l_bossCheck"]!='簽核中'))  ){
           ?>
           <tr>
             <td style="width:70px"><?php echo $row2["l_name"]; ?></td>
             <td style="width:215px"><?php echo $row2["l_startDate"]; ?>~<?php echo $row2["l_endDate"];?></td>
             <td style="width:70px"><?php echo substr( $row2["l_startTime"],0,-3);?></td>
             <td style="width:70px"><?php echo substr($row2["l_endTime"],0,-3);?></td>
-            <td style="width:50px"><?php echo $row2["l_type"]?></td>
-            <td style="width:45px"><?php echo $row2["l_hrs"];?></td>
+            <td style="width:70px"><?php echo $row2["l_type"]?></td>
+            <td style="width:70px"><?php echo $row2["l_hrs"];?></td>
             <td style="width:200px"><?php echo $row2["l_state"];?></td>
             <td style="width:200px"><?php echo $row2["l_comment"];?></td>
-            <td style="width:35px"><a href="admin_leave_hrCheck.php?id=<?php echo $row2["id"]; ?>">
-            <i class="material-icons" style="font-size:15px">check</i></a></td>
-            <td style="width:35px"><a href="admin_leave_hrCheck.php?id=<?php echo $row2["id"]; ?>">
-                 <i class="material-icons" style="font-size:15px">clear</i></a></td>
-            <td style="width:35px"><a href="admin_leave_bossCheck.php?id=<?php echo $row2["id"]; ?>">
-            <i class="material-icons" style="font-size:15px">check</i></a></td>
-            <td style="width:35px"><a href="admin_leave_bossCheck.php?id=<?php echo $row2["id"]; ?>">
-            <i class="material-icons" style="font-size:15px">clear</i></a></td>
+            <td style="width:50px"><?php echo $row2["l_hrCheck"]; ?></td>
+            <td style="width:50px"><?php echo $row2["l_bossCheck"]; ?></td>
           </tr>
           <?php }} ?>
           </table>
