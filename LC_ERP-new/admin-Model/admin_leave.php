@@ -33,7 +33,13 @@ catch(PDOException $e)
 	<link rel="stylesheet" href="../view/indexStyle.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style>
+  <script src='http://code.jquery.com/jquery-1.9.1.js'></script>
+  <link rel="stylesheet" type="text/css" href="../user-Model/fullcalendar_drag/css/fancybox.css">
+<link rel="stylesheet" type="text/css" href="../user-Model/fullcalendar_drag/css/jquery-ui.css">
+<script src='http://code.jquery.com/ui/1.10.3/jquery-ui.js'></script>
+<script src='../user-Model/fullcalendar_drag/js/jquery.fancybox-1.3.1.pack.js'></script>
+<script src='../user-Model/fullcalendar_drag/js/jquery.form.min.js'></script>
+<style type="text/css">
     th{
       background-color:#FFDEAD;
     }
@@ -44,7 +50,21 @@ catch(PDOException $e)
     tr:hover{
     	background-color:#FFEFD5;
     }
+.fancy{width:900px; height:450px}
+.fancy h3{height:30px; line-height:30px; border-bottom:1px solid #d3d3d3; font-size:14px}
+.fancy form{padding:10px}
+.fancy p{height:28px; line-height:28px; padding:4px; color:#999}
+.input{height:20px; line-height:20px; padding:2px; border:1px solid #d3d3d3; width:100px}
+.btn{-webkit-border-radius: 3px;-moz-border-radius:3px;padding:5px 12px; cursor:pointer}
+.btn_ok{background: rgb(54, 135, 255);border: 1px solid #390;color:#fff}
+.btn_cancel{background:#f0f0f0;border: 1px solid #d3d3d3; color:#666 }
+.btn_del{background:#f90;border: 1px solid #f80; color:#fff }
+.sub_btn{height:32px; line-height:32px; padding-top:6px; border-top:0px solid #f0f0f0; text-align:right; position:relative}
+.sub_btn .del{position:absolute; left:2px}
   </style>
+
+
+
 </head>
 <body>
   <div class="top">
@@ -156,7 +176,7 @@ catch(PDOException $e)
           	<th colspan="2">老闆確認</th>
           <?php
           while($row = mysqli_fetch_array($result)) {
-          if(($row["l_hrCheck"]=='簽核中' AND $row["l_bossCheck"]=='簽核中') OR ($row["l_hrCheck"]=='通過'AND $row["l_bossCheck"]=='簽核中')){?>
+          if(($row["l_hrCheck"]=='簽核中' AND $row["l_bossCheck"]=='簽核中') OR ($row["l_hrCheck"]=='通過'AND $row["l_bossCheck"]=='簽核中')){?> 
           <tr>
           	<td style="width:70px"><?php echo $row["l_name"]; ?></td>
           	<td style="width:215px"><?php echo $row["l_startDate"]; ?>~<?php echo $row["l_endDate"];?></td>
@@ -168,21 +188,23 @@ catch(PDOException $e)
           	<td style="width:200px"><?php echo $row["l_comment"];?></td>
             <?php if($row["l_hrCheck"]=='簽核中') {?>
             <td style="width:35px">
-              <a href="../Controller/approve.php?a=yes&b=leave&c=hr&id=<?php echo $row["id"];?>">
+              <a href="../Controller/approve.php?yesNO=yes&table=leave&who=hr&id=<?php echo $row["id"]; ?>">
               <i class="material-icons" style="font-size:15px">check</i></a></td>
-            <td style="width:35px">
-              <a href="../Controller/approve.php?a=no&b=leave&c=hr&id=<?php echo $row["id"];?>">
-              <i class="material-icons" style="font-size:15px">clear</i></a></td>
+
+            <td style="width:35px" id="cancleCkeck"  class="fancybox" 
+            person=<?php echo $row['id'];?> name=<?php echo $row['l_name'];?> startDate=<?php echo $row['l_startDate'];?> endDate=<?php echo $row['l_endDate'];?> startTime=<?php echo $row['l_startTime'];?> endTime=<?php echo $row['l_endTime'];?> type=<?php echo $row['l_type'];?> hrs=<?php echo $row['l_hrs'];?> hrCheck=<?php echo $row['l_hrCheck'];?> yesNO=no table=leave who=hr>
+              <i class="material-icons" style="font-size:15px">clear</i></td>
             <?php }
             else{?>
               <td colspan="2"><?php echo $row["l_hrCheck"]?> </td> <?php  } ?>
             <?php if($row["l_hrCheck"]=='簽核中') {?>
               <td colspan="2"></td> <?php  }
             else{?>
-              <td style="width:35px"><a href="../Controller/approve.php?a=yes&b=leave&c=boss&id=<?php echo $row["id"];?>">
+              <td style="width:35px"><a href="../Controller/approve.php?yesNO=yes&table=leave&who=boss&id=<?php echo $row["id"]; ?>">
               <i class="material-icons" style="font-size:15px">check</i></a></td>
-              <td style="width:35px"><a href="../Controller/approve.php?a=no&b=leave&c=boss&id=<?php echo $row["id"];?>">
-              <i class="material-icons" style="font-size:15px">clear</i></a></td> <?php }?>
+              <td style="width:35px"  class="fancybox" id="cancleCkeck"   person=<?php echo $row['id'];?> name=<?php echo $row['l_name'];?> startDate=<?php echo $row['l_startDate'];?> endDate=<?php echo $row['l_endDate'];?> startTime=<?php echo $row['l_startTime'];?> endTime=<?php echo $row['l_endTime'];?> type=<?php echo $row['l_type'];?> hrs=<?php echo $row['l_hrs'];?> hrCheck=<?php echo $row['l_hrCheck'];?> bossCheck=<?php echo $row['l_bossCheck'];?> yesNO=no table=leave who=boss>
+              <i class="material-icons" style="font-size:15px">clear</i></td>
+              <?php }?>
           </tr>
           <?php }} ?>
           </table>
@@ -226,6 +248,30 @@ catch(PDOException $e)
 			</div><!--  右下欄 RIGHT-BOTTOM 結束    -->
 		</div><!--   右欄 RIGHT 結束    -->
 	</div><!--    下欄 DOWN 結束    -->
-
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('td#cancleCkeck').click(function(evt) {
+          console.log(evt);
+          var ele = evt.currentTarget;
+          var id = $(ele).attr('person');
+          var name=$(ele).attr('name');
+          var startTime=$(ele).attr('startTime');
+          var startDate=$(ele).attr('startDate');
+          var endTime=$(ele).attr('endTime');
+          var endDate=$(ele).attr('endDate');
+          var hrs=$(ele).attr('hrs');
+          var type=$(ele).attr('type');
+          var hrCheck=$(ele).attr('hrCheck');
+          var bossCheck=$(ele).attr('bossCheck');
+          var yesNO=$(ele).attr('yesNO');
+          var table=$(ele).attr('table');
+          var who=$(ele).attr('who');
+         $.fancybox({
+          'type':'ajax',
+          'href':'admin_fancybox.php?id='+id+'&startTime='+startTime+'&startDate='+startDate+'&endDate='+endDate+'&endTime='+endTime+'&hrs='+hrs+'&type='+type+'&name='+name+'&hrCheck='+hrCheck+'&bossCheck='+bossCheck+'&yesNO='+yesNO+'&table='+table+'&who='+who
+          });
+        });
+    });
+  </script>
 </body>
 </html>
