@@ -33,10 +33,14 @@ if ($conn->connect_error) {
 		header('Location: ../user-Model/user_index.php');
 
 	}
-	else
+	elseif($row['a_sn'] == $id && $row['a_password'] != $pw)
 	{
-		//要不然就是登入失敗
-		//使用php header 來轉址回 login.php 必加入在網址加入 msg 的 GET 用變數 返回登入頁
-		//header('Location: ../user-Model/log_login.php');
+		header('Location:../user-Model/log_login.php?msg=pwerror');
 	}
+  elseif($row['a_sn'] != $id && $row['a_password'] != $pw){
+    header('Location:../user-Model/log_login.php?msg=iderror');
+  }
+  elseif ($id==NULL && $pw ==NULL ){
+    header('Location:../user-Model/log_login.php?msg=error');
+  }
 ?>
