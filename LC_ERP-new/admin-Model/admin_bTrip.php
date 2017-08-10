@@ -155,7 +155,7 @@ catch(PDOException $e)
 						<th colspan="2">老闆簽核</th>
 					<?php
 						while($row = mysqli_fetch_array($result)) {
-            if($row["b_hrCheck"]=='簽核中' || $row["b_bossCheck"]=='簽核中'){?>
+            if(($row["b_hrCheck"]=='簽核中' AND $row["b_bossCheck"]=='簽核中') OR ($row["b_hrCheck"]=='通過'AND $row["b_bossCheck"]=='簽核中')){?>
 						<tr>
   						<td style="width:70px"><?php echo $row["b_name"]; ?></td>
   						<td style="width:215px"><?php echo $row["b_startDate"]; ?>~<?php echo $row["b_endDate"];?></td>
@@ -165,14 +165,23 @@ catch(PDOException $e)
   						<td style="width:70px"><?php echo $row["b_location"];?></td>
   						<td style="width:200px"><?php echo $row["b_state"];?></td>
   						<td style="width:200px"><?php echo $row["b_comment"];?></td>
-  						<td style="width:35px"><a href="admin_bTrip_hrCheck.php?id=<?php echo $row["id"]; ?>">
-  						<i class="material-icons" style="font-size:15px">check</i></a></td>
-              <td style="width:35px"><a href="admin_bTrip_hrCheck.php?id=<?php echo $row["id"]; ?>">
-  						     <i class="material-icons" style="font-size:15px">clear</i></a></td>
-  						<td style="width:35px"><a href="admin_bTrip_bossCheck.php?id=<?php echo $row["id"]; ?>">
-  						<i class="material-icons" style="font-size:15px">check</i></a></td>
-              <td style="width:35px"><a href="admin_bTrip_bossCheck.php?id=<?php echo $row["id"]; ?>">
-  						<i class="material-icons" style="font-size:15px">clear</i></a></td>
+              <?php if($row["b_hrCheck"]=='簽核中') {?>
+              <td style="width:35px">
+                <a href="../Controller/approve.php?a=yes&b=btrip&c=hr&id=<?php echo $row["id"];?>">
+                <i class="material-icons" style="font-size:15px">check</i></a></td>
+              <td style="width:35px">
+                <a href="../Controller/bTrip_hrCheck.php?a=no&b=btrip&c=hr&id=<?php echo $row["id"];?>">
+                <i class="material-icons" style="font-size:15px">clear</i></a></td>
+              <?php }
+              else{?>
+                <td colspan="2"><?php echo $row["b_hrCheck"]?> </td> <?php  } ?>
+              <?php if($row["b_hrCheck"]=='簽核中') {?>
+                <td colspan="2"></td> <?php  }
+              else{?>
+                <td style="width:35px"><a href="../Controller/approve.php?a=yes&b=btrip&c=boss&id=<?php echo $row["id"];?>">
+                <i class="material-icons" style="font-size:15px">check</i></a></td>
+                <td style="width:35px"><a href="../Controller/approve.php?a=no&b=btrip&c=boss&id=<?php echo $row["id"];?>">
+                <i class="material-icons" style="font-size:15px">clear</i></a></td> <?php }?>
   					</tr>
 					<?php }} ?>
 					</table>
@@ -189,31 +198,26 @@ catch(PDOException $e)
 						<th>公差地點</th>
 						<th>公差事由</th>
 						<th>備註</th>
-						<th colspan="2">人資簽核</th>
-						<th colspan="2">老闆簽核</th>
+						<th>人資簽核</th>
+						<th>老闆簽核</th>
 					<?php
             $sql = "SELECT * FROM business";
             $result = mysqli_query($conn,$sql);
 						while($row2 = mysqli_fetch_array($result)) {
-            if($row2["b_hrCheck"]!='簽核中' && $row2["b_bossCheck"]!='簽核中'){
+              if((($row2["b_hrCheck"]=='不通過') AND ( $row2["b_bossCheck"]=='簽核中'))
+              || (($row2["b_hrCheck"]!='簽核中') AND ( $row2["b_bossCheck"]!='簽核中'))  ){
           ?>
 						<tr>
 						<td style="width:70px"><?php echo $row2["b_name"]; ?></td>
-						<td style="width:215px"><?php echo $row2["b_startDate"]; ?>~<?php echo $row["b_endDate"];?></td>
+						<td style="width:215px"><?php echo $row2["b_startDate"]; ?>~<?php echo $row2["b_endDate"];?></td>
 						<td style="width:70px"><?php echo substr($row2["b_startTime"],0,-3);?></td>
 						<td style="width:70px"><?php echo substr($row2["b_endTime"],0,-3);?></td>
 						<td style="width:45px"><?php echo $row2["b_totalTime"]?></td>
 						<td style="width:70px"><?php echo $row2["b_location"];?></td>
 						<td style="width:200px"><?php echo $row2["b_state"];?></td>
 						<td style="width:200px"><?php echo $row2["b_comment"];?></td>
-						<td style="width:35px"><a href="admin_bTrip_hrCheck.php?id=<?php echo $row2["id"]; ?>">
-						<i class="material-icons" style="font-size:15px">check</i></a></td>
-            <td style="width:35px"><a href="admin_bTrip_hrCheck.php?id=<?php echo $row2["id"]; ?>">
-						  <i class="material-icons" style="font-size:15px">clear</i></a></td>
-						<td style="width:35px"><a href="admin_bTrip_bossCheck.php?id=<?php echo $row2["id"]; ?>">
-						<i class="material-icons" style="font-size:15px">check</i></a></td>
-            <td style="width:35px"><a href="admin_bTrip_bossCheck.php?id=<?php echo $row2["id"]; ?>">
-						<i class="material-icons" style="font-size:15px">clear</i></a></td>
+            <td style="width:50px"><?php echo $row2["b_hrCheck"]; ?></td>
+            <td style="width:50px"><?php echo $row2["b_bossCheck"]; ?></td>
 						</tr>
 					<?php }} ?>
 					</table>

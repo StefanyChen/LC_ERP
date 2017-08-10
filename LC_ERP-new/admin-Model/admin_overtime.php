@@ -156,7 +156,7 @@ catch(PDOException $e)
           	<th colspan="2">老闆確認</th>
           <?php
           while($row = mysqli_fetch_array($result)) {
-          if($row["o_hrCheck"]=='簽核中' || $row["o_bossCheck"]=='簽核中'){ ?>
+          if(($row["o_hrCheck"]=='簽核中' AND $row["o_bossCheck"]=='簽核中') OR ($row["o_hrCheck"]=='通過'AND $row["o_bossCheck"]=='簽核中')){?>
           <tr>
           	<td style="width:70px"><?php echo $row["o_name"]; ?></td>
           	<td style="width:105px"><?php echo $row["o_date"]; ?></td>
@@ -166,15 +166,24 @@ catch(PDOException $e)
           	<td style="width:70px"><?php echo $row["o_phrs"];?></td>
           	<td style="width:200px"><?php echo $row["o_state"]?></td>
           	<td style="width:200px"><?php echo $row["o_comment"];?></td>
-            <td style="width:35px"><a href="admin_overtime_hrCheck.php?id=<?php echo $row["id"]; ?>">
-            <i class="material-icons" style="font-size:15px">check</i></a></td>
-            <td style="width:35px"><a href="admin_overtime_hrCheck.php?id=<?php echo $row["id"]; ?>">
-                 <i class="material-icons" style="font-size:15px">clear</i></a></td>
-            <td style="width:35px"><a href="admin_overtime_bossCheck.php?id=<?php echo $row["id"]; ?>">
-            <i class="material-icons" style="font-size:15px">check</i></a></td>
-            <td style="width:35px"><a href="admin_overtime_bossCheck.php?id=<?php echo $row["id"]; ?>">
-            <i class="material-icons" style="font-size:15px">clear</i></a></td>
-          </tr>
+            <?php if($row["o_hrCheck"]=='簽核中') {?>
+            <td style="width:35px">
+              <a href="../Controller/approve.php?a=yes&b=overtime&c=hr&id=<?php echo $row["id"];?>">
+              <i class="material-icons" style="font-size:15px">check</i></a></td>
+            <td style="width:35px">
+              <a href="../Controller/approve.php?a=no&b=overtime&c=hr&id=<?php echo $row["id"];?>">
+              <i class="material-icons" style="font-size:15px">clear</i></a></td>
+            <?php }
+            else{?>
+              <td colspan="2"><?php echo $row["o_hrCheck"]?> </td> <?php  } ?>
+            <?php if($row["o_hrCheck"]=='簽核中') {?>
+              <td colspan="2"></td> <?php  }
+            else{?>
+              <td style="width:35px"><a href="../Controller/approve.php?a=yes&b=overtime&c=boss&id=<?php echo $row["id"];?>">
+              <i class="material-icons" style="font-size:15px">check</i></a></td>
+              <td style="width:35px"><a href="../Controller/approve.php?a=no&b=overtime&c=boss&id=<?php echo $row["id"];?>">
+              <i class="material-icons" style="font-size:15px">clear</i></a></td> <?php }?>
+              </tr>
           <?php  }}?>
         </table>
       </div>
@@ -190,13 +199,14 @@ catch(PDOException $e)
           <th>申請補修時數</th>
           <th>加班事由</th>
           <th>備註</th>
-          <th colspan="2">人資確認</th>
-          <th colspan="2">老闆確認</th>
+          <th>人資確認</th>
+          <th>老闆確認</th>
           <?php
           $sql = "SELECT * FROM `overtime_apply`";
           $result = mysqli_query($conn,$sql);
           while($row2 = mysqli_fetch_array($result)) {
-          if($row2["o_hrCheck"]!='簽核中' || $row2["o_bossCheck"]!='簽核中'){ ?>
+            if((($row2["o_hrCheck"]=='不通過') AND ( $row2["o_bossCheck"]=='簽核中'))
+            || (($row2["o_hrCheck"]!='簽核中') AND ( $row2["o_bossCheck"]!='簽核中'))  ){?>
           <tr>
           <td style="width:70px"><?php echo $row2["o_name"]; ?></td>
           <td style="width:105px"><?php echo $row2["o_date"]; ?></td>
@@ -206,14 +216,8 @@ catch(PDOException $e)
           <td style="width:70px"><?php echo $row2["o_phrs"];?></td>
           <td style="width:200px"><?php echo $row2["o_state"]?></td>
           <td style="width:200px"><?php echo $row2["o_comment"];?></td>
-          <td style="width:35px"><a href="admin_overtime_hrCheck.php?id=<?php echo $row2["id"]; ?>">
-          <i class="material-icons" style="font-size:15px">check</i></a></td>
-          <td style="width:35px"><a href="admin_overtime_hrCheck.php?id=<?php echo $row2["id"]; ?>">
-               <i class="material-icons" style="font-size:15px">clear</i></a></td>
-          <td style="width:35px"><a href="admin_overtime_bossCheck.php?id=<?php echo $row2["id"]; ?>">
-          <i class="material-icons" style="font-size:15px">check</i></a></td>
-          <td style="width:35px"><a href="admin_overtime_bossCheck.php?id=<?php echo $row2["id"]; ?>">
-          <i class="material-icons" style="font-size:15px">clear</i></a></td>
+          <td style="width:50px"><?php echo $row2["o_hrCheck"]; ?></td>
+          <td style="width:50px"><?php echo $row2["o_bossCheck"]; ?></td>
           </tr>
           <?php  }}?>
           </table>

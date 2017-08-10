@@ -168,10 +168,10 @@ catch(PDOException $e)
           	<td style="width:200px"><?php echo $row["l_comment"];?></td>
             <?php if($row["l_hrCheck"]=='簽核中') {?>
             <td style="width:35px">
-              <a href="../Controller/leave_hrCheck.php?id=<?php echo $row["id"]; ?>">
+              <a href="../Controller/approve.php?a=yes&b=leave&c=hr&id=<?php echo $row["id"];?>">
               <i class="material-icons" style="font-size:15px">check</i></a></td>
             <td style="width:35px">
-              <a href="../Controller/leave_hrCheckRefuse.php?id=<?php echo $row["id"]; ?>">
+              <a href="../Controller/approve.php?a=no&b=leave&c=hr&id=<?php echo $row["id"];?>">
               <i class="material-icons" style="font-size:15px">clear</i></a></td>
             <?php }
             else{?>
@@ -179,9 +179,9 @@ catch(PDOException $e)
             <?php if($row["l_hrCheck"]=='簽核中') {?>
               <td colspan="2"></td> <?php  }
             else{?>
-              <td style="width:35px"><a href="../Controller/leave_bossCheck.php?id=<?php echo $row["id"]; ?>">
+              <td style="width:35px"><a href="../Controller/approve.php?a=yes&b=leave&c=boss&id=<?php echo $row["id"];?>">
               <i class="material-icons" style="font-size:15px">check</i></a></td>
-              <td style="width:35px"><a href="../Controller/leave_bossCheck.php?id=<?php echo $row["id"]; ?>">
+              <td style="width:35px"><a href="../Controller/approve.php?a=no&b=leave&c=boss&id=<?php echo $row["id"];?>">
               <i class="material-icons" style="font-size:15px">clear</i></a></td> <?php }?>
           </tr>
           <?php }} ?>
