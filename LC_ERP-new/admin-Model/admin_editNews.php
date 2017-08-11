@@ -68,7 +68,7 @@
 							<a href="admin_editEmployee.php" style="margin:auto 35px">編輯員工資料</a>
 						</div>
 						<div class="left-list">
-							<p style="margin:auto 35px">新增員工資料</p>
+							<a href="admin_addEmployee.php" style="margin:auto 35px">新增員工資料</a>
 						</div>
 				</div>
 <!-- 第一組選單結束  -->
