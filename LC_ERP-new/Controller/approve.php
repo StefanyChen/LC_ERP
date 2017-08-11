@@ -15,16 +15,17 @@ try {
               $sql = "UPDATE `business` SET b_hrCheck='通過' WHERE id={$_GET['id']}";
             }
             else{
-              $sql = "UPDATE `business` SET b_hrCheck='不通過',b_bossCheck=' ' WHERE id={$_GET['id']}";
+              $sql = "UPDATE `business` SET b_hrCheck='不通過',b_bossCheck=' ',b_reason='$reason' WHERE id={$_GET['id']}";
 
             }
             break;
           case 'boss':
             if($_GET['yesNO']=='yes'){
-              $sql = "UPDATE` `business` SET b_bossCheck='通過' WHERE id={$_GET['id']}";
+              $sql = "UPDATE `business` SET b_bossCheck='通過' WHERE id={$_GET['id']}";
             }
             else{
-              $sql = "UPDATE `business` SET b_bossCheck='不通過' WHERE id={$_GET['id']}";
+
+              $sql = "UPDATE `business` SET b_bossCheck='不通過',b_reason='$reason' WHERE id={$_GET['id']}";
             }
             break;
           default:
