@@ -250,9 +250,9 @@ catch(PDOException $e)
 	</div><!--    下欄 DOWN 結束    -->
 <script type="text/javascript">
     $(document).ready(function() {
-        $('td#cancleCkeck').click(function(evt) {
-          console.log(evt);
-          var ele = evt.currentTarget;
+        $('td#cancleCkeck').click(function(event) {
+          console.log(event);
+          var ele = event.currentTarget;
           var id = $(ele).attr('person');
           var name=$(ele).attr('name');
           var startTime=$(ele).attr('startTime');
