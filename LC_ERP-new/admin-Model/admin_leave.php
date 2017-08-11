@@ -1,7 +1,7 @@
 <?php session_start();
   if ($_SESSION['id']== NULL )
   {
-    header('Location:log_login.php');
+    header('Location:../user-Model/log_login.php');
   }
 	elseif ($_SESSION['id']!= NULL && $_SESSION['root']!='admin')
 	{
@@ -15,11 +15,9 @@ $password = "root";
 $dbname = "peopleresource";
 try {
     $conn = mysqli_connect($servername,$username ,$password,$dbname);
-
     $sql = "SELECT * FROM `leave`";
     // use exec() because no results are returned
     $result = mysqli_query($conn,$sql);
-
     }
 catch(PDOException $e)
     {
@@ -35,10 +33,10 @@ catch(PDOException $e)
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src='http://code.jquery.com/jquery-1.9.1.js'></script>
   <link rel="stylesheet" type="text/css" href="../user-Model/fullcalendar_drag/css/fancybox.css">
-<link rel="stylesheet" type="text/css" href="../user-Model/fullcalendar_drag/css/jquery-ui.css">
-<script src='http://code.jquery.com/ui/1.10.3/jquery-ui.js'></script>
-<script src='../user-Model/fullcalendar_drag/js/jquery.fancybox-1.3.1.pack.js'></script>
-<script src='../user-Model/fullcalendar_drag/js/jquery.form.min.js'></script>
+  <link rel="stylesheet" type="text/css" href="../user-Model/fullcalendar_drag/css/jquery-ui.css">
+  <script src='http://code.jquery.com/ui/1.10.3/jquery-ui.js'></script>
+  <script src='../user-Model/fullcalendar_drag/js/jquery.fancybox-1.3.1.pack.js'></script>
+  <script src='../user-Model/fullcalendar_drag/js/jquery.form.min.js'></script>
 <style type="text/css">
     th{
       background-color:#FFDEAD;
@@ -49,6 +47,9 @@ catch(PDOException $e)
     }
     tr:hover{
     	background-color:#FFEFD5;
+    }
+    table{
+      width: 100%;
     }
 .fancy{width:900px; height:450px}
 .fancy h3{height:30px; line-height:30px; border-bottom:1px solid #d3d3d3; font-size:14px}
@@ -176,7 +177,7 @@ catch(PDOException $e)
           	<th colspan="2">老闆確認</th>
           <?php
           while($row = mysqli_fetch_array($result)) {
-          if(($row["l_hrCheck"]=='簽核中' AND $row["l_bossCheck"]=='簽核中') OR ($row["l_hrCheck"]=='通過'AND $row["l_bossCheck"]=='簽核中')){?> 
+          if(($row["l_hrCheck"]=='簽核中' AND $row["l_bossCheck"]=='簽核中') OR ($row["l_hrCheck"]=='通過'AND $row["l_bossCheck"]=='簽核中')){?>
           <tr>
           	<td style="width:70px"><?php echo $row["l_name"]; ?></td>
           	<td style="width:215px"><?php echo $row["l_startDate"]; ?>~<?php echo $row["l_endDate"];?></td>
@@ -191,7 +192,7 @@ catch(PDOException $e)
               <a href="../Controller/approve.php?yesNO=yes&table=leave&who=hr&id=<?php echo $row["id"]; ?>">
               <i class="material-icons" style="font-size:15px">check</i></a></td>
 
-            <td style="width:35px" id="cancleCkeck"  class="fancybox" 
+            <td style="width:35px" id="cancleCkeck"  class="fancybox"
             person=<?php echo $row['id'];?> name=<?php echo $row['l_name'];?> startDate=<?php echo $row['l_startDate'];?> endDate=<?php echo $row['l_endDate'];?> startTime=<?php echo $row['l_startTime'];?> endTime=<?php echo $row['l_endTime'];?> type=<?php echo $row['l_type'];?> hrs=<?php echo $row['l_hrs'];?> hrCheck=<?php echo $row['l_hrCheck'];?> yesNO=no table=leave who=hr>
               <i class="material-icons" style="font-size:15px">clear</i></td>
             <?php }
@@ -213,16 +214,16 @@ catch(PDOException $e)
         <div style="margin-left:10px">
           <p style="font-size:18px;font-family:Microsoft JhengHei">簽核完成名單</p>
         	<table cellspacing="0">
-            <th>申請人</th>
-            <th>公差時間</th>
-            <th>開始時間</th>
-            <th>結束時間</th>
-            <th>請假類別</th>
-            <th>請假時數</th>
-            <th>請假事由</th>
-            <th>備註</th>
-            <th>人資確認</th>
-            <th>老闆確認</th>
+            <th style="min-width:8%;width:8%">申請人</th>
+            <th style="min-width:20%;width:20%">公差時間</th>
+            <th style="min-width:7.5%;width:7.5%">開始時間</th>
+            <th style="min-width:7.5%;width:7.5%">結束時間</th>
+            <th style="min-width:7.5%;width:7.5%">請假類別</th>
+            <th style="min-width:7.5%;width:7.5%">請假時數</th>
+            <th style="min-width:15%;width:15%">請假事由</th>
+            <th style="min-width:15%;width:15%">備註</th>
+            <th style="min-width:7.5%;width:7.5%">人資確認</th>
+            <th style="min-width:7.5%;width:7.5%">老闆確認</th>
           <?php
             $sql = "SELECT * FROM `leave`";
             $result = mysqli_query($conn,$sql);
