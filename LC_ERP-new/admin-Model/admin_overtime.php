@@ -1,7 +1,7 @@
 <?php session_start();
   if ($_SESSION['id']== NULL )
   {
-    header('Location:log_login.php');
+    header('Location:../user-Model/log_login.php');
   }
 	elseif ($_SESSION['id']!= NULL && $_SESSION['root']!='admin')
 	{
@@ -43,6 +43,9 @@ catch(PDOException $e)
     }
     tr:hover{
       background-color:#FFEFD5;
+    }
+    table{
+      width: 100%;
     }
   </style>
 </head>
@@ -141,36 +144,36 @@ catch(PDOException $e)
   			</div>
 <!--  右下欄上方選擇列 結束   -->
 <!--  未簽核名單    -->
-        <div style="margin-left:10px">
+        <div style="margin-left:10px;margin-right:10px">
          <p style="font-size:18px;font-family:Microsoft JhengHei">未簽核名單</p>
           <table cellspacing="0">
-          	<th>申請人</th>
-          	<th>加班日期</th>
-          	<th>開始時間</th>
-          	<th>結束時間</th>
-          	<th>申請加班費時數</th>
-          	<th>申請補修時數</th>
-          	<th>加班事由</th>
-          	<th>備註</th>
-          	<th colspan="2">人資確認</th>
-          	<th colspan="2">老闆確認</th>
+          	<th style="min-width:9%;width:9%">申請人</th>
+          	<th style="min-width:11%;width:11%">加班日期</th>
+          	<th style="min-width:8%;width:8%">開始時間</th>
+          	<th style="min-width:8%;width:8%">結束時間</th>
+          	<th style="min-width:9%;width:9%">申請加班費</th>
+          	<th style="min-width:8%;width:8%">申請補修</th>
+          	<th style="min-width:16%;width:16%">加班事由</th>
+          	<th style="min-width:15%;width:15%">備註</th>
+          	<th colspan="2" style="min-width:8%;width:8%">人資確認</th>
+          	<th colspan="2"  style="min-width:8%;width:8%">老闆確認</th>
           <?php
           while($row = mysqli_fetch_array($result)) {
           if(($row["o_hrCheck"]=='簽核中' AND $row["o_bossCheck"]=='簽核中') OR ($row["o_hrCheck"]=='通過'AND $row["o_bossCheck"]=='簽核中')){?>
           <tr>
-          	<td style="width:70px"><?php echo $row["o_name"]; ?></td>
-          	<td style="width:105px"><?php echo $row["o_date"]; ?></td>
-          	<td style="width:70px"><?php echo substr($row["o_start"],0,-3); ?></td>
-          	<td style="width:70px"><?php echo substr($row["o_end"],0,-3);?></td>
-          	<td style="width:70px"><?php echo $row["o_hrs"];?></td>
-          	<td style="width:70px"><?php echo $row["o_phrs"];?></td>
-          	<td style="width:200px"><?php echo $row["o_state"]?></td>
-          	<td style="width:200px"><?php echo $row["o_comment"];?></td>
+          	<td><?php echo $row["o_name"]; ?></td>
+          	<td><?php echo $row["o_date"]; ?></td>
+          	<td><?php echo substr($row["o_start"],0,-3); ?></td>
+          	<td><?php echo substr($row["o_end"],0,-3);?></td>
+          	<td><?php echo $row["o_hrs"];?></td>
+          	<td><?php echo $row["o_phrs"];?></td>
+          	<td><?php echo $row["o_state"]?></td>
+          	<td><?php echo $row["o_comment"];?></td>
             <?php if($row["o_hrCheck"]=='簽核中') {?>
-            <td style="width:35px">
+            <td>
               <a href="../Controller/approve.php?a=yes&b=overtime&c=hr&id=<?php echo $row["id"];?>">
               <i class="material-icons" style="font-size:15px">check</i></a></td>
-            <td style="width:35px">
+            <td>
               <a href="../Controller/approve.php?a=no&b=overtime&c=hr&id=<?php echo $row["id"];?>">
               <i class="material-icons" style="font-size:15px">clear</i></a></td>
             <?php }
@@ -188,19 +191,20 @@ catch(PDOException $e)
         </table>
       </div>
 <!--  已簽核名單    -->
-      <div style="margin-left:10px">
+      <div style="margin-left:10px;margin-right:10px">
         <p style="font-size:18px;font-family:Microsoft JhengHei">簽核完成名單</p>
         <table cellspacing="0">
-          <th>申請人</th>
-          <th>加班日期</th>
-          <th>開始時間</th>
-          <th>結束時間</th>
-          <th>申請加班費時數</th>
-          <th>申請補修時數</th>
-          <th>加班事由</th>
-          <th>備註</th>
-          <th>人資確認</th>
-          <th>老闆確認</th>
+          <th style="width:min-width:3%;width:3%"></th>
+          <th style="min-width:8%;width:8%">申請人</th>
+          <th style="min-width:10%;width:10%">加班日期</th>
+          <th style="min-width:8%;width:8%">開始時間</th>
+          <th style="min-width:8%;width:8%">結束時間</th>
+          <th style="min-width:9%;width:9%">申請加班費</th>
+          <th style="min-width:8%;width:8%">申請補修</th>
+          <th style="min-width:15%;width:15%">加班事由</th>
+          <th style="min-width:15%;width:15%">備註</th>
+          <th style="min-width:8%;width:8%">人資確認</th>
+          <th style="min-width:8%;width:8%">老闆確認</th>
           <?php
           $sql = "SELECT * FROM `overtime_apply`";
           $result = mysqli_query($conn,$sql);
@@ -208,6 +212,8 @@ catch(PDOException $e)
             if((($row2["o_hrCheck"]=='不通過') AND ( $row2["o_bossCheck"]=='簽核中'))
             || (($row2["o_hrCheck"]!='簽核中') AND ( $row2["o_bossCheck"]!='簽核中'))  ){?>
           <tr>
+          <td><a href="../Controller/delete_overtime.php?id=<?php echo $row2["id"]; ?>">
+            <i class="material-icons" style="font-size:30px;color:#CCC;margin-top:4px">delete</i></a></td>
           <td style="width:70px"><?php echo $row2["o_name"]; ?></td>
           <td style="width:105px"><?php echo $row2["o_date"]; ?></td>
           <td style="width:70px"><?php echo substr($row2["o_start"],0,-3); ?></td>
