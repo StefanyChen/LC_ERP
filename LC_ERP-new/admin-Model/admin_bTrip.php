@@ -1,7 +1,7 @@
 <?php session_start();
   if ($_SESSION['id']== NULL )
   {
-    header('Location:log_login.php');
+    header('Location:../user-Model/log_login.php');
   }
 	elseif ($_SESSION['id']!= NULL && $_SESSION['root']!='admin')
 	{
@@ -146,16 +146,16 @@ catch(PDOException $e)
         <div style="margin-left:10px;margin-right:10px">
         <p style="font-size:18px;font-family:Microsoft JhengHei">未簽核名單</p>
           <table cellspacing="0">
-						<th style="min-width:15%">申請人</th>
-						<th style="min-width:35%">公差時間</th>
-						<th style="min-width:15%">開始時間</th>
-						<th style="min-width:15%">結束時間</th>
-						<th style="min-width:8%">時數</th>
-						<th style="min-width:15%">公差地點</th>
-						<th style="min-width:35%;width:15%">公差事由</th>
-						<th style="min-width:35%;width:15%">備註</th>
-						<th colspan="2" style="min-width:15%">人資簽核</th>
-						<th colspan="2" style="min-width:15%">老闆簽核</th>
+						<th style="min-width:7.5%;width:7.5%">申請人</th>
+						<th style="min-width:20%;width:20%">公差時間</th>
+						<th style="min-width:7.5%;width:7.5%">開始時間</th>
+						<th style="min-width:7.5%;width:7.5%">結束時間</th>
+						<th style="min-width:4%;width:4%">時數</th>
+						<th style="min-width:7.5%;width:7.5%">公差地點</th>
+						<th style="min-width:15%;width:15%">公差事由</th>
+						<th style="min-width:15%;width:15%">備註</th>
+						<th colspan="2" style="min-width:8%;width:8%">人資簽核</th>
+						<th colspan="2" style="min-width:8%;width:8%">老闆簽核</th>
 					<?php
 						while($row = mysqli_fetch_array($result)) {
             if(($row["b_hrCheck"]=='簽核中' AND $row["b_bossCheck"]=='簽核中') OR ($row["b_hrCheck"]=='通過'AND $row["b_bossCheck"]=='簽核中')){?>
@@ -193,17 +193,17 @@ catch(PDOException $e)
 				<div style="margin-left:10px;margin-right:10px">
           <p style="font-size:18px;font-family:Microsoft JhengHei">簽核完成名單</p>
 					<table cellspacing="0">
-            <th style="min-width:5%"></th>
-						<th style="min-width:15%">申請人</th>
-						<th style="min-width:35%">公差時間</th>
-						<th style="min-width:15%">開始時間</th>
-						<th style="min-width:15%">結束時間</th>
-						<th style="min-width:8%">時數</th>
-						<th style="min-width:15%">公差地點</th>
-						<th style="min-width:35%;width:15%">公差事由</th>
-						<th style="min-width:35%;width:15%">備註</th>
-						<th style="min-width:15%">人資簽核</th>
-						<th style="min-width:15%x">老闆簽核</th>
+            <th style="min-width:3%;width:3%"></th>
+						<th style="min-width:7.5%;width:7.5%">申請人</th>
+						<th style="min-width:20%;width:20%">公差時間</th>
+						<th style="min-width:7.5%;width:7.5%">開始時間</th>
+						<th style="min-width:7.5%;width:7.5%">結束時間</th>
+						<th style="min-width:4%;width:4%">時數</th>
+						<th style="min-width:7.5%;width:7.5%">公差地點</th>
+						<th style="min-width:14%;width:14%">公差事由</th>
+						<th style="min-width:14%;width:14%">備註</th>
+						<th style="min-width:7.5%;width:7.5%">人資簽核</th>
+						<th style="min-width:7.5%;width:7.5%">老闆簽核</th>
 					<?php
             $sql = "SELECT * FROM business";
             $result = mysqli_query($conn,$sql);
@@ -212,7 +212,8 @@ catch(PDOException $e)
               || (($row2["b_hrCheck"]!='簽核中') AND ( $row2["b_bossCheck"]!='簽核中'))  ){
           ?>
 						<tr>
-            <td><a href="../Controller/delete_bTrip.php?id=<?php echo $row2["id"]; ?>"><i class="material-icons" style="font-size:30px;color:#CCC;margin-top:4px">delete</i></a></td>
+            <td><a href="../Controller/delete_bTrip.php?id=<?php echo $row2["id"]; ?>">
+              <i class="material-icons" style="font-size:30px;color:#CCC;margin-top:4px">delete</i></a></td>
 						<td><?php echo $row2["b_name"]; ?></td>
 						<td><?php echo $row2["b_startDate"]; ?>~<?php echo $row2["b_endDate"];?></td>
 						<td><?php echo substr($row2["b_startTime"],0,-3);?></td>
