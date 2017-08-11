@@ -30,12 +30,13 @@ if ($_SESSION['id']== NULL)
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style>
  		.profile-block{
- 			
+
 			/*border: solid;*/
 			/*height: 1000px;*/
 			width: 90%;
 			margin:auto;
-			margin-top:30px; 
+			margin-top:30px;
+      font-family: Microsoft JhengHei;
  		}
  		.p_sidebar{
  			display: inline-block;
@@ -43,7 +44,8 @@ if ($_SESSION['id']== NULL)
  			/*border: solid;*/
 			width:30%;
 			/*height:300px; */
-			
+      font-family: Microsoft JhengHei;
+
  		}
  		.p_sidebar_intro{
  			display: inline-block;
@@ -51,7 +53,8 @@ if ($_SESSION['id']== NULL)
  			/*border: solid;*/
 			width:30%;
 			/*height:500px; */
-			
+      font-family: Microsoft JhengHei;
+
  		}
  		.p_content{
  			float: right;
@@ -59,27 +62,31 @@ if ($_SESSION['id']== NULL)
 			/*display: inline-block;*/
  			/*border: solid;*/
 			/*height:300px; */
-
+      font-family: Microsoft JhengHei;
  		}
  		.p_img{
  			/*margin:auto;*/
  			height:250px ;
  			width:220px ;
+      font-family: Microsoft JhengHei;
  		}
  		table{
  			width:90%;
  			border:0px;
+      font-family: Microsoft JhengHei;
  		}
  		tr,th,td{
  			border:0px;
- 			padding:0 0 0 0;
+ 			padding:0 0 0 5px;
  			text-align:left;
+      font-family: Microsoft JhengHei;
  		}
  		p{
  			margin-top:10px;
  			margin-bottom:10px;
+      font-family: Microsoft JhengHei;
  		}
- 		
+
 	</style>
 </head>
 <body>
@@ -169,21 +176,19 @@ if ($_SESSION['id']== NULL)
 						<p>緊急聯絡人手機：<?php echo $row["e_em_mobile"];?></p>
 						<!-- <br><br><br><hr noshade align="left"> -->
 					</div>
-					
+
 					<div class="p_content">
 						<table>
 						<tr>
 						<th colspan="6" style="text-align:left">學歷</th>
 						</tr>
 						<tr>
-						<th style="font-size:15px;background-color:#A9A9A9;width:15%  "><?php echo $row["e_edu"];?></th>
-						
-						<th style="font-size:15px;background-color:#D3D3D3 "><?php echo $row["e_edu_high"];?></th>
-						<th style="font-size:15px;background-color:#A9A9A9"><?php echo $row["e_edu_dep"];?></th>
-						<th style="font-size:15px;background-color:#D3D3D3"><?php echo $row["e_edu_start"];?></th>
-						<th style="font-size:15px;background-color:#A9A9A9"><?php echo $row["e_edu_end"]?></th>
-						<th colspan="2" style="font-size:15px;background-color:#D3D3D3"><?php echo $row["e_edu_gra"];?></th>
-					
+						<td style="font-size:15px;background-color:#A9A9A9;width:15%"><?php echo $row["e_edu"];?></td>
+						<td style="font-size:15px;background-color:#D3D3D3 "><?php echo $row["e_edu_high"];?></td>
+						<td style="font-size:15px;background-color:#A9A9A9"><?php echo $row["e_edu_dep"];?></td>
+						<td style="font-size:15px;background-color:#D3D3D3;width:20%"><?php echo $row["e_edu_start"];?></td>
+						<td style="font-size:15px;background-color:#A9A9A9;width:20%"><?php echo $row["e_edu_end"]?></td>
+						<td colspan="2" style="font-size:15px;background-color:#D3D3D3"><?php echo $row["e_edu_gra"];?></td>
 						</table>
 						<br><br><br>
 						<!-- <hr noshade align="left"> -->
@@ -194,12 +199,12 @@ if ($_SESSION['id']== NULL)
 						<th colspan="6" style="text-align:left">經歷</th>
 						</tr>
 						<tr>
-						<th style="font-size:15px;background-color:#A9A9A9;width:130px ">公司名稱</th>
-						<th style="font-size:15px;background-color:#D3D3D3;width:130px ">職稱</th>
-						<th colspan="2" style="font-size:15px;background-color:#A9A9A9; ">期間</th>
+						<th style="font-size:15px;background-color:#A9A9A9;width:18% ">公司名稱</th>
+						<th style="font-size:15px;background-color:#D3D3D3;width:18% ">職稱</th>
+						<th colspan="2" style="font-size:15px;background-color:#A9A9A9;width:35% ">期間</th>
 						<th colspan="2" style="font-size:15px;background-color:#D3D3D3">離職原因</th>
 						</tr>
-<!-- 經歷表格1  -->	
+<!-- 經歷表格1  -->
 						<tr>
 						<td ><?php echo $row["e_exp_com1"];?></td>
 						<td ><?php echo $row["e_exp_posi1"];?></td>
@@ -207,34 +212,42 @@ if ($_SESSION['id']== NULL)
 						<td ><?php echo $row["e_exp_end1"];?></td>
 						<td colspan="2"><?php echo $row["e_exp_reason1"];?></td>
 						</tr>
+            <?php if($row["e_exp_start2"]!='0000-00-00'){?>
 						<tr>
-<!-- 經歷表格2  -->		<td ><?php echo $row["e_exp_com2"];?></td>
+<!-- 經歷表格2  -->
+            <td ><?php echo $row["e_exp_com2"];?></td>
 						<td ><?php echo $row["e_exp_posi2"];?></td>
 						<td ><?php echo $row["e_exp_start2"];?></td>
 						<td ><?php echo $row["e_exp_end2"];?></td>
 						<td colspan="2"><?php echo $row["e_exp_reason2"];?></td>
-						</tr>
+            </tr><?php }
+            if($row["e_exp_start3"]!='0000-00-00'){?>
 						<tr>
-<!-- 經歷表格3  -->		<td ><?php echo $row["e_exp_com3"];?></td>
+<!-- 經歷表格3  -->
+            <td ><?php echo $row["e_exp_com3"];?></td>
 						<td ><?php echo $row["e_exp_posi3"];?></td>
 						<td ><?php echo $row["e_exp_start3"];?></td>
 						<td ><?php echo $row["e_exp_end3"];?></td>
 						<td colspan="2"><?php echo $row["e_exp_reason3"];?></td>
-						</tr>
+            </tr><?php }
+            if($row["e_exp_start4"]!='0000-00-00'){?>
 						<tr>
-<!-- 經歷表格4  -->		<td ><?php echo $row["e_exp_com4"];?></td>
+<!-- 經歷表格4  -->
+            <td ><?php echo $row["e_exp_com4"];?></td>
 						<td ><?php echo $row["e_exp_posi4"];?></td>
 						<td ><?php echo $row["e_exp_start4"];?></td>
 						<td ><?php echo $row["e_exp_end4"];?></td>
 						<td colspan="2"><?php echo $row["e_exp_reason4"];?></td>
-						</tr>
+						</tr><?php }
+            if($row["e_exp_start5"]!='0000-00-00') { ?>
 						<tr>
-<!-- 經歷表格5  -->		<td ><?php echo $row["e_exp_com5"];?></td>
+<!-- 經歷表格5  -->
+            <td ><?php echo $row["e_exp_com5"];?></td>
 						<td ><?php echo $row["e_exp_posi5"];?></td>
 						<td ><?php echo $row["e_exp_start5"];?></td>
 						<td ><?php echo $row["e_exp_end5"];?></td>
 						<td colspan="2"><?php echo $row["e_exp_reason5"];?></td>
-						</tr>
+          </tr><?php } ?>
 						</table>
 					</div>
 					<div class="p_sidebar_intro">
@@ -250,7 +263,7 @@ if ($_SESSION['id']== NULL)
 						<hr noshade color="#A9A9A9" align="left" width="80%">
 						<p style="background-color:#C0C0C0;width:25%;text-align: center  ">技能專長</p>
 						<p><?php echo $row["e_license"];?></p>
-						
+
 					</div>
 					<?php } ?>
 				</div>
