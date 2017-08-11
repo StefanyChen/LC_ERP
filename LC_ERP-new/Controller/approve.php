@@ -3,7 +3,7 @@ $servername = "localhost";
 $username = "root";
 $password = "root";
 $dbname = "peopleresource";
-
+$reason=$_GET['reason'];
 try {
     $conn = mysqli_connect($servername,$username ,$password,$dbname);
 
@@ -15,8 +15,8 @@ try {
               $sql = "UPDATE `business` SET b_hrCheck='通過' WHERE id={$_GET['id']}";
             }
             else{
-              $sql = "UPDATE `business` SET b_hrCheck='不通過' WHERE id={$_GET['id']}";
-              $sql = "UPDATE `business` SET b_bossCheck=' ' WHERE id={$_GET['id']}";
+              $sql = "UPDATE `business` SET b_hrCheck='不通過',b_bossCheck=' ' WHERE id={$_GET['id']}";
+
             }
             break;
           case 'boss':
@@ -40,7 +40,7 @@ try {
               $sql = "UPDATE `leave` SET l_hrCheck='通過' WHERE id={$_GET['id']}";
             }
             else{
-              $sql = "UPDATE `leave` SET l_hrCheck='不通過',l_bossCheck=' ' WHERE id={$_GET['id']}";
+              $sql = "UPDATE `leave` SET l_hrCheck='不通過',l_bossCheck=' ',l_reason='$reason' WHERE id={$_GET['id']}";
             }
             break;
           case 'boss':
@@ -48,7 +48,7 @@ try {
               $sql = "UPDATE `leave` SET l_bossCheck='通過' WHERE id={$_GET['id']}";
             }
             else{
-              $sql = "UPDATE `leave` SET l_bossCheck='不通過' WHERE id={$_GET['id']}";
+              $sql = "UPDATE `leave` SET l_bossCheck='不通過', l_reason='$reason' WHERE id={$_GET['id']}";
             }
             break;
           default:
