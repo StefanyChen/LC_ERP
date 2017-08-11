@@ -33,6 +33,9 @@ catch(PDOException $e)
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
+    table{
+      width: 100%;
+    }
     th{
       background-color:#FFDEAD;
     }
@@ -140,19 +143,19 @@ catch(PDOException $e)
   			</div>
 <!--  右下欄上方選擇列 結束   -->
 <!--  未簽核名單    -->
-        <div style="margin-left:10px">
+        <div style="margin-left:10px;margin-right:10px">
         <p style="font-size:18px;font-family:Microsoft JhengHei">未簽核名單</p>
           <table cellspacing="0">
-						<th style="min-width:70px">申請人</th>
-						<th style="min-width:200px">公差時間</th>
-						<th style="min-width:70px">開始時間</th>
-						<th style="min-width:70px">結束時間</th>
-						<th style="min-width:45px">時數</th>
-						<th style="min-width:70px">公差地點</th>
-						<th style="min-width:150px;width:150px">公差事由</th>
-						<th style="min-width:150px;width:150px">備註</th>
-						<th colspan="2" style="min-width:70px">人資簽核</th>
-						<th colspan="2" style="min-width:70px">老闆簽核</th>
+						<th style="min-width:15%">申請人</th>
+						<th style="min-width:35%">公差時間</th>
+						<th style="min-width:15%">開始時間</th>
+						<th style="min-width:15%">結束時間</th>
+						<th style="min-width:8%">時數</th>
+						<th style="min-width:15%">公差地點</th>
+						<th style="min-width:35%;width:15%">公差事由</th>
+						<th style="min-width:35%;width:15%">備註</th>
+						<th colspan="2" style="min-width:15%">人資簽核</th>
+						<th colspan="2" style="min-width:15%">老闆簽核</th>
 					<?php
 						while($row = mysqli_fetch_array($result)) {
             if(($row["b_hrCheck"]=='簽核中' AND $row["b_bossCheck"]=='簽核中') OR ($row["b_hrCheck"]=='通過'AND $row["b_bossCheck"]=='簽核中')){?>
@@ -187,20 +190,20 @@ catch(PDOException $e)
 					</table>
         </div>
 <!--  已簽核名單    -->
-				<div style="margin-left:10px">
+				<div style="margin-left:10px;margin-right:10px">
           <p style="font-size:18px;font-family:Microsoft JhengHei">簽核完成名單</p>
 					<table cellspacing="0">
-            <th style="min-width:30px"></th>
-						<th style="min-width:70px">申請人</th>
-						<th style="min-width:200px">公差時間</th>
-						<th style="min-width:70px">開始時間</th>
-						<th style="min-width:70px">結束時間</th>
-						<th style="min-width:45px">時數</th>
-						<th style="min-width:70px">公差地點</th>
-						<th style="min-width:150px;width:150px">公差事由</th>
-						<th style="min-width:150px;width:150px">備註</th>
-						<th style="min-width:70px">人資簽核</th>
-						<th style="min-width:70px">老闆簽核</th>
+            <th style="min-width:5%"></th>
+						<th style="min-width:15%">申請人</th>
+						<th style="min-width:35%">公差時間</th>
+						<th style="min-width:15%">開始時間</th>
+						<th style="min-width:15%">結束時間</th>
+						<th style="min-width:8%">時數</th>
+						<th style="min-width:15%">公差地點</th>
+						<th style="min-width:35%;width:15%">公差事由</th>
+						<th style="min-width:35%;width:15%">備註</th>
+						<th style="min-width:15%">人資簽核</th>
+						<th style="min-width:15%x">老闆簽核</th>
 					<?php
             $sql = "SELECT * FROM business";
             $result = mysqli_query($conn,$sql);
