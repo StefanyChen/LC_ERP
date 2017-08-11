@@ -7,11 +7,11 @@ $dbname = "peopleresource";
 try {
     $conn = mysqli_connect($servername,$username ,$password,$dbname);
 
-    switch ($_GET['b']) {
+    switch ($_GET['table']) {
       case 'btrip':
-        switch ($_GET['c']) {
+        switch ($_GET['who']) {
           case 'hr':
-            if($_GET['a']=='yes'){
+            if($_GET['yesNO']=='yes'){
               $sql = "UPDATE `business` SET b_hrCheck='通過' WHERE id={$_GET['id']}";
             }
             else{
@@ -20,7 +20,7 @@ try {
             }
             break;
           case 'boss':
-            if($_GET['a']=='yes'){
+            if($_GET['yesNO']=='yes'){
               $sql = "UPDATE` `business` SET b_bossCheck='通過' WHERE id={$_GET['id']}";
             }
             else{
@@ -34,9 +34,9 @@ try {
         header("Location:../admin-Model/admin_bTrip.php");
         break;# btrip-END
       case 'leave':
-        switch ($_GET['c']) {
+        switch ($_GET['who']) {
           case 'hr':
-            if($_GET['a']=='yes'){
+            if($_GET['yesNO']=='yes'){
               $sql = "UPDATE `leave` SET l_hrCheck='通過' WHERE id={$_GET['id']}";
             }
             else{
@@ -58,9 +58,9 @@ try {
         header("Location:../admin-Model/admin_leave.php");
         break;# leave-END
       case 'overtime':
-        switch ($_GET['c']) {
+        switch ($_GET['who']) {
           case 'hr':
-            if($_GET['a']=='yes'){
+            if($_GET['yesNO']=='yes'){
               $sql = "UPDATE `overtime_apply` SET o_hrCheck='通過' WHERE id={$_GET['id']}";
             }
             else{
