@@ -11,7 +11,7 @@ try {
     $sql = "DELETE FROM business WHERE id='" . $_GET["id"] . "'";
 
     mysqli_query($conn,$sql);
-    header("Location:admin_bTrip.php");
+    header("Location:../admin-Model/admin_bTrip.php");
     }
 catch(PDOException $e)
     {
