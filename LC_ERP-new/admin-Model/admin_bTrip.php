@@ -143,34 +143,34 @@ catch(PDOException $e)
         <div style="margin-left:10px">
         <p style="font-size:18px;font-family:Microsoft JhengHei">未簽核名單</p>
           <table cellspacing="0">
-						<th>申請人</th>
-						<th>公差時間</th>
-						<th>開始時間</th>
-						<th>結束時間</th>
-						<th>時數</th>
-						<th>公差地點</th>
-						<th>公差事由</th>
-						<th>備註</th>
-						<th colspan="2">人資簽核</th>
-						<th colspan="2">老闆簽核</th>
+						<th style="min-width:70px">申請人</th>
+						<th style="min-width:200px">公差時間</th>
+						<th style="min-width:70px">開始時間</th>
+						<th style="min-width:70px">結束時間</th>
+						<th style="min-width:45px">時數</th>
+						<th style="min-width:70px">公差地點</th>
+						<th style="min-width:150px;width:150px">公差事由</th>
+						<th style="min-width:150px;width:150px">備註</th>
+						<th colspan="2" style="min-width:70px">人資簽核</th>
+						<th colspan="2" style="min-width:70px">老闆簽核</th>
 					<?php
 						while($row = mysqli_fetch_array($result)) {
             if(($row["b_hrCheck"]=='簽核中' AND $row["b_bossCheck"]=='簽核中') OR ($row["b_hrCheck"]=='通過'AND $row["b_bossCheck"]=='簽核中')){?>
 						<tr>
-  						<td style="width:70px"><?php echo $row["b_name"]; ?></td>
-  						<td style="width:215px"><?php echo $row["b_startDate"]; ?>~<?php echo $row["b_endDate"];?></td>
-  						<td style="width:70px"><?php echo substr($row["b_startTime"],0,-3);?></td>
-  						<td style="width:70px"><?php echo substr($row["b_endTime"],0,-3);?></td>
-  						<td style="width:45px"><?php echo $row["b_totalTime"]?></td>
-  						<td style="width:70px"><?php echo $row["b_location"];?></td>
-  						<td style="width:200px"><?php echo $row["b_state"];?></td>
-  						<td style="width:200px"><?php echo $row["b_comment"];?></td>
+  						<td><?php echo $row["b_name"]; ?></td>
+  						<td><?php echo $row["b_startDate"]; ?>~<?php echo $row["b_endDate"];?></td>
+  						<td><?php echo substr($row["b_startTime"],0,-3);?></td>
+  						<td><?php echo substr($row["b_endTime"],0,-3);?></td>
+  						<td><?php echo $row["b_totalTime"]?></td>
+  						<td><?php echo $row["b_location"];?></td>
+  						<td><?php echo $row["b_state"];?></td>
+  						<td><?php echo $row["b_comment"];?></td>
               <?php if($row["b_hrCheck"]=='簽核中') {?>
-              <td style="width:35px">
-                <a href="../Controller/approve.php?a=yes&b=btrip&c=hr&id=<?php echo $row["id"];?>">
+              <td>
+                <a href="../Controller/approve.php?yesNO=yes&table=btrip&who=hr&id=<?php echo $row["id"];?>">
                 <i class="material-icons" style="font-size:15px">check</i></a></td>
-              <td style="width:35px">
-                <a href="../Controller/bTrip_hrCheck.php?a=no&b=btrip&c=hr&id=<?php echo $row["id"];?>">
+              <td>
+                <a href="../Controller/bTrip_hrCheck.php?yesNO=no&table=btrip&who=hr&id=<?php echo $row["id"];?>">
                 <i class="material-icons" style="font-size:15px">clear</i></a></td>
               <?php }
               else{?>
@@ -178,9 +178,9 @@ catch(PDOException $e)
               <?php if($row["b_hrCheck"]=='簽核中') {?>
                 <td colspan="2"></td> <?php  }
               else{?>
-                <td style="width:35px"><a href="../Controller/approve.php?a=yes&b=btrip&c=boss&id=<?php echo $row["id"];?>">
+                <td><a href="../Controller/approve.php?yesNO=yes&table=btrip&who=boss&id=<?php echo $row["id"];?>">
                 <i class="material-icons" style="font-size:15px">check</i></a></td>
-                <td style="width:35px"><a href="../Controller/approve.php?a=no&b=btrip&c=boss&id=<?php echo $row["id"];?>">
+                <td><a href="../Controller/approve.php?yesNO=no&table=btrip&who=boss&id=<?php echo $row["id"];?>">
                 <i class="material-icons" style="font-size:15px">clear</i></a></td> <?php }?>
   					</tr>
 					<?php }} ?>
@@ -190,16 +190,17 @@ catch(PDOException $e)
 				<div style="margin-left:10px">
           <p style="font-size:18px;font-family:Microsoft JhengHei">簽核完成名單</p>
 					<table cellspacing="0">
-						<th>申請人</th>
-						<th>公差時間</th>
-						<th>開始時間</th>
-						<th>結束時間</th>
-						<th>時數</th>
-						<th>公差地點</th>
-						<th>公差事由</th>
-						<th>備註</th>
-						<th>人資簽核</th>
-						<th>老闆簽核</th>
+            <th style="min-width:30px"></th>
+						<th style="min-width:70px">申請人</th>
+						<th style="min-width:200px">公差時間</th>
+						<th style="min-width:70px">開始時間</th>
+						<th style="min-width:70px">結束時間</th>
+						<th style="min-width:45px">時數</th>
+						<th style="min-width:70px">公差地點</th>
+						<th style="min-width:150px;width:150px">公差事由</th>
+						<th style="min-width:150px;width:150px">備註</th>
+						<th style="min-width:70px">人資簽核</th>
+						<th style="min-width:70px">老闆簽核</th>
 					<?php
             $sql = "SELECT * FROM business";
             $result = mysqli_query($conn,$sql);
@@ -208,16 +209,17 @@ catch(PDOException $e)
               || (($row2["b_hrCheck"]!='簽核中') AND ( $row2["b_bossCheck"]!='簽核中'))  ){
           ?>
 						<tr>
-						<td style="width:70px"><?php echo $row2["b_name"]; ?></td>
-						<td style="width:215px"><?php echo $row2["b_startDate"]; ?>~<?php echo $row2["b_endDate"];?></td>
-						<td style="width:70px"><?php echo substr($row2["b_startTime"],0,-3);?></td>
-						<td style="width:70px"><?php echo substr($row2["b_endTime"],0,-3);?></td>
-						<td style="width:45px"><?php echo $row2["b_totalTime"]?></td>
-						<td style="width:70px"><?php echo $row2["b_location"];?></td>
-						<td style="width:200px"><?php echo $row2["b_state"];?></td>
-						<td style="width:200px"><?php echo $row2["b_comment"];?></td>
-            <td style="width:50px"><?php echo $row2["b_hrCheck"]; ?></td>
-            <td style="width:50px"><?php echo $row2["b_bossCheck"]; ?></td>
+            <td><a href="../Controller/delete_bTrip.php?id=<?php echo $row2["id"]; ?>"><i class="material-icons" style="font-size:30px;color:#CCC;margin-top:4px">delete</i></a></td>
+						<td><?php echo $row2["b_name"]; ?></td>
+						<td><?php echo $row2["b_startDate"]; ?>~<?php echo $row2["b_endDate"];?></td>
+						<td><?php echo substr($row2["b_startTime"],0,-3);?></td>
+						<td><?php echo substr($row2["b_endTime"],0,-3);?></td>
+						<td><?php echo $row2["b_totalTime"]?></td>
+						<td><?php echo $row2["b_location"];?></td>
+						<td><?php echo $row2["b_state"];?></td>
+						<td><?php echo $row2["b_comment"];?></td>
+            <td><?php echo $row2["b_hrCheck"]; ?></td>
+            <td><?php echo $row2["b_bossCheck"]; ?></td>
 						</tr>
 					<?php }} ?>
 					</table>
