@@ -184,7 +184,7 @@ catch(PDOException $e)
   						<td><?php echo $row["b_comment"];?></td>
               <?php if($row["b_hrCheck"]=='簽核中') {?>
               <td>
-                <a href="../Controller/approve.php?yesNO=yes&table=btrip&who=hr&id=<?php echo $row["id"];?>">
+                <a href="../Controller/approve.php?yesNO=yes&table=btrip&who=hr&id=<?php echo $row["id"];?>&name=<?php echo $row["b_name"]; ?>">
                 <i class="material-icons" style="font-size:15px">check</i></a></td>
               <td style="width:35px" id="cancleCkeck"  class="fancybox" 
                  person=<?php echo $row['id'];?> name=<?php echo $row['b_name'];?> startDate=<?php echo $row['b_startDate'];?> endDate=<?php echo $row['b_endDate'];?> startTime=<?php echo $row['b_startTime'];?> endTime=<?php echo $row['b_endTime'];?> totalTime=<?php echo $row['b_totalTime'];?> location=<?php echo $row['b_location']?> hrCheck=<?php echo $row['b_hrCheck'];?> yesNO=no table=btrip who=hr>  
@@ -195,7 +195,7 @@ catch(PDOException $e)
               <?php if($row["b_hrCheck"]=='簽核中') {?>
                 <td colspan="2"></td> <?php  }
               else{?>
-                <td><a href="../Controller/approve.php?yesNO=yes&table=btrip&who=boss&id=<?php echo $row["id"];?>">
+                <td><a href="../Controller/approve.php?yesNO=yes&table=btrip&who=boss&id=<?php echo $row["id"];?>&name=<?php echo $row["b_name"]; ?>">
                 <i class="material-icons" style="font-size:15px">check</i></a></td>
                 <td style="width:35px" id="cancleCkeck"  class="fancybox" 
                  person=<?php echo $row['id'];?> name=<?php echo $row['b_name'];?> startDate=<?php echo $row['b_startDate'];?> endDate=<?php echo $row['b_endDate'];?> startTime=<?php echo $row['b_startTime'];?> endTime=<?php echo $row['b_endTime'];?> totalTime=<?php echo $row['b_totalTime'];?> location=<?php echo $row['b_location']?> hrCheck=<?php echo $row['b_hrCheck'];?> bossCheck=<?php echo $row['b_bossCheck']?> yesNO=no table=btrip who=boss>                
