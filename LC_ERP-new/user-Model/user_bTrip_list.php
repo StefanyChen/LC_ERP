@@ -35,6 +35,9 @@ catch(PDOException $e)
   tr:hover{
   	background-color:#FFEFD5;
   }
+  table{
+    width:100%;
+  }
 </style>
 	<title>一般員工</title>
 	<meta charset="UTF-8">
@@ -123,32 +126,34 @@ catch(PDOException $e)
           </div>
   			</div>
 <!--  右下欄上方選擇列 結束   -->
-  			<div>
-    			<table cellspacing="0">
-    				<th>申請人</th>
-    				<th>公差時間</th>
-    				<th>開始時間</th>
-    				<th>結束時間</th>
-    				<th>時數</th>
-    				<th>公差地點</th>
-    				<th>公差事由</th>
-    				<th>備註</th>
-    				<th>人資確認</th>
-    				<th>老闆確認</th>
+  			<div  style="margin-left:10px;margin-right:10px">
+    			<table cellspacing="0"  style="border:solid 2px white ">
+            <tr>
+            <th style="min-width:7.5%;width:7.5%">申請人</th>
+    				<th style="min-width:21%;width:21%">公差時間</th>
+    				<th style="min-width:8%;width:8%">開始時間</th>
+    				<th style="min-width:8%;width:8%">結束時間</th>
+    				<th style="min-width:5%;width:5%">時數</th>
+    				<th style="min-width:7.5%;width:7.5%">公差地點</th>
+    				<th style="min-width:14%;width:14%">公差事由</th>
+    				<th style="min-width:14%;width:14%">備註</th>
+            <th style="min-width:7.5%;width:7.5%">人資確認</th>
+    				<th style="min-width:7.5%;width:7.5%">老闆確認</th>
+            </tr>
       			<?php
       			while($row = mysqli_fetch_array($result)) {
       			?>
   			    <tr>
-      				<td style="width:70px"><?php echo $row["b_name"]; ?></td>
-      				<td style="width:215px"><?php echo $row["b_startDate"]?>~<?php echo $row["b_endDate"];?></td>
-      				<td style="width:70px"><?php echo $row["b_startTime"];?></td>
-      				<td style="width:70px"><?php echo $row["b_endTime"];?></td>
-      				<td style="width:45px"><?php echo $row["b_totalTime"]?></td>
-      				<td style="width:70px"><?php echo $row["b_location"];?></td>
-      				<td style="width:200px"><?php echo $row["b_state"];?></td>
-      				<td style="width:200px"><?php echo $row["b_comment"];?></td>
-      				<td style="width:70px"><?php echo $row["b_hrCheck"]; ?></td>
-      				<td style="width:70px"><?php echo $row["b_bossCheck"]; ?></td>
+      				<td><?php echo $row["b_name"]; ?></td>
+      				<td><?php echo $row["b_startDate"]?>~<?php echo $row["b_endDate"];?></td>
+      				<td><?php echo substr($row["b_startTime"],0,-3);?></td>
+      				<td><?php echo substr($row["b_endTime"],0,-3);?></td>
+      				<td><?php echo $row["b_totalTime"]?></td>
+      				<td><?php echo $row["b_location"];?></td>
+      				<td><?php echo $row["b_state"];?></td>
+      				<td><?php echo $row["b_comment"];?></td>
+      				<td><?php echo $row["b_hrCheck"]; ?></td>
+      				<td><?php echo $row["b_bossCheck"]; ?></td>
       			</tr>
     			  <?php } ?>
     			</table>

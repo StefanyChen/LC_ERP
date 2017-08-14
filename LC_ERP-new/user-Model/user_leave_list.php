@@ -33,6 +33,9 @@ catch(PDOException $e)
   tr:hover{
   	background-color:#FFEFD5;
   }
+  table{
+    width:100%;
+  }
 </style>
 </head>
 <body>
@@ -123,32 +126,32 @@ catch(PDOException $e)
           </div>
         </div>
 <!--  右下欄上方選擇列 結束   -->
-			  <div>
-      		<table cellspacing="0">
-            <th>申請人</th>
-      			<th>請假時間</th>
-      			<th>開始時間</th>
-      			<th>結束時間</th>
-      			<th>類別</th>
-      			<th>時數</th>
-      			<th>請假事由</th>
-      			<th>備註</th>
-      			<th>人資確認</th>
-      			<th>老闆確認</th>
+			  <div style="margin-left:10px;margin-right:10px">
+      		<table cellspacing="0" style="border:solid 2px white ">
+            <th style="min-width:7.5%;width:7.5%">申請人</th>
+      			<th style="min-width:21%;width:21%">請假時間</th>
+      			<th style="min-width:8%;width:8%">開始時間</th>
+      			<th style="min-width:8%;width:8%">結束時間</th>
+      			<th style="min-width:5%;width:5%">類別</th>
+      			<th style="min-width:5%;width:5%">時數</th>
+      			<th style="min-width:15%;width:15%">請假事由</th>
+      			<th style="min-width:15%;width:15%">備註</th>
+      			<th style="min-width:7.5%;width:7.5%">人資確認</th>
+      			<th style="min-width:8%;width:8%">老闆確認</th>
         		<?php
         		while($row = mysqli_fetch_array($result)) {
         		?>
             <tr>
-        			<td style="width:70px"><?php echo $row["l_name"]; ?></td>
-        			<td style="width:215px"><?php echo $row["l_startDate"]; ?>~<?php echo $row["l_endDate"];?></td>
-        			<td style="width:70px"><?php echo $row["l_startTime"];?></td>
-        			<td style="width:70px"><?php echo $row["l_endTime"];?></td>
-        			<td style="width:45px"><?php echo $row["l_type"]?></td>
-        			<td style="width:45px"><?php echo $row["l_hrs"];?></td>
-        			<td style="width:200px"><?php echo $row["l_state"];?></td>
-        			<td style="width:200px"><?php echo $row["l_comment"];?></td>
-        			<td style="width:70px"><?php echo $row["l_hrCheck"]; ?></td>
-        			<td style="width:70px"><?php echo $row["l_bossCheck"]; ?></td>
+        			<td><?php echo $row["l_name"]; ?></td>
+        			<td><?php echo $row["l_startDate"]; ?>~<?php echo $row["l_endDate"];?></td>
+        			<td><?php echo substr($row["l_startTime"],0,-3);?></td>
+        			<td><?php echo substr($row["l_endTime"],0,-3);?></td>
+        			<td><?php echo $row["l_type"]?></td>
+        			<td><?php echo $row["l_hrs"];?></td>
+        			<td><?php echo $row["l_state"];?></td>
+        			<td><?php echo $row["l_comment"];?></td>
+        			<td><?php echo $row["l_hrCheck"]; ?></td>
+        			<td><?php echo $row["l_bossCheck"]; ?></td>
         		</tr>
         		<?php } ?>
 		      </table>
@@ -169,7 +172,7 @@ catch(PDOException $e)
 		    echo $sql . "<br>" . $e->getMessage();
 		    }
 		 $row = mysqli_fetch_array($result) ?>
-          <table cellspacing="0" style="border:solid 1px white;margin-top:10px;float:right;">
+          <table cellspacing="0" style="border:solid 2px white;margin-top:10px;float:right;">
         		<td style="width:110px">補休:<?php echo $row["SUM(`l_compensatoryLevae`)"]; ?>  hrs</td>
         		<td style="width:110px">特休:<?php echo $row["SUM(`l_annualLeave`)"];?>  hrs</td>
         		<td style="width:110px">婚/產假:<?php echo $row["SUM(`l_marriageLeave`)"];?>  hrs</td>

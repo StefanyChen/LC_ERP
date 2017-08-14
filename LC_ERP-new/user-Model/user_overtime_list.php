@@ -35,6 +35,9 @@ catch(PDOException $e)
   tr:hover{
   	background-color:#FFEFD5;
   }
+  table{
+    width: 100%;
+  }
 </style>
 </head>
 <body>
@@ -125,55 +128,57 @@ catch(PDOException $e)
           </div>
         </div>
   <!--  右下欄上方選擇列 結束   -->
-			  <div>
-		      <table cellspacing="0">
-      			<th>申請人</th>
-      			<th>加班日期</th>
-      			<th>開始時間</th>
-      			<th>結束時間</th>
-      			<th>申請加班費時數</th>
-      			<th>申請補修時數</th>
-      			<th>加班事由</th>
-      			<th>備註</th>
-      			<th>人資確認</th>
-      			<th>老闆確認</th>
+			  <div  style="margin:10px 10px">
+		      <table cellspacing="0"  style="border:solid 2px white ">
+      			<th style="min-width:9%;width:9%">申請人</th>
+      			<th style="min-width:11%;width:11%">加班日期</th>
+      			<th style="min-width:8%;width:8%">開始時間</th>
+      			<th style="min-width:8%;width:8%">結束時間</th>
+      			<th style="min-width:9%;width:9%">加班費時數</th>
+      			<th style="min-width:8%;width:8%">補修時數</th>
+      			<th style="min-width:16%;width:16%">加班事由</th>
+      			<th style="min-width:15%;width:15%">備註</th>
+      			<th style="min-width:8%;width:8%">人資確認</th>
+      			<th style="min-width:8%;width:8%">老闆確認</th>
         		<?php
         		while($row = mysqli_fetch_array($result)) {
         		?>
         		<tr>
-        			<td style="width:70px"><?php echo $row["o_name"]; ?></td>
-        			<td style="width:105px"><?php echo $row["o_date"]; ?></td>
-        			<td style="width:70px"><?php echo $row["o_start"];?></td>
-        			<td style="width:70px"><?php echo $row["o_end"];?></td>
-        			<td style="width:70px"><?php echo $row["o_hrs"];?></td>
-        			<td style="width:70px"><?php echo $row["o_phrs"]?></td>
-        			<td style="width:200px"><?php echo $row["o_state"]?></td>
-        			<td style="width:200px"><?php echo $row["o_comment"];?></td>
-        			<td style="width:70px"><?php echo $row["o_hrCheck"]; ?></td>
-        			<td style="width:70px"><?php echo $row["o_bossCheck"]; ?></td>
+        			<td><?php echo $row["o_name"]; ?></td>
+        			<td><?php echo $row["o_date"]; ?></td>
+        			<td><?php echo substr($row["o_start"],0,-3);?></td>
+        			<td><?php echo substr( $row["o_end"],0,-3);?></td>
+        			<td><?php echo $row["o_hrs"];?></td>
+        			<td><?php echo $row["o_phrs"]?></td>
+        			<td><?php echo $row["o_state"]?></td>
+        			<td><?php echo $row["o_comment"];?></td>
+        			<td><?php echo $row["o_hrCheck"]; ?></td>
+        			<td><?php echo $row["o_bossCheck"]; ?></td>
         		</tr>
-        		<?php } ?>
-		      </table>
+          <?php } ?>
+          </table>
+          <?php
+          $servername = "localhost";
+          $username = "root";
+          $password = "root";
+          $dbname = "peopleresource";
+          try {
+              $conn = mysqli_connect($servername,$username ,$password,$dbname);
+              $sql = "SELECT SUM(`o_hrs`),SUM(`o_phrs`) FROM `overtime_apply` WHERE o_name='".$_SESSION['name']."'";
+              // use exec() because no results are returned
+              $result2 = mysqli_query($conn,$sql);
+              }
+          catch(PDOException $e)
+              {
+              echo $sql . "<br>" . $e->getMessage();
+              }
+           $row2 = mysqli_fetch_array($result2); ?>
+           <table cellspacing="0" style="border:solid 1px white ">
+            <tr>
+           <td colspan="5" style="border-top:solid 2px white;border-bottom:solid 2px white">加班費總時數:<?php echo $row2["SUM(`o_hrs`)"]; ?></td>
+           <td colspan="5" style="border-top:solid 2px white;border-bottom:solid 2px white">補修總時數:<?php echo $row2["SUM(`o_phrs`)"]; ?></td>
+            </tr>
+          </table>
 <!-- 第一個表格結束  -->
-		<?php
-		$servername = "localhost";
-		$username = "root";
-		$password = "root";
-		$dbname = "peopleresource";
-		try {
-		    $conn = mysqli_connect($servername,$username ,$password,$dbname);
-		    $sql = "SELECT SUM(`o_hrs`),SUM(`o_phrs`) FROM `overtime_apply` WHERE o_name='".$_SESSION['name']."'";
-		    // use exec() because no results are returned
-		    $result = mysqli_query($conn,$sql);
-		    }
-		catch(PDOException $e)
-		    {
-		    echo $sql . "<br>" . $e->getMessage();
-		    }
-		 $row = mysqli_fetch_array($result); ?>
-		      <table cellspacing="0" style="border:solid 1px white;margin-top:10px;float:right;">
-        		<td style="width:200px">加班費總時數:<?php echo $row["SUM(`o_hrs`)"]; ?></td>
-        		<td style="width:200px">補修總時數:<?php echo $row["SUM(`o_phrs`)"]; ?></td>
-        	</table>
 	</body>
 </html>
