@@ -35,7 +35,7 @@ a:active {
 	margin:auto;
 }
 .left{
-	width:15%;
+	width:17%;
 	height:auto;
 	background-color:white;
 	margin:auto;
@@ -83,7 +83,7 @@ a:active {
 	background-color: #FFDDAA;
 }
 .right{
-	width:85%;
+	width:83%;
 	height:auto;
 	background-color:#F5F5F5;
 	margin:auto;
@@ -130,7 +130,6 @@ table{
 	font-family:Microsoft JhengHei;
 	font-size:16px;
 	line-height:30px;
-	table-layout:fixed;
 	word-wrap:break-word;
 	word-break: break-all;
 }
