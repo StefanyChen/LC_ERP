@@ -36,10 +36,39 @@ th{
 }
 </style>
 <script src='http://code.jquery.com/jquery-1.9.1.js'></script>
+<script src="../js/notyf.min.js" type="text/javascript"></script>
 <script src='http://code.jquery.com/ui/1.10.3/jquery-ui.js'></script>
 <script src='fullcalendar_drag/js/fullcalendar.min.js'></script>
 <script src='fullcalendar_drag/js/jquery.fancybox-1.3.1.pack.js'></script>
 <script src='fullcalendar_drag/js/jquery.form.min.js'></script>
+<link rel="stylesheet" type="text/css" href="../css/notyf.min.css">
+<script language="JavaScript">
+function notyf(){
+<?php include "test.php" ?>
+var notyf = new Notyf({delay:5000});
+
+if("<?php echo $row['businessMsg']?>" !=""){
+notyf.confirm("<?php echo $row['businessMsg']?>");
+}
+if("<?php echo $row['overTimeMsg']?>" !=""){
+notyf.confirm("<?php echo $row['overTimeMsg']?>");
+}
+if("<?php echo $row['leaveMsg']?>" !=""){
+notyf.confirm("<?php echo $row['leaveMsg']?>");
+}
+if("<?php echo $row['returnBusinessMsg']?>" !=""){
+notyf.alert("<?php echo $row['returnBusinessMsg']?>");
+}
+if("<?php echo $row['returnOvertimeMsg']?>" !=""){
+notyf.alert("<?php echo $row['returnOvertimeMsg']?>");
+}
+if("<?php echo $row['returnLeaveMsg']?>" !=""){
+notyf.alert("<?php echo $row['returnLeaveMsg']?>");
+}
+setTimeout("<?php include '../Controller/refreshMsg.php' ?>",50000);
+}
+</script>
+
 <script type="text/javascript">
 $(function() {
 	$('#calendar').fullCalendar({
@@ -93,11 +122,12 @@ $(function() {
 			});
 		}
 	});
-
 });
 </script>
 </head>
-<body>
+<body >
+	<script>notyf();</script>
+	
 	<div class="top">
 			<img class="titleImg" src="http://www.lctech.com.tw/wp-content/uploads/bfi_thumb/%E6%9C%AA%E5%91%BD%E5%90%8D-1-%E6%8B%B7%E8%B2%9D-31w65e1o8bhj94p9q5patm@2x.png" width="50" height="50">
 		<a href="../Controller/log_logout.php">
@@ -173,5 +203,7 @@ $(function() {
 
 		</div><!--   右欄 RIGHT 結束    -->
 	</div><!--    下欄 DOWN 結束    -->
+
+
 </body>
 </html>
