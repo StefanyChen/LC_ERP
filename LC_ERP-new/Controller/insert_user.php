@@ -59,18 +59,29 @@ $e_type=$_POST['e_type'];
 $e_status=$_POST['e_status'];
 $e_location=$_POST['e_location'];
 $e_extension=$_POST['e_extension'];
+$a_root=$_POST['a_root'];
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn = mysqli_connect($servername,$username ,$password,$dbname);
 
-    $sql = "INSERT INTO `employees`(`e_sn`, `e_date`, `e_name_cn`, `e_name_en`, `e_sex`, `e_birth`, `e_personalID`, `e_marriage`, `e_blood`, `e_address`, `e_mobile`, `e_email`, `e_emergency`, `e_em_mobile`, `e_edu`, `e_edu_high`, `e_edu_dep`, `e_edu_start`, `e_edu_end`, `e_edu_gra`, `e_exp_com1`, `e_exp_posi1`, `e_exp_start1`, `e_exp_reason1`, `e_license`, `e_exp_end1`, `e_exp_com2`, `e_exp_posi2`, `e_exp_start2`, `e_exp_end2`, `e_exp_reason2`, `e_exp_com3`, `e_exp_posi3`, `e_exp_start3`, `e_exp_end3`, `e_exp_reason3`, `e_exp_com4`, `e_exp_posi4`, `e_exp_start4`, `e_exp_end4`, `e_exp_reason4`, `e_exp_com5`, `e_exp_posi5`, `e_exp_start5`, `e_exp_end5`, `e_exp_reason5`, `e_type`, `e_status`, `e_location`, `e_extension`)
-	VALUES ('$e_sn', '$e_date','$e_name_cn', '$e_name_en', '$e_sex','$e_birth','$e_personalID','$e_marriage','$e_blood','$e_address','$e_mobile','$e_email','$e_emergency','$e_em_mobile','$e_edu','$e_edu_high','$e_edu_dep','$e_edu_start','$e_edu_end','$e_edu_gra','$e_exp_com1', '$e_exp_posi1','$e_exp_start1','$e_exp_reason1', '$e_license','$e_exp_end1','$e_exp_com2', '$e_exp_posi2','$e_exp_start2','$e_exp_end2', '$e_exp_reason2', '$e_exp_com3', '$e_exp_posi3', '$e_exp_start3', '$e_exp_end3','$e_exp_reason3','$e_exp_com4', '$e_exp_posi4', '$e_exp_start4', '$e_exp_end4', '$e_exp_reason4','$e_exp_com5','$e_exp_posi5','$e_exp_start5','$e_exp_end5', '$e_exp_reason5','$e_type','$e_status','$e_location', '$e_extension');";
+    $sql = "INSERT INTO  `employees` (e_sn, e_date, e_name_cn, e_name_en, e_sex, e_birth, e_personalID, e_marriage, e_blood,
+      e_address, e_mobile, e_email, e_emergency, e_em_mobile, e_edu, e_edu_high, e_edu_dep, e_edu_start, e_edu_end, e_edu_gra,
+      e_exp_com1, e_exp_posi1, e_exp_start1, e_exp_reason1, e_license, e_exp_end1, e_exp_com2, e_exp_posi2,
+      e_exp_start2, e_exp_end2, e_exp_reason2, e_exp_com3, e_exp_posi3, e_exp_start3, e_exp_end3, e_exp_reason3,
+      e_exp_com4, e_exp_posi4, e_exp_start4, e_exp_end4, e_exp_reason4, e_exp_com5, e_exp_posi5, e_exp_start5,
+      e_exp_end5, e_exp_reason5, e_type, e_status, e_location, e_extension)
+	     VALUES ('$e_sn', '$e_date','$e_name_cn', '$e_name_en', '$e_sex','$e_birth','$e_personalID','$e_marriage','$e_blood',
+         '$e_address','$e_mobile','$e_email','$e_emergency','$e_em_mobile','$e_edu','$e_edu_high','$e_edu_dep','$e_edu_start',
+         '$e_edu_end','$e_edu_gra','$e_exp_com1', '$e_exp_posi1','$e_exp_start1','$e_exp_reason1', '$e_license','$e_exp_end1',
+         '$e_exp_com2', '$e_exp_posi2','$e_exp_start2','$e_exp_end2', '$e_exp_reason2', '$e_exp_com3', '$e_exp_posi3', '$e_exp_start3',
+          '$e_exp_end3','$e_exp_reason3','$e_exp_com4', '$e_exp_posi4', '$e_exp_start4', '$e_exp_end4', '$e_exp_reason4','$e_exp_com5',
+          '$e_exp_posi5','$e_exp_start5','$e_exp_end5', '$e_exp_reason5','$e_type','$e_status','$e_location', '$e_extension');";
 
-	$_SESSION['temp'] = $e_sn;
-    // use exec() because no results are returned
-    $conn->exec($sql);
+    mysqli_query($conn,$sql);
+	  $_SESSION['temp'] = $e_sn;
+
+    $sql = "INSERT INTO `account` (a_root,a_name,a_sn) VALUES('$a_root','$e_name_cn','$e_sn');";
+    mysqli_query($conn,$sql);
     header("Location:../admin-Model/admin_addProfile.php");
     }
 catch(PDOException $e)
