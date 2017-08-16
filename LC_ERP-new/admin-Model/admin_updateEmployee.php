@@ -9,20 +9,27 @@
 	} ?>
 <!DOCTYPE html>
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "peopleresource";
-try {
-    $conn = mysqli_connect($servername,$username ,$password,$dbname);
-    $sql = "SELECT * FROM `employees` WHERE e_sn = '".$_GET['e_sn']."'";
-    // use exec() because no results are returned
-    $result = mysqli_query($conn,$sql);
-    }
-catch(PDOException $e)
-    {
-    echo $sql . "<br>" . $e->getMessage();
-    }
+    $servername = "localhost";
+    $username = "root";
+    $password = "root";
+    $dbname = "peopleresource";
+    try {
+        $conn = mysqli_connect($servername,$username ,$password,$dbname);
+        $sql = "SELECT * FROM `employees` WHERE e_sn = '".$_GET['e_sn']."'";
+        // use exec() because no results are returned
+        $result = mysqli_query($conn,$sql);
+        $row = mysqli_fetch_array($result);
+
+        $sql = "SELECT * FROM `account` WHERE a_sn = '".$_GET['e_sn']."'";
+        // use exec() because no results are returned
+        $result1 = mysqli_query($conn,$sql);
+        $row1 = mysqli_fetch_array($result1);
+
+        }
+    catch(PDOException $e)
+        {
+        echo $sql . "<br>" . $e->getMessage();
+        }
 ?>
 <html>
 <head>
@@ -32,38 +39,74 @@ catch(PDOException $e)
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<style>
- 		table{
-   		width:95% ;
-   		margin:auto;
-   		margin-top:30px;
-		}
-		th{
-		padding:0;
-		margin:0;
-		background-color:#F4A460;
-		text-align:center;
-		font-size:20px;
-		line-height:40px ;
-		width:15%;
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+  <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  <script>
+  $(function(){
+    var today = new Date();
+    var tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
+    $('.end').datepicker();
+    $('.start').datepicker();
+  });
+  $.datepicker.setDefaults({ dateFormat: 'yy-mm-dd' });
 
-		}
-		td{
-			text-align: left;
-			padding:0;
-			width:15%;
-		}
-		tr{
-			height:38px;
+  function showStuff(id, btn) {
+    if(document.getElementById(id).style.display == 'none')
+    {
+      document.getElementById(id).style.display = 'block';
+      btn.style.display="none";
+    }
+    else{
 
-		}
-		input{
-			background-color:transparent;
-			font-family:Microsoft JhengHei;
-			font-size:18px;
-			margin-right:0px;
-		}
-</style>
+    }}
+  </script>
+  <style >
+    td{
+      text-align: left;
+      font-size: 14px;
+      width:550px;
+      padding-left: 10px;
+      height: 20%;
+    }
+    input,textarea,select{
+       font-size:16px;
+       font-family:Microsoft JhengHei;
+       background-color:	#FCFCFC;
+       border:solid 0.5px #CCC;
+       border-radius: 5px;
+       padding-left: 10px;
+    }
+    table{
+      width:90%;
+      margin: auto;
+    }
+    input:focus,select:focus{
+      border:solid 2px 	#FF8000;
+      border-radius: 5px;
+      outline: none;
+    }
+    .addButton{
+      background-color: #FF8040;
+      border:0px;
+      color: white;
+      font-weight: 600;
+      padding-left: 5px;
+    }
+    .form{
+      margin-top: 40px;
+      margin-left: 80px;
+      margin-right: 80px;
+      background-color:white;
+      border-radius:3px;
+      padding-bottom:30px;
+      padding-top:20px
+    }
+    .tdtitle{
+      color:#666666;
+      font-size:12px
+    }
+  </style>
 </head>
 <body>
   <div class="top">
@@ -147,51 +190,39 @@ catch(PDOException $e)
 			</div>
 <!--    右上欄 RIGHT-TOP 結束    -->
 			<div class="right-bottom">
-			  <form method="post" action="update_user.php">
-				  <table>
-          <?php
-						while($row = mysqli_fetch_array($result)) {
-					?>
-					<tr>
-						<th colspan="6">員工基本資料</th>
-					</tr>
-					<tr>
-						<td colspan="2"><i class="fa fa-star" style="font-size:17px;color:red"></i>員工編號：<input type="text" name="e_sn" size="4" value="<?php echo $row["e_sn"];?>"></td>
-						<td colspan="2"><i class="fa fa-star" style="font-size:17px;color:red"></i>到職日期：<input type="date" name="e_date" size="1" value="<?php echo $row["e_date"];?>"></td>
-	<!-- 人員大頭貼  --><td colspan="2" rowspan="4"></td>
-					</tr>
-					<tr>
-						<td colspan="2"><i class="fa fa-star" style="font-size:17px;color:red"></i>中文姓名：<input type="text" name="e_name_cn" size="12" value="<?php echo $row["e_name_cn"];?>"></td>
-						<td><i class="fa fa-star" style="font-size:17px;color:red"></i>性別：
-              <?php switch ($row["e_sex"]) {
-                case '男':?>
-                  <input type="radio" name="e_sex" value="男" checked>男  <input type="radio" name="e_sex" value="女">女
-                  <?php break;
-                case '女':?>
-                  <input type="radio" name="e_sex" value="男">男  <input type="radio" name="e_sex" value="女" checked>女
-                  <?php break;
-                default:
-                  break; }?>
-                </td>
-						<td><i class="fa fa-star" style="font-size:17px;color:red"></i>手機：<input type="text" name="e_mobile" size="10" vaule="<?php echo $row["e_mobile"];?>"></td>
-					</tr>
-					<tr>
-						<td colspan="2"><i class="fa fa-star" style="font-size:17px;color:red"></i>英文姓名：<input type="text" name="e_name_en" size="12" value="<?php echo $row["e_name_en"];?>"></td>
-						<td colspan="2"><i class="fa fa-star" style="font-size:17px;color:red"></i>ID：<input type="text" name="e_personalID" size="12" value="<?php echo $row["e_personalID"];?>"></td>
-					</tr>
-					<tr>
-						<td colspan="2"><i class="fa fa-star" style="font-size:17px;color:red"></i>婚姻：
-              <?php   switch ($row["e_marriage"]) {
-                case '已婚':?>
-                  <input type="radio" name="e_marriage" value="已婚" checked>已婚  <input type="radio" name="e_marriage" value="未婚">未婚<?php
-                  break;
-                case '未婚':?>
-                  <input type="radio" name="e_marriage" value="已婚">已婚  <input type="radio" name="e_marriage" value="未婚" checked>未婚<?php
-                  break;
-                default:
-                  break;
-              } ?></td>
-						<td colspan="2"><i class="fa fa-star" style="font-size:17px;color:red"></i>血型：<?php
+			  <form method="post" action="../Controller/update_user.php">
+
+        <div class="form">
+          <table  cellspacing="0" style="margin-top:10px;">
+          <td  style="font-size:20px;font-weight:550" colspan="2">員工基本資料</td>
+          <tr><td class="tdtitle">員工編號<br><input type="text" name="e_sn" style="width:90%" value="<?php echo $row["e_sn"];?>"></td>
+          <td><span class="tdtitle">到職日期<br /></span><input type="text" class="start" name="e_date" style="width:90%" value="<?php echo $row["e_date"];?>"></td></tr>
+          <tr><td class="tdtitle">中文姓名<br /><input type="text" name="e_name_cn" style="width:90%" value="<?php echo $row["e_name_cn"];?>"></td>
+          <td class="tdtitle">英文姓名<br /><input type="text" name="e_name_en" style="width:90%" value="<?php echo $row["e_name_en"];?>"></td></tr>
+          <tr><td><span class="tdtitle">性別<br /></span>
+            <?php switch ($row["e_sex"]) {
+              case '男':?>
+                <input type="radio" name="e_sex" value="男" checked>男  <input type="radio" name="e_sex" value="女">女
+                <?php break;
+              case '女':?>
+                <input type="radio" name="e_sex" value="男">男  <input type="radio" name="e_sex" value="女" checked>女
+                <?php break;
+              default:
+                break; }?></td>
+          <td><span class="tdtitle">婚姻<br /></span>
+            <?php   switch ($row["e_marriage"]) {
+              case '已婚':?>
+                <input type="radio" name="e_marriage" value="已婚" checked>已婚  <input type="radio" name="e_marriage" value="未婚">未婚<?php
+                break;
+              case '未婚':?>
+                <input type="radio" name="e_marriage" value="已婚">已婚  <input type="radio" name="e_marriage" value="未婚" checked>未婚<?php
+                break;
+              default:
+                break;
+            } ?></td></tr>
+          <tr>
+          <td><span class="tdtitle">血型<br /></span>
+            <?php
             switch ($row["e_blood"]) {
               case 'A':?>
                 <input type="radio" name="e_blood" value="A" checked>A  <input type="radio" name="e_blood" value="B">B  <input type="radio" name="e_blood" value="O">O  <input type="radio" name="e_blood" value="AB">AB
@@ -206,30 +237,22 @@ catch(PDOException $e)
                 <input type="radio" name="e_blood" value="A">A  <input type="radio" name="e_blood" value="B">B  <input type="radio" name="e_blood" value="O">O  <input type="radio" name="e_blood" value="AB" checked>AB
                 <?php break;
               default:
-                break;            }?>  </td>
-					</tr>
-					<tr>
-						<td colspan="3"><i class="fa fa-star" style="font-size:17px;color:red"></i>通訊地址：<input type="text" name="e_address" size="35" value="<?php echo $row["e_address"];?>"></td>
-						<td colspan="3"><i class="fa fa-star" style="font-size:17px;color:red"></i>郵件信箱：<input type="email" name="e_email" size="35" value="<?php echo $row["e_email"];?>"></td>
-					</tr>
-					<tr>
-						<td colspan="2"><i class="fa fa-star" style="font-size:17px;color:red"></i>生日：<input type="date" name="e_birth" size="1" value="<?php echo $row["e_birth"];?>"></td>
-						<td colspan="2"><i class="fa fa-star" style="font-size:17px;color:red"></i>緊急聯絡人：<input type="text" name="e_emergency" size="12" value="<?php echo $row["e_emergency"];?>"></td>
-						<td colspan="2"><i class="fa fa-star" style="font-size:17px;color:red"></i>緊急聯絡人手機：<input type="text" name="e_em_mobile" size="16" value="<?php echo $row["e_em_mobile"];?>"></td>
-					</tr>
-					<tr>
-						<th colspan="6" style=" ;"><i class="fa fa-star" style="font-size:17px;color:red"></i>學歷</th>
-					</tr>
-						<tr>
-						<th style="font-size:15px;background-color:#F5F5F5; ">最高學歷</th>
-						<th style="font-size:15px;background-color:#F5F5F5; ">學校</th>
-						<th style="font-size:15px;background-color:#F5F5F5; ">科系</th>
-						<th colspan="2" style="font-size:15px;background-color:#F5F5F5; ">期間</th>
-						<th colspan="2" style="font-size:15px;background-color:#F5F5F5; ">畢/肄/在學</th>
-					</tr>
-<!-- 學歷表格  -->	<tr>
-						<td >
-						<select name="e_edu">
+                break;     }?>  </td>
+          <td class="tdtitle">生日<br /><input type="text" class="start" name="e_birth" style="width:90%" value="<?php echo $row["e_birth"];?>"></td></tr>
+          <tr><td class="tdtitle">手機<br /><input type="text" name="e_mobile" style="width:90%" value="<?php echo $row['e_mobile'];?>"></td>
+          <td class="tdtitle">身分證字號<br /><input type="text" name="e_personalID" style="width:90%" value="<?php echo $row["e_personalID"];?>"></td></tr>
+          <tr><td colspan="2" class="tdtitle">通訊地址<br /><input type="text" name="e_address"style="width:95.1%" value="<?php echo $row["e_address"];?>"></td></tr>
+          <tr><td colspan="2" class="tdtitle">郵件信箱<br /><input type="email" name="e_email" style="width:95.1%" value="<?php echo $row["e_email"];?>"></td></tr>
+          <tr><td class="tdtitle">緊急聯絡人<br /><input type="text" name="e_emergency" style="width:90%" value="<?php echo $row["e_emergency"];?>"></td>
+          <td class="tdtitle">緊急聯絡人手機<br /><input type="text" name="e_em_mobile" style="width:90%" value="<?php echo $row["e_em_mobile"];?>"></td></tr>
+        </table>
+      </div>
+<!-- 學歷表格  -->
+      <div class="form">
+          <table cellspacing="0" style="margin-top:10px;">
+            <td  style="font-size:20px;font-weight:550" colspan="3">學歷</td>
+            <tr><td class="tdtitle">最高學歷<br />
+            <select name="e_edu" style="width:89.5%">
               <?php switch ($row["e_edu"]) {
                 case '高中職':?>
                   <option value="" ></option>
@@ -274,127 +297,148 @@ catch(PDOException $e)
                 default:
                   break;
               } ?>
-						</select>
-						</td>
-						<td ><input type="text" name="e_edu_high" size="15" value="<?php echo $row["e_edu_high"];?>"></td>
-						<td ><input type="text" name="e_edu_dep" size="15" value="<?php echo $row["e_edu_dep"];?>"></td>
-						<td ><input type="date" name="e_edu_start" value="<?php echo $row["e_edu_start"]?>"></td >
-						<td ><input type="date" name="e_edu_end" value="<?php echo $row["e_edu_end"]?>"></td >
-						<td ><?php switch ($row["e_edu_gra"]) {
-						  case '畢業':?>
-						    <input type="radio" name="e_edu_gra" value="畢業" checked>畢業  <input type="radio" name="e_edu_gra" value="肄業">肄業  <input type="radio" name="e_edu_gra" value="就學">就學
-						    <?php
-                break;
-              case '肄業':?>
-                <input type="radio" name="e_edu_gra" value="畢業">畢業  <input type="radio" name="e_edu_gra" value="肄業" checked>肄業  <input type="radio" name="e_edu_gra" value="就學">就學
-                <?php
-                break;
-              case '就學':?>
-                <input type="radio" name="e_edu_gra" value="畢業">畢業  <input type="radio" name="e_edu_gra" value="肄業">肄業  <input type="radio" name="e_edu_gra" value="就學" checked>就學
-                <?php
-                break;
-						  default:
-						    break;
-						} ?></td>
-					</tr>
-					<tr>
-						<th colspan="6"><i class="fa fa-star" style="font-size:17px;color:red"></i>經歷</th>
-					</tr>
-					<tr>
-						<th style="font-size:15px;background-color:#F5F5F5; ">公司名稱</th>
-						<th style="font-size:15px;background-color:#F5F5F5; ">職稱</th>
-						<th colspan="2" style="font-size:15px;background-color:#F5F5F5; ">期間</th>
-						<th colspan="2" style="font-size:15px;background-color:#F5F5F5; ">離職原因</th>
-					</tr>
-<!-- 經歷表格1  -->	<tr>
-
-						<td ><input type="text" name="e_exp_com1" size="15" value="<?php echo $row["e_exp_com1"];?>"></td>
-						<td ><input type="text" name="e_exp_posi1" size="15" value="<?php echo $row["e_exp_posi1"];?>"></td>
-						<td ><input type="date" name="e_exp_start1" value="<?php echo $row["e_exp_start1"];?>"></td>
-						<td ><input type="date" name="e_exp_end1" value="<?php echo $row["e_exp_end1"];?>"></td>
-						<td colspan="2"><input type="text" name="e_exp_reason1" size="25" value="<?php echo $row["e_exp_reason1"];?>"></td>
-					</tr>
-					<tr>
-<!-- 經歷表格2  -->		<td ><input type="text" name="e_exp_com2" size="15" value="<?php echo $row["e_exp_com2"];?>"></td>
-						<td ><input type="text" name="e_exp_posi2" size="15" value="<?php echo $row["e_exp_posi2"];?>"></td>
-						<td ><input type="date" name="e_exp_start2" value="<?php echo $row["e_exp_start2"];?>"></td>
-						<td ><input type="date" name="e_exp_end2" value="<?php echo $row["e_exp_end2"];?>"></td>
-						<td colspan="2"><input type="text" name="e_exp_reason2" size="25" value="<?php echo $row["e_exp_reason2"];?>"></td>
-					</tr>
-					<tr>
-<!-- 經歷表格3  -->		<td ><input type="text" name="e_exp_com3" size="15" value="<?php echo $row["e_exp_com3"];?>"></td>
-						<td ><input type="text" name="e_exp_posi3" size="15" value="<?php echo $row["e_exp_posi3"];?>"></td>
-						<td ><input type="date" name="e_exp_start3" value="<?php echo $row["e_exp_start3"];?>"></td>
-						<td ><input type="date" name="e_exp_end3" value="<?php echo $row["e_exp_end3"];?>"></td>
-						<td colspan="2"><input type="text" name="e_exp_reason3" size="25" value="<?php echo $row["e_exp_reason3"];?>"></td>
-					</tr>
-					<tr>
-<!-- 經歷表格4  -->		<td ><input type="text" name="e_exp_com4" size="15" value="<?php echo $row["e_exp_com4"];?>"></td>
-						<td ><input type="text" name="e_exp_posi4" size="15" value="<?php echo $row["e_exp_posi4"];?>"></td>
-						<td ><input type="date" name="e_exp_start4" value="<?php echo $row["e_exp_start4"];?>"></td>
-						<td ><input type="date" name="e_exp_end4" value="<?php echo $row["e_exp_end4"];?>"></td>
-						<td colspan="2"><input type="text" name="e_exp_reason4" size="25" value="<?php echo $row["e_exp_reason4"];?>"></td>
-					</tr>
-					<tr>
-<!-- 經歷表格5  -->		<td ><input type="text" name="e_exp_com5" size="15" value="<?php echo $row["e_exp_com5"];?>"></td>
-						<td ><input type="text" name="e_exp_posi5" size="15" value="<?php echo $row["e_exp_posi5"];?>"></td>
-						<td ><input type="date" name="e_exp_start5" value="<?php echo $row["e_exp_start5"];?>"></td>
-						<td ><input type="date" name="e_exp_end5" value="<?php echo $row["e_exp_end5"];?>"></td>
-						<td colspan="2"><input type="text" name="e_exp_reason5" size="25" value="<?php echo $row["e_exp_reason5"];?>"></td>
-					</tr>
-					<tr>
-						<th colspan="6"><i class="fa fa-star" style="font-size:17px;color:red"></i>技能專長</th>
-					</tr>
-					<tr>
-						<td colspan="6"><i class="fa fa-star" style="font-size:17px;color:red"></i>認證資格:<input type="text" name="e_license" size="50"></td>
-					</tr>
-					<tr>
-						<th colspan="6"><i class="fa fa-star" style="font-size:17px;color:red"></i>在職資料</th>
-					</tr>
-					<tr>
-						<th colspan="2" style="font-size:15px;background-color:#F5F5F5; ">員工狀態</th>
-						<th style="font-size:15px;background-color:#F5F5F5; ">員工型態</th>
-						<th style="font-size:15px;background-color:#F5F5F5; ">工作地點</th>
-						<th colspan="2" style="font-size:15px;background-color:#F5F5F5; ">分機號碼</th>
-					</tr>
-					<tr>
-						<td colspan="2">
-            <?php switch ($row["e_status"]) {
-              case '在職中':?>
-                <input type="radio" name="e_status" value="已離職">已離職  <input type="radio" name="e_status" value="在職中" checked>在職中
-                <?php break;
-              case '已離職':?>
-                <input type="radio" name="e_status" value="已離職" checked>已離職  <input type="radio" name="e_status" value="在職中">在職中
-                <?php break;
-              default:
-                break;
-            } ?></td>
-						<td>
-              <?php switch ($row["e_type"]) {
-                case '正職':?>
-                  <input type="radio" name="e_type" value="正職" checked>正職<input type="radio" name="e_type" value="工讀">工讀
-                  <?php break;
-                case '工讀':?>
-                  <input type="radio" name="e_type" value="正職">正職<input type="radio" name="e_type" value="工讀" checked>工讀
-                  <?php break;
-                default:
+            </select>
+            </td>
+            <td class="tdtitle">學校<br><input style="width:85%" type="text" name="e_edu_high" value="<?php echo $row["e_edu_high"];?>"></td>
+            <td class="tdtitle">科系<br><input style="width:85%" type="text" name="e_edu_dep" value="<?php echo $row["e_edu_dep"];?>"></td>
+          </tr>
+          <tr>
+            <td class="tdtitle">起訖時間<br><input type="text" class="start" name="e_edu_start"  style="width:85%" value="<?php echo $row["e_edu_start"]?>"></td >
+            <td class="tdtitle"><br /><input type="text" class="end" name="e_edu_end"  style="width:85%"  value="<?php echo $row["e_edu_end"]?>"></td >
+            <td><span class="tdtitle">畢/肄/就學<br /></span>
+              <?php switch ($row["e_edu_gra"]) {
+  						  case '畢業':?>
+  						    <input type="radio" name="e_edu_gra" value="畢業" checked>畢業  <input type="radio" name="e_edu_gra" value="肄業">肄業  <input type="radio" name="e_edu_gra" value="就學">就學
+  						    <?php
                   break;
-              } ?></td>
-						<td>
-              <?php switch ($row["e_location"]) {
-                case '台北':?>
-                  <input type="radio" name="e_location" value="台北" checked>台北  <input type="radio" name="e_location" value="中壢">中壢
-                  <?php break;
-                case '中壢':?>
-                  <input type="radio" name="e_location" value="台北">台北  <input type="radio" name="e_location" value="中壢" checked>中壢
-                  <?php break;
-                default:
+                case '肄業':?>
+                  <input type="radio" name="e_edu_gra" value="畢業">畢業  <input type="radio" name="e_edu_gra" value="肄業" checked>肄業  <input type="radio" name="e_edu_gra" value="就學">就學
+                  <?php
                   break;
-              } ?></td>
-						<td colspan="2"><input type="text" name="e_extension"size="20" value="<?php echo $row["e_extension"];?>"></td>
-					</tr>
-          <?php } ?>
-				</table>
+                case '就學':?>
+                  <input type="radio" name="e_edu_gra" value="畢業">畢業  <input type="radio" name="e_edu_gra" value="肄業">肄業  <input type="radio" name="e_edu_gra" value="就學" checked>就學
+                  <?php
+                  break;
+  						  default:
+  						    break;
+  						} ?></td>
+          </tr>
+          </table>
+      </div>
+<!-- 第1個經歷 -->
+      <div class="form">
+          <table cellspacing="0" style="margin-top:10px;">
+            <td  style="font-size:20px;width:100%;min-width:100%;font-weight:550" colspan="2">經歷</td>
+            <tr><td class="tdtitle">公司名稱<br /><input style="width:90%" type="text" name="e_exp_com1"  value="<?php echo $row["e_exp_com1"];?>"></td>
+            <td class="tdtitle">職稱<br /><input style="width:90%" type="text" name="e_exp_posi1"  value="<?php echo $row["e_exp_posi1"];?>"></td></tr>
+            <tr><td class="tdtitle">期間<br /><input style="width:90%" type="text" class="start" name="e_exp_start1" value="<?php echo $row["e_exp_start1"];?>"></td>
+            <td class="tdtitle"><br /><input style="width:90%" type="text" class="end" name="e_exp_end1" value="<?php echo $row["e_exp_end1"];?>"></td></tr>
+            <tr><td colspan="2" class="tdtitle">離職原因<br><input style="width:95.1%" type="text" name="e_exp_reason1" value="<?php echo $row["e_exp_reason1"];?>"></td></tr>
+            <tr style="<?php if( $row['e_exp_com2'] != NULL){?>display:none<?php }else{?>display:block<?php }?>"><td><input type="button" onclick="showStuff('exp2',this)" value="＋" class="addButton" ></td></tr>
+          </table>
+<!-- 第2個經歷 -->
+          <table style="<?php if( $row['e_exp_com2'] != NULL){?>display:block<?php }else{?>display:none<?php }?>" id="exp2">
+            <tr><td class="tdtitle">公司名稱<br /><input style="width:90%" type="text" name="e_exp_com2" value="<?php echo $row["e_exp_com2"];?>"></td>
+            <td class="tdtitle">職稱<br /><input style="width:90%" type="text" name="e_exp_posi2" value="<?php echo $row["e_exp_posi2"];?>"></td></tr>
+            <tr><td class="tdtitle">期間<br /><input style="width:90%" type="text" class="start" name="e_exp_start2" value="<?php echo $row["e_exp_start2"];?>"></td>
+            <td class="tdtitle"><br /><input style="width:90%" type="text" class="end" name="e_exp_end2" value="<?php echo $row["e_exp_end2"];?>"></td></tr>
+            <tr><td colspan="2" class="tdtitle">離職原因<br></vr><input style="width:95.1%" type="text" name="e_exp_reason2" value="<?php echo $row["e_exp_reason2"];?>"></td></tr>
+            <tr style="<?php if( $row['e_exp_com3'] != NULL){?>display:none<?php }else{?>display:block<?php }?>"><td><input type="button" onclick="showStuff('exp3',this)" value="＋" class="addButton"></td></tr>
+          </table>
+<!-- 第3個經歷 -->
+          <table style="<?php if( $row['e_exp_com3'] != NULL){?>display:block<?php }else{?>display:none<?php }?>" id="exp3">
+            <tr><td class="tdtitle">公司名稱<br /><input style="width:90%" type="text" name="e_exp_com3" value="<?php echo $row["e_exp_com3"];?>"></td>
+            <td class="tdtitle">職稱<br /><input style="width:90%" type="text" name="e_exp_posi3" value="<?php echo $row["e_exp_posi3"];?>"></td></tr>
+            <tr><td class="tdtitle">期間<br /><input style="width:90%" type="text" class="start" name="e_exp_start3" value="<?php echo $row["e_exp_start3"];?>"></td>
+            <td class="tdtitle"><br /><input style="width:90%" type="text" class="end" name="e_exp_end3" value="<?php echo $row["e_exp_end3"];?>"></td></tr>
+            <tr><td colspan="2" class="tdtitle">離職原因<br><input style="width:95.1%" type="text" name="e_exp_reason3" value="<?php echo $row["e_exp_reason3"];?>"></td></tr>
+            <tr style="<?php if( $row['e_exp_com4'] != NULL){?>display:none<?php }else{?>display:block<?php }?>"><td><input type="button" onclick="showStuff('exp4',this)" value="＋" class="addButton"></td></tr>
+          </table>
+<!-- 第4個經歷 -->
+          <table style="<?php if( $row['e_exp_com4'] != NULL){?>display:block<?php }else{?>display:none<?php }?>" id="exp4">
+            <tr><td class="tdtitle">公司名稱<br /><input style="width:90%" type="text" name="e_exp_com4" value="<?php echo $row["e_exp_com4"];?>"></td>
+            <td class="tdtitle">職稱<br /><input style="width:90%" type="text" name="e_exp_posi4" value="<?php echo $row["e_exp_posi4"];?>"></td></tr>
+            <tr><td class="tdtitle">期間<br /><input style="width:90%" type="text" class="start" name="e_exp_start4" value="<?php echo $row["e_exp_start4"];?>"></td>
+            <td class="tdtitle"><br /><input style="width:90%" type="text" class="end" name="e_exp_end4" value="<?php echo $row["e_exp_end4"];?>"></td></tr>
+            <tr><td colspan="2" class="tdtitle">離職原因<br><input style="width:95.1%" type="text" name="e_exp_reason4" value="<?php echo $row["e_exp_reason4"];?>"></td></tr>
+            <tr style="<?php if( $row['e_exp_com5'] != NULL){?>display:none<?php }else{?>display:block<?php }?>"><td><input type="button" onclick="showStuff('exp5',this)" value="＋" class="addButton"></td></tr>
+          </table>
+<!-- 第5個經歷 -->
+          <table style="<?php if( $row['e_exp_com5'] != NULL){?>display:block<?php }else{?>display:none<?php }?>" id="exp5">
+            <tr><td class="tdtitle">公司名稱<br /><input style="width:90%" type="text" name="e_exp_com5" value="<?php echo $row["e_exp_com5"];?>"></td>
+            <td class="tdtitle">職稱<br /><input style="width:90%" type="text" name="e_exp_posi5" value="<?php echo $row["e_exp_posi5"];?>"></td></tr>
+            <tr><td class="tdtitle">期間<br /><input style="width:90%" type="text" class="start" name="e_exp_start5" value="<?php echo $row["e_exp_start5"];?>"></td>
+            <td class="tdtitle"><br /><input style="width:90%" type="text" class="end" name="e_exp_end5" value="<?php echo $row["e_exp_end5"];?>"></td></tr>
+            <tr><td colspan="2" class="tdtitle">離職原因<br><input style="width:95.1%" type="text" name="e_exp_reason5" value="<?php echo $row["e_exp_reason5"];?>"></td></tr>
+          </table>
+        </div>
+<!-- 專長技能-->
+        <div class="form">
+            <table cellspacing="0" style="margin-top:10px;">
+              <tr><td style="font-size:20px;width:100%;min-width:100%;font-weight:550">技能專長</td></tr>
+              <tr><td class="tdtitle">認證資格<br><input type="text" name="e_license" style="width:95.1%" value="<?php echo $row["e_license"];?>"></td>
+            </tr>
+            </table>
+        </div>
+<!-- 在職狀態-->
+        <div class="form">
+            <table cellspacing="0" style="margin-top:10px;">
+              <tr><td colspan="2" style="font-size:20px;width:100%;min-width:100%;font-weight:550">在職資訊</td></tr>
+              <tr><td><span class="tdtitle">工作狀態<br></span>
+                <?php switch ($row["e_status"]) {
+                  case '在職中':?>
+                    <input type="radio" name="e_status" value="已離職">已離職  <input type="radio" name="e_status" value="在職中" checked>在職中
+                    <?php break;
+                  case '已離職':?>
+                    <input type="radio" name="e_status" value="已離職" checked>已離職  <input type="radio" name="e_status" value="在職中">在職中
+                    <?php break;
+                  default:
+                    break;
+                } ?></td>
+                  <td><span class="tdtitle">工作型態<br></span>
+                    <?php switch ($row["e_type"]) {
+                      case '正職':?>
+                        <input type="radio" name="e_type" value="正職" checked>正職<input type="radio" name="e_type" value="工讀">工讀
+                        <?php break;
+                      case '工讀':?>
+                        <input type="radio" name="e_type" value="正職">正職<input type="radio" name="e_type" value="工讀" checked>工讀
+                        <?php break;
+                      default:
+                        break;
+                    } ?></td></tr>
+              <tr><td><span class="tdtitle">工作地點<br></span>
+                <?php switch ($row["e_location"]) {
+                  case '台北':?>
+                    <input type="radio" name="e_location" value="台北" checked>台北  <input type="radio" name="e_location" value="中壢">中壢
+                    <?php break;
+                  case '中壢':?>
+                    <input type="radio" name="e_location" value="台北">台北  <input type="radio" name="e_location" value="中壢" checked>中壢
+                    <?php break;
+                  default:
+                    break;
+                } ?></td>
+                  <td class="tdtitle">分機號碼<br><input type="text" name="e_extension" style="width:90%" value="<?php echo $row["e_extension"];?>"></td></tr>
+              <tr><td><span class="tdtitle">員工型態<br></span>
+                <?php
+                  switch ($row1["a_root"]) {
+                  case 'staff':?>
+                    <input type="radio" name="a_root" value="staff" checked>一般員工  <input type="radio" name="a_root" value="admin">管理人員
+                    <?php break;
+                  case 'admin':?>
+                    <input type="radio" name="a_root" value="staff">一般員工  <input type="radio" name="a_root" value="admin" checked>管理人員
+                    <?php break;
+                  default:
+                    break;
+                } ?></td></tr>
+            </table>
+        </div>
+<!-- 上傳照片-->
+        <div class="form">
+            <table cellspacing="0" style="margin-top:10px;">
+              <tr><td colspan="2" style="font-size:20px;width:100%;min-width:100%;font-weight:550">上傳照片</td></tr>
+              <tr><td></td></tr>
+            </table>
+        </div>
 				<input type="submit" class="btn" style="margin:5px 25px;">
 				</form>
 			</div>
