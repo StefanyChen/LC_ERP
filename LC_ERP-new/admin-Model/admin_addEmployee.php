@@ -26,7 +26,6 @@
     $('.start').datepicker();
   });
   $.datepicker.setDefaults({ dateFormat: 'yy-mm-dd' });
-
   function showStuff(id, btn) {
     if(document.getElementById(id).style.display == 'none')
     {
@@ -34,7 +33,6 @@
       btn.style.display="none";
     }
     else{
-
     }}
   </script>
   <style >
@@ -282,14 +280,64 @@
               <div class="form">
                   <table cellspacing="0" style="margin-top:10px;">
                     <tr><td colspan="2" style="font-size:20px;width:100%;min-width:100%;font-weight:550">上傳照片</td></tr>
-                    <tr><td></td></tr>
+                    <tr><td>
+                      <input type="file" name="image_path" accept="image/gif, image/jpeg, image/png">
+                      <input type="hidden" id="image_path" value="">
+                      <div class="image"></div>
                   </table>
               </div>
-          </div>
-				<input type="submit" class="btn" style="margin:15px 80px;" value="送出資料">
+				  <input type="submit" class="btn" style="margin:15px 80px;" value="送出資料">
 				</form>
 			</div>
 		</div>
 	</div>
+  <script>
+   $(document).on("ready", function() {
+      /**
+       * 圖片上傳
+       */
+      //上傳圖片的input更動的時候
+      $("input[name='image_path']").on("change", function() {
+        //產生 FormData 物件
+        var file_data = new FormData(),
+            file_name = $(this)[0].files[0]['name'],
+            save_path = "images/";
+          alert(file_name);
+
+        //在圖片區塊，顯示loading
+        $("div.image").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
+
+        //FormData 新增剛剛選擇的檔案
+        file_data.append("file", $(this)[0].files[0]);
+        file_data.append("save_path", save_path);
+        //透過ajax傳資料
+        $.ajax({
+          type : 'POST',
+          url : '../Controller/preview_image.php',
+          data : file_data,
+          cache : false, //因為只有上傳檔案，所以不要暫存
+          processData : false, //因為只有上傳檔案，所以不要處理表單資訊
+          contentType : false, //送過去的內容，由 FormData 產生了，所以設定false
+          dataType : 'html'
+        }).done(function(data) {
+          console.log(data);
+          //上傳成功
+          if (data == "yes") {
+            //將檔案插入
+            $("div.image").html("<img width='300' src='../" + save_path + file_name + "'>");
+            //給予 #image_path 值，等等存檔時會用
+            $("#image_path").val(save_path + file_name);
+          } else {
+            //警告回傳的訊息
+            alert(data);
+          }
+        }).fail(function(data) {
+          //失敗的時候
+          alert("有錯誤產生，請看 console log");
+          console.log(jqXHR.responseText);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
