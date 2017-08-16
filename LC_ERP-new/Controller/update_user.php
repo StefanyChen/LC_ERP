@@ -55,6 +55,7 @@ $e_type=$_POST['e_type'];
 $e_status=$_POST['e_status'];
 $e_location=$_POST['e_location'];
 $e_extension=$_POST['e_extension'];
+$a_root=$POST_['a_root'];
 
 try {
 
@@ -73,6 +74,9 @@ try {
     mysqli_query($conn,$sql);
 
     $_SESSION['temp']=$e_sn;
+
+    $sql="UPDATE `account` SET a_root='$a_root' WHERE a_sn='$e_sn'";
+    mysqli_query($conn,$sql);
     header("Location:../admin-Model/admin_addProfile.php");
 }
 catch(PDOException $e)
