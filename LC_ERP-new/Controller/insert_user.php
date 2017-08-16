@@ -82,7 +82,7 @@ try {
 
     $sql = "INSERT INTO `account` (a_root,a_name,a_sn) VALUES('$a_root','$e_name_cn','$e_sn');";
     mysqli_query($conn,$sql);
-    header("Location:../admin-Model/admin_addProfile.php");
+    header("Location:../admin-Model/admin_pvProfile.php");
     }
 catch(PDOException $e)
     {

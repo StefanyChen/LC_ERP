@@ -77,7 +77,7 @@ try {
 
     $sql="UPDATE `account` SET a_root='$a_root' WHERE a_sn='$e_sn'";
     mysqli_query($conn,$sql);
-    header("Location:../admin-Model/admin_addProfile.php");
+    header("Location:../admin-Model/admin_pvProfile.php");
 }
 catch(PDOException $e)
     {
