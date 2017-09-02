@@ -1,8 +1,4 @@
-<?php session_start();
-  if ($_SESSION['id']== NULL)
-  {
-    header('Location:log_login.php');
-  }  ?>
+
 <!DOCTYPE html>
 <html>
 <head>
